@@ -1,0 +1,1203 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>RA — Prova Final 29/06</title>
+<script src="https://skulpt.org/js/skulpt.min.js"></script>
+<script src="https://skulpt.org/js/skulpt-stdlib.js"></script>
+<style>
+:root{--bg:#0f1117;--sur:#1a1d27;--bdr:#2d3145;--txt:#e2e8f0;--mut:#64748b;--acc:#6366f1;--grn:#22c55e;--yel:#eab308;--red:#ef4444}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--txt);font-family:'Segoe UI',system-ui,sans-serif;height:100vh;display:flex;flex-direction:column;overflow:hidden}
+header{background:var(--sur);border-bottom:1px solid var(--bdr);padding:10px 18px;display:flex;align-items:center;gap:16px;flex-shrink:0}
+.logo{font-size:16px;font-weight:700;color:var(--acc)}
+.cd{background:#1e1b4b;border:1px solid #4338ca;border-radius:6px;padding:4px 12px;font-size:12px;color:#a5b4fc}
+.cd span{font-weight:700;color:#c7d2fe}
+.ovp{flex:1;max-width:260px}
+.ovp-lbl{font-size:10px;color:var(--mut);display:flex;justify-content:space-between;margin-bottom:3px}
+.bar{height:5px;background:var(--bdr);border-radius:3px;overflow:hidden}
+.bar-fill{height:100%;background:linear-gradient(90deg,var(--acc),#8b5cf6);border-radius:3px;transition:width .3s}
+.layout{display:flex;flex:1;overflow:hidden}
+sidebar{width:240px;background:var(--sur);border-right:1px solid var(--bdr);overflow-y:auto;padding:8px 0;flex-shrink:0}
+.tbtn{width:100%;padding:9px 14px;background:none;border:none;color:var(--txt);cursor:pointer;text-align:left;display:flex;align-items:center;gap:8px;border-left:3px solid transparent}
+.tbtn:hover{background:rgba(99,102,241,.08)}
+.tbtn.active{background:rgba(99,102,241,.18);border-left-color:var(--acc)}
+.tdot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.tinfo{flex:1;min-width:0}
+.tname{font-size:11px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tsub{font-size:9px;color:var(--mut);margin-top:1px}
+.mbar{height:2px;background:var(--bdr);border-radius:1px;margin-top:4px}
+.mfill{height:100%;border-radius:1px}
+.tcnt{font-size:10px;color:var(--mut);flex-shrink:0}
+main{flex:1;display:flex;overflow:hidden}
+.exlist{width:250px;border-right:1px solid var(--bdr);overflow-y:auto;padding:6px;flex-shrink:0}
+.exc{padding:8px 10px;border-radius:6px;cursor:pointer;margin-bottom:3px;border:1px solid transparent}
+.exc:hover{background:rgba(255,255,255,.04)}
+.exc.active{background:rgba(99,102,241,.15);border-color:var(--acc)}
+.exc-row{display:flex;align-items:center;gap:6px}
+.exc-num{font-size:9px;color:var(--mut);font-weight:600;min-width:22px}
+.exc-title{font-size:11px;flex:1;line-height:1.3}
+.exc-st{font-size:12px}
+.epanel{flex:1;display:flex;flex-direction:column;overflow:hidden}
+.empty{flex:1;display:flex;align-items:center;justify-content:center;color:var(--mut);font-size:13px}
+.exview{flex:1;display:flex;flex-direction:column;overflow:hidden}
+.exhdr{padding:12px 16px 10px;border-bottom:1px solid var(--bdr);flex-shrink:0}
+.extitle{font-size:14px;font-weight:600;margin-bottom:4px}
+.exdesc{font-size:12px;color:#94a3b8;line-height:1.5;white-space:pre-wrap;max-height:80px;overflow-y:auto}
+.exbody{flex:1;display:flex;overflow:hidden}
+.codecol{flex:1;display:flex;flex-direction:column;border-right:1px solid var(--bdr)}
+.ctbar{padding:6px 10px;background:#12151e;border-bottom:1px solid var(--bdr);display:flex;align-items:center;gap:6px;flex-shrink:0}
+.clbl{font-size:10px;color:var(--mut);font-weight:600;text-transform:uppercase;letter-spacing:.5px}
+.btn{padding:4px 10px;border-radius:4px;border:none;cursor:pointer;font-size:11px;font-weight:600;transition:opacity .15s}
+.btn:hover{opacity:.8}
+.brun{background:var(--grn);color:#000}
+.bclr{background:var(--bdr);color:var(--txt)}
+.bsol{background:#1e1b4b;color:#a5b4fc;border:1px solid #4338ca}
+.bdone{background:var(--grn);color:#000}
+.brev{background:var(--yel);color:#000}
+.marks{margin-left:auto;display:flex;gap:5px}
+textarea.ce{flex:1;background:#0d1117;color:#e6edf3;font-family:'Consolas','Courier New',monospace;font-size:12.5px;line-height:1.65;padding:12px;border:none;outline:none;resize:none;tab-size:4}
+.outcol{width:260px;display:flex;flex-direction:column;flex-shrink:0}
+.obar{padding:6px 10px;background:#12151e;border-bottom:1px solid var(--bdr);font-size:10px;color:var(--mut);font-weight:600;text-transform:uppercase}
+.outbox{flex:1;padding:10px;font-family:monospace;font-size:11.5px;color:#a8ff78;background:#0d1117;overflow-y:auto;white-space:pre-wrap}
+.outbox.err{color:#ff6b6b}
+.solpanel{display:none;border-top:1px solid var(--bdr);background:#0a0d1a;max-height:200px;overflow-y:auto;flex-shrink:0}
+.solpanel.open{display:block}
+.solhdr{padding:6px 10px;background:#1e1b4b;font-size:10px;color:#a5b4fc;font-weight:600;display:flex;justify-content:space-between;align-items:center}
+.solhdr span{cursor:pointer;font-size:14px}
+.solcode{padding:10px;font-family:monospace;font-size:11.5px;color:#c9d1d9;line-height:1.6;white-space:pre-wrap}
+.imodal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:100;align-items:center;justify-content:center}
+.imodal.open{display:flex}
+.ibox{background:var(--sur);border:1px solid var(--acc);border-radius:10px;padding:18px;width:360px}
+.ibox h3{font-size:13px;color:#a5b4fc;margin-bottom:8px}
+.ibox p{font-size:12px;color:var(--mut);margin-bottom:8px;white-space:pre-wrap}
+.ibox input{width:100%;background:var(--bg);border:1px solid var(--bdr);color:var(--txt);padding:7px 9px;border-radius:5px;font-size:12px;outline:none;font-family:monospace}
+.ibox input:focus{border-color:var(--acc)}
+.iact{display:flex;gap:6px;margin-top:10px;justify-content:flex-end}
+/* Drill mode */
+.btrn{background:#7c3aed;color:#fff}
+.drill-wrap{flex:1;display:flex;flex-direction:column;background:#0d1117;overflow:hidden}
+.drill-hdr{padding:8px 12px;background:#12151e;border-bottom:1px solid var(--bdr);display:flex;align-items:center;gap:10px;font-size:11px;color:var(--mut);flex-shrink:0}
+.drill-hdr b{color:var(--txt)}
+.drill-done{flex:1;overflow-y:auto;padding:10px 12px;font-family:monospace;font-size:12px;line-height:1.9}
+.dl{padding:1px 6px;border-radius:3px;white-space:pre}
+.dl.ok{color:#86efac;background:rgba(34,197,94,.08)}
+.dl.miss{color:#fca5a5;background:rgba(239,68,68,.08)}
+.dl.skip{color:#475569}
+.drill-cur{padding:10px 12px;border-top:1px solid var(--bdr);flex-shrink:0;background:#0a0d14}
+.drill-ctx{font-family:monospace;font-size:11px;color:#334155;margin-bottom:6px;white-space:pre;padding:2px 6px}
+.drill-inp{width:100%;background:#161b22;border:1px solid var(--bdr);color:#e6edf3;font-family:monospace;font-size:13px;padding:8px 10px;border-radius:5px;outline:none;margin-bottom:6px}
+.drill-inp:focus{border-color:#7c3aed}
+.drill-inp.ok{border-color:var(--grn);background:rgba(34,197,94,.06)}
+.drill-inp.err{border-color:var(--red);background:rgba(239,68,68,.06)}
+.drill-fb{font-size:11px;font-family:monospace;padding:4px 8px;border-radius:4px;margin-bottom:6px;min-height:22px}
+.drill-fb.ok{color:#86efac;background:rgba(34,197,94,.1)}
+.drill-fb.err{color:#fca5a5;background:rgba(239,68,68,.1)}
+.drill-acts{display:flex;gap:6px;align-items:center}
+.drill-ind{font-size:10px;color:#475569;font-family:monospace;margin-left:auto}
+
+/* Filter & simulado */
+.sb-hdr{padding:8px 14px 4px;display:flex;align-items:center;justify-content:space-between}
+.sb-lbl{font-size:10px;color:var(--mut);font-weight:600;text-transform:uppercase;letter-spacing:.5px}
+.fbtn{padding:3px 8px;border-radius:20px;border:1px solid var(--bdr);background:none;color:var(--mut);font-size:10px;cursor:pointer;transition:all .2s}
+.fbtn.on{background:var(--yel);color:#000;border-color:var(--yel)}
+.sim-sep{padding:6px 14px 2px;font-size:9px;color:var(--mut);font-weight:700;text-transform:uppercase;letter-spacing:1px;border-top:1px solid var(--bdr);margin-top:4px}
+/* Cheat sheet */
+.ref-panel{flex:1;overflow-y:auto;padding:20px 24px}
+.ref-panel h2{font-size:14px;color:var(--acc);margin-bottom:16px;padding-bottom:8px;border-bottom:1px solid var(--bdr)}
+.ref-section{margin-bottom:18px}
+.ref-section h3{font-size:11px;color:var(--mut);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px;font-weight:700}
+.ref-block{background:#0d1117;border:1px solid var(--bdr);border-radius:6px;padding:10px 12px;font-family:monospace;font-size:12px;color:#c9d1d9;line-height:1.7;white-space:pre}
+.ref-note{font-size:11px;color:#64748b;margin-top:4px;font-style:italic}
+/* Exercise type badges */
+.badge{display:inline-block;padding:1px 7px;border-radius:10px;font-size:9px;font-weight:700;margin-left:6px;vertical-align:middle}
+.badge-trace{background:#1e3a5f;color:#60a5fa}
+.badge-debug{background:#3b1f1f;color:#f87171}
+.badge-sim{background:#1e293b;color:#94a3b8}
+
+/* Countdown */
+#cdown{font-size:11px;font-weight:700;color:var(--yel);letter-spacing:.3px;padding:2px 6px;border:1px solid #3d3000;border-radius:4px;background:#1a1500}
+/* Surpreenda-me */
+#surpbtn{position:fixed;bottom:24px;right:24px;width:52px;height:52px;border-radius:50%;background:var(--acc);border:none;font-size:22px;cursor:pointer;box-shadow:0 4px 16px #0008;z-index:200;transition:transform .15s}
+#surpbtn:hover{transform:scale(1.12) rotate(20deg)}
+#surpbtn:active{transform:scale(.96)}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">⚡ RA Study</div>
+  <div class="cd">Prova: <span id="cd">--</span></div>
+  <div class="ovp">
+    <div class="ovp-lbl"><span>Progresso</span><span id="ptxt">0/0</span></div>
+    <div class="bar"><div class="bar-fill" id="pfill" style="width:0%"></div></div>
+  </div>
+</header>
+
+<div class="layout">
+  <sidebar id="sb">
+  <div class="sb-hdr">
+    <span class="sb-lbl">Tópicos</span>
+    <button class="fbtn" id="fbtn" onclick="toggleFilter()" title="Mostrar só os que precisa rever">🔄 Rever</button>
+  </div>
+</sidebar>
+  <main>
+    <div class="exlist" id="exlist"><div style="padding:14px;color:var(--mut);font-size:12px">← Selecione um tópico</div></div>
+    <div class="epanel" id="epanel">
+      <div class="empty" id="emp">Selecione um exercício para começar</div>
+      <div class="ref-panel" id="refpanel" style="display:none"></div>
+      <div class="exview" id="exview" style="display:none">
+        <div class="exhdr">
+          <div class="extitle" id="xtitle"></div>
+          <div class="exdesc" id="xdesc"></div>
+        </div>
+        <div class="exbody">
+          <div class="codecol">
+            <div class="ctbar">
+              <span class="clbl">Python</span>
+              <button class="btn brun" onclick="runCode()">▶ Run</button>
+              <button class="btn bclr" onclick="clearCode()">Clear</button>
+              <button class="btn bsol" onclick="toggleSol()">💡 Solução</button>
+              <button class="btn btrn" onclick="startDrill()">🎯 Treinar</button>
+              <div class="marks">
+                <button class="btn bdone" onclick="mark('done')" title="Entendi">✅</button>
+                <button class="btn brev" onclick="mark('review')" title="Rever">🔄</button>
+              </div>
+            </div>
+            <div id="drillwrap" class="drill-wrap" style="display:none">
+              <div class="drill-hdr">
+                <span>🎯 Modo Treino — linha a linha</span>
+                <b>Linha <span id="dln">1</span>/<span id="dtot">0</span></b>
+                <span>Erros: <span id="derr" style="color:var(--red)">0</span></span>
+                <button class="btn bclr" style="margin-left:auto;font-size:10px" onclick="stopDrill()">✕ Sair</button>
+              </div>
+              <div id="ddone" class="drill-done"></div>
+              <div class="drill-cur">
+                <div id="dctx" class="drill-ctx"></div>
+                <input id="dinp" class="drill-inp" placeholder="digite a próxima linha e pressione Enter..." autocomplete="off" spellcheck="false">
+                <div id="dfb" class="drill-fb"></div>
+                <div class="drill-acts">
+                  <button class="btn bclr" style="font-size:10px" onclick="drillHint()">💡 Dica (1/3)</button>
+                  <button class="btn bclr" style="font-size:10px" onclick="drillSkip()">⏭ Pular</button>
+                  <div class="drill-ind" id="dind"></div>
+                </div>
+              </div>
+            </div>
+            <textarea class="ce" id="ce" placeholder="# escreva aqui..." spellcheck="false"></textarea>
+            <div class="solpanel" id="solpanel">
+              <div class="solhdr">💡 Solução do Professor<span onclick="toggleSol()">✕</span></div>
+              <div class="solcode" id="solcode"></div>
+            </div>
+          </div>
+          <div class="outcol">
+            <div class="obar">Saída</div>
+            <div class="outbox" id="outbox">▶ clique Run para executar</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<div class="imodal" id="imodal">
+  <div class="ibox">
+    <h3>input()</h3>
+    <p id="iprmt"></p>
+    <input type="text" id="ifield" onkeydown="if(event.key==='Enter')okInput()">
+    <div class="iact"><button class="btn brun" onclick="okInput()">OK</button></div>
+  </div>
+</div>
+
+<script>
+const TOPICS=[{id:1,title:"T01 — Introdução",full:"Tópico 01 — Introdução",sub:"Variáveis · Tipos · Operadores",color:"#6366f1",exercises:[
+{id:"01-01",title:"Soma de dois números",desc:"Calcule a soma de dois números.",sol:`num1 = 10\nnum2 = 20\nsoma = num1 + num2\nprint("A soma de", num1, "com", num2, "é:", soma)`},
+{id:"01-02",title:"Antecessor e Sucessor",desc:"Calcule o antecessor e o sucessor de um número.",sol:`num = 10\nprint("Antecessor:", num - 1)\nprint("Sucessor:", num + 1)`},
+{id:"01-03",title:"Troco de compra",desc:"Calcular o troco de uma compra (valor_compra e valor_pago).",sol:`valor_compra = 232.75\nvalor_pago = 250.00\ntroco = valor_pago - valor_compra\nprint("Troco:", troco)`},
+{id:"01-04",title:"Gorjeta 10%",desc:"Calcule a gorjeta de um garçom (10%).",sol:`valor_conta = 325.50\ngorjeta = valor_conta * 0.1\nprint("Gorjeta:", gorjeta)`},
+{id:"01-05",title:"Metragem quadrada",desc:"Calcule a metragem quadrada de uma área (comprimento × largura).",sol:`comprimento = 30.57\nlargura = 65.21\narea = comprimento * largura\nprint("Área:", area, "m²")`},
+{id:"01-06",title:"Casa com 3 pavimentos",desc:"Calcule a metragem quadrada de uma casa com 3 pavimentos.",sol:`comprimento = 12.5\nlargura = 5.35\narea = comprimento * largura * 3\nprint("Casa tem", area, "m²")`},
+{id:"01-07",title:"Média de 5 idades",desc:"Calcule a média de idade de 5 pessoas.",sol:`idades = [25, 30, 35, 40, 45]\nmedia = (idades[0]+idades[1]+idades[2]+idades[3]+idades[4]) / 5\nprint("Média:", media, "anos")`},
+{id:"01-08",title:"Idade em anos/meses/dias",desc:"Calcule a idade a partir do ano de nascimento (em anos, meses e dias).",sol:`ano_nasc = 1983\nano_atual = 2026\nanos = ano_atual - ano_nasc\nprint("Anos:", anos)\nprint("Meses:", anos * 12)\nprint("Dias:", anos * 365)`},
+{id:"01-09",title:"Gorjeta de N%",desc:"Generalização: calcule a gorjeta de N% (use variável para a porcentagem).",sol:`valor_conta = 325.50\nperc = 0.1\ngorjeta = valor_conta * perc\nprint("Gorjeta:", gorjeta)`},
+{id:"01-10",title:"Casa com N pavimentos",desc:"Generalização: metragem de uma casa com N pavimentos (variável).",sol:`comprimento = 12.5\nlargura = 5.35\npavimentos = 3\narea = comprimento * largura * pavimentos\nprint("Casa tem", area, "m²")`},
+]},{id:2,title:"T02 — IF",full:"Tópico 02 — Estruturas de Seleção (IF)",sub:"if · else · comparações",color:"#ec4899",exercises:[
+{id:"02-01",title:"Mesmo nome",desc:"Informe se uma pessoa tem o mesmo nome que você.",sol:`nome = input("Nome da pessoa: ")\neu = input("Seu nome: ")\nif nome == eu:\n    print("Mesmo nome!")\nelse:\n    print("Nomes diferentes.")`},
+{id:"02-02",title:"Vogal ou Consoante",desc:"Informe se o usuário digitou uma vogal ou consoante.",sol:`letra = input("Digite uma letra: ")\nif letra.lower() in "aeiou":\n    print("Vogal")\nelse:\n    print("Consoante")`},
+{id:"02-03",title:"Dia da semana",desc:"Informe o dia da semana a partir de um número (1=Domingo ... 7=Sábado). Número inválido → mensagem.",sol:`dia = int(input("Número (1-7): "))\nif dia==1: print("Domingo")\nelif dia==2: print("Segunda")\nelif dia==3: print("Terça")\nelif dia==4: print("Quarta")\nelif dia==5: print("Quinta")\nelif dia==6: print("Sexta")\nelif dia==7: print("Sábado")\nelse: print("Valor inválido")`},
+{id:"02-04",title:"Maior de dois números",desc:"Informe o maior número entre dois quaisquer.",sol:`a = int(input("Número 1: "))\nb = int(input("Número 2: "))\nif a > b:\n    print("Maior:", a)\nelse:\n    print("Maior:", b)`},
+{id:"02-05",title:"Maior e menor de dois",desc:"Informe o maior e o menor entre dois números.",sol:`a = int(input("Número 1: "))\nb = int(input("Número 2: "))\nif a > b:\n    print("Maior:", a, "| Menor:", b)\nelse:\n    print("Maior:", b, "| Menor:", a)`},
+{id:"02-06",title:"Ano bissexto",desc:"Informe se um ano é bissexto ou não.\nDica: divisível por 4 E não por 100, OU divisível por 400.",sol:`ano = int(input("Ano: "))\nif (ano % 4 == 0 and ano % 100 != 0) or (ano % 400 == 0):\n    print("Bissexto")\nelse:\n    print("Não bissexto")`},
+{id:"02-07",title:"Par ou Ímpar",desc:"Informe se um número é par ou ímpar (use o operador %).",sol:`num = int(input("Número: "))\nif num % 2 == 0:\n    print("Par")\nelse:\n    print("Ímpar")`},
+{id:"02-08",title:"Múltiplo de N",desc:"Informe se um número é múltiplo de um número N.",sol:`num = int(input("Número: "))\nn = int(input("N: "))\nif num % n == 0:\n    print(num, "é múltiplo de", n)\nelse:\n    print(num, "não é múltiplo de", n)`},
+{id:"02-09",title:"Aprovação por média",desc:"3 notas → média → aprovado (≥70) ou reprovado.",sol:`n1 = float(input("Nota 1: "))\nn2 = float(input("Nota 2: "))\nn3 = float(input("Nota 3: "))\nmedia = (n1+n2+n3)/3\nif media >= 70:\n    print("Aprovado — média:", round(media,1))\nelse:\n    print("Reprovado — média:", round(media,1))`},
+]},{id:3,title:"T03 — ELIF",full:"Tópico 03 — Seleção Múltipla (ELIF)",sub:"elif · lógica encadeada",color:"#f59e0b",exercises:[
+{id:"03-01",title:"Seletor de canais",desc:"Canais: 2=BAND, 4=SBT, 6=CNT, 7=RECORD, 9=CULTURA, 12=GLOBO\nMensagem de erro para canal inválido.",sol:`c = int(input("Canal: "))\nif c==2: print("BANDEIRANTES")\nelif c==4: print("SBT")\nelif c==6: print("CNT")\nelif c==7: print("RECORD")\nelif c==9: print("CULTURA")\nelif c==12: print("GLOBO")\nelse: print("Canal inválido")`},
+{id:"03-02",title:"Comissão progressiva",desc:"Comissão:\na. 5% para vendas ≤ R$100\nb. 6% ≤ R$500\nc. 7% ≤ R$1000\nd. 8% acima de R$1000",sol:`v = float(input("Vendas: R$"))\nif v<=100: c=v*0.05\nelif v<=500: c=v*0.06\nelif v<=1000: c=v*0.07\nelse: c=v*0.08\nprint(f"Comissão: R\${c:.2f}")`},
+{id:"03-03",title:"Conceito por média",desc:"3 notas → média → conceito:\nA(≥9) B(≥7.5) C(≥6) D(≥4) E(<4)\nAbaixo de C = Reprovado.",sol:`n1=float(input("Nota 1: "))\nn2=float(input("Nota 2: "))\nn3=float(input("Nota 3: "))\nm=(n1+n2+n3)/3\nif m>=9: c="A"\nelif m>=7.5: c="B"\nelif m>=6: c="C"\nelif m>=4: c="D"\nelse: c="E"\nprint(f"Média: {m:.1f} | Conceito: {c}")\nprint("APROVADO" if m>=6 else "REPROVADO")`},
+{id:"03-04",title:"IRPF",desc:"Calcule o IRPF:\n≤R$1903.98 → Isento\nR$1903.99–2826.65 → 7.5%\nR$2826.66–3751.05 → 15%\nR$3751.06–4664.68 → 22.5%",sol:`s=float(input("Salário: R$"))\nif s<=1903.98: print("Isento")\nelif s<=2826.65: print(f"IRPF: R\${s*0.075:.2f}")\nelif s<=3751.05: print(f"IRPF: R\${s*0.15:.2f}")\nelif s<=4664.68: print(f"IRPF: R\${s*0.225:.2f}")\nelse: print(f"IRPF: R\${s*0.275:.2f}")`},
+{id:"03-05",title:"Ordena 3 números",desc:"Ordene três números em ordem crescente usando apenas if/elif/else.",sol:`a=float(input("N1: "))\nb=float(input("N2: "))\nc=float(input("N3: "))\nif a>b: a,b=b,a\nif b>c: b,c=c,b\nif a>b: a,b=b,a\nprint("Ordem crescente:", a, b, c)`},
+{id:"03-06",title:"Pedra-Papel-Tesoura",desc:"Simule um jogo de pedra-papel-tesoura entre dois jogadores.",sol:`j1=input("J1 (pedra/papel/tesoura): ").lower()\nj2=input("J2 (pedra/papel/tesoura): ").lower()\nif j1==j2: print("Empate!")\nelif (j1=="pedra" and j2=="tesoura") or \\\n     (j1=="tesoura" and j2=="papel") or \\\n     (j1=="papel" and j2=="pedra"): print("J1 venceu!")\nelse: print("J2 venceu!")`},
+{id:"03-07",title:"Detetive",desc:"5 perguntas sobre um crime [S/N]:\n• Telefonou para a vítima?\n• Esteve no local?\n• Mora perto?\n• Tinha dívida?\n• Já trabalhou com a vítima?\n\n0-1 = Inocente | 2 = Suspeito | 3-4 = Cúmplice | 5 = Assassino",sol:`perguntas=["Telefonou para a vítima? [S/N]: ","Esteve no local? [S/N]: ","Mora perto? [S/N]: ","Tinha dívida? [S/N]: ","Trabalhou com ela? [S/N]: "]\npos=0\nfor p in perguntas:\n    if input(p).upper()=="S": pos+=1\nif pos==5: print("ASSASSINO")\nelif pos>=3: print("CÚMPLICE")\nelif pos==2: print("SUSPEITO")\nelse: print("INOCENTE")`},
+{id:"03-08",title:"Recomendação de roupas",desc:"Crie um sistema de recomendação de roupa:\n• Profissional ou lazer?\n• Calor ou frio?\n• Fechado ou aberto?\nSugira desde terno até bermuda.",sol:`ev=input("Evento (profissional/lazer): ").lower()\ntmp=input("Temperatura (calor/frio): ").lower()\nlocal=input("Local (fechado/aberto): ").lower()\nif ev=="profissional":\n    if tmp=="frio": print("Terno com sobretudo")\n    else: print("Terno social leve")\nelse:\n    if tmp=="frio":\n        if local=="fechado": print("Calça + suéter")\n        else: print("Jaqueta + calça")\n    else:\n        if local=="aberto": print("Bermuda + camiseta")\n        else: print("Calça leve + camisa")`},
+]},{id:4,title:"T04 — While",full:"Tópico 04 — Estruturas de Repetição (While)",sub:"while · break · acumuladores",color:"#22c55e",exercises:[
+{id:"04-01",title:"Múltiplos de 3 (0–100)",desc:"Exiba os múltiplos de 3 de 0 a 100.",sol:`n=0\nwhile n<=100:\n    if n%3==0: print(n)\n    n+=1`},
+{id:"04-02",title:"Contagem regressiva",desc:"Contagem regressiva de 10 a 0.",sol:`n=10\nwhile n>=0:\n    print(n)\n    n-=1`},
+{id:"04-03",title:"Soma dos ímpares",desc:"Calcule a soma dos números ímpares de 1 a 100.",sol:`soma=0\nn=1\nwhile n<=100:\n    if n%2!=0: soma+=n\n    n+=1\nprint("Soma:", soma)`},
+{id:"04-04",title:"Adivinhe o número",desc:"Gere número aleatório 1–100 e peça ao usuário adivinhar (sem limite de tentativas).",sol:`import random\nnum=random.randint(1,100)\nchute=int(input("Adivinhe (1-100): "))\nwhile chute!=num:\n    print("Maior!" if chute<num else "Menor!")\n    chute=int(input("Tente: "))\nprint("Acertou!")`},
+{id:"04-05",title:"Tabuada",desc:"Solicite um número inteiro e exiba sua tabuada de 1 a 10.",sol:`num=int(input("Número: "))\nn=1\nwhile n<=10:\n    print(f"{num} x {n} = {num*n}")\n    n+=1`},
+{id:"04-06",title:"Soma dos dígitos",desc:"Solicite um número inteiro e calcule a soma de seus dígitos.",sol:`num=abs(int(input("Número: ")))\nsoma=0\nwhile num>0:\n    soma+=num%10\n    num//=10\nprint("Soma:", soma)`},
+{id:"04-07",title:"Fibonacci",desc:"Imprima os N primeiros números da sequência de Fibonacci.",sol:`n=int(input("Quantos? "))\na,b=0,1\ni=0\nwhile i<n:\n    print(a,end=" ")\n    a,b=b,a+b\n    i+=1\nprint()`},
+{id:"04-08",title:"Número primo",desc:"Informe se um número é primo ou não.",sol:`num=int(input("Número: "))\nif num<2: print("Não é primo")\nelse:\n    primo=True\n    i=2\n    while i*i<=num:\n        if num%i==0:\n            primo=False\n            break\n        i+=1\n    print("Primo" if primo else "Não é primo")`},
+{id:"04-09",title:"Celsius → Fahrenheit",desc:"Tabela de conversão °C → °F de -10 até 100°C.\nFórmula: F = C * 9/5 + 32",sol:`c=-10\nwhile c<=100:\n    print(f"{c}°C = {c*9/5+32:.1f}°F")\n    c+=1`},
+{id:"04-10",title:"Adivinhe — 5 tentativas",desc:"Número aleatório 1–100. Usuário tem 5 tentativas.\nDica: 'quente' (diff≤10) ou 'frio' (diff>10).",sol:`import random\nnum=random.randint(1,100)\nfor t in range(1,6):\n    c=int(input(f"Tent {t}/5: "))\n    if c==num:\n        print("Acertou!")\n        break\n    d=abs(c-num)\n    print(("Maior" if c<num else "Menor")+" — "+("🔥 quente" if d<=10 else "🧊 frio"))\nelse:\n    print(f"Perdeu! Era {num}")`},
+{id:"04-11",title:"Sistema de votação",desc:"Candidatos: 28765 João da Silva | 32928 Carlos Alberto\nComputar votos até 'ENCERRAR'.\nMostrar parcial com 'RESULTADO'.",sol:`j=c=0\nwhile True:\n    v=input("Vote (28765/32928/RESULTADO/ENCERRAR): ").upper()\n    if v=="28765": j+=1\n    elif v=="32928": c+=1\n    elif v=="RESULTADO": print(f"João:{j} Carlos:{c}")\n    elif v=="ENCERRAR": break\n    else: print("Voto inválido")\nprint(f"Final — João:{j} Carlos:{c}")\nprint("Vencedor: "+("João" if j>c else "Carlos" if c>j else "Empate"))`},
+]},{id:5,title:"T05 — FOR",full:"Tópico 05 — Estruturas de Repetição (FOR)",sub:"for · range · iteração definida",color:"#06b6d4",exercises:[
+{id:"05-01",title:"-100 a 100",desc:"Imprima os números de -100 a 100 usando 'for'.",sol:`for i in range(-100,101):\n    print(i)`},
+{id:"05-02",title:"Pares 0–1000",desc:"Imprima os números pares de 0 a 1000.",sol:`for i in range(0,1001,2):\n    print(i)`},
+{id:"05-03",title:"Fatorial",desc:"Calcule o fatorial de N.\nEx: 5! = 120",sol:`n=int(input("N: "))\nf=1\nfor i in range(1,n+1): f*=i\nprint(f"{n}! = {f}")`},
+{id:"05-04",title:"Juros compostos",desc:"Calcule quanto um investimento X rende em Y anos com taxa T.\nFórmula: montante = X * (1 + T)^ano",sol:`x=float(input("Valor inicial: R$"))\nt=float(input("Taxa anual (ex: 0.10): "))\ny=int(input("Anos: "))\nfor a in range(1,y+1):\n    print(f"Ano {a}: R\${x*(1+t)**a:.2f}")`},
+{id:"05-05",title:"N-ésimo da PA",desc:"N-ésimo elemento de uma PA de razão R.\nFórmula: an = a1 + (n-1) * r",sol:`a1=float(input("Primeiro termo: "))\nr=float(input("Razão: "))\nn=int(input("N: "))\nprint(f"a{n} = {a1+(n-1)*r}")`},
+{id:"05-06",title:"N-ésimo da PG",desc:"N-ésimo elemento de uma PG de razão R.\nFórmula: an = a1 * r^(n-1)",sol:`a1=float(input("Primeiro termo: "))\nr=float(input("Razão: "))\nn=int(input("N: "))\nprint(f"a{n} = {a1*(r**(n-1))}")`},
+]},{id:6,title:"T06 — Vetores",full:"Tópico 06 — Arrays e Vetores",sub:"listas 1D · índices · sem built-ins",color:"#f97316",exercises:[
+{id:"06-01",title:"20 elementos aleatórios",desc:"Crie um vetor de 20 elementos aleatórios.",sol:`import random\nvet=[]\nfor i in range(20): vet.append(random.randint(0,100))\nprint(vet)`},
+{id:"06-02",title:"Incremento de 5 em 5",desc:"Crie vetor de 20 elementos incrementando de 5 em 5.",sol:`vet=[]\nfor i in range(20): vet.append(i*5)\nprint(vet)`},
+{id:"06-03",title:"N elementos do usuário",desc:"Crie um vetor com N elementos digitados pelo usuário.",sol:`n=int(input("Quantos? "))\nvet=[]\nfor i in range(n): vet.append(int(input(f"[{i}]: ")))\nprint(vet)`},
+{id:"06-04",title:"N pares do usuário",desc:"Crie vetor com N elementos PARES digitados pelo usuário (só aceitar pares).",sol:`n=int(input("Quantos pares? "))\nvet=[]\nwhile len(vet)<n:\n    v=int(input(f"Par {len(vet)+1}: "))\n    if v%2==0: vet.append(v)\n    else: print("Não é par!")\nprint(vet)`},
+{id:"06-05",title:"Antecessor/Sucessor por índice",desc:"Para cada posição [i], imprima valor atual, antecessor e sucessor.",sol:`import random\nvet=[random.randint(0,100) for _ in range(8)]\nfor i in range(len(vet)):\n    ant=vet[i-1] if i>0 else None\n    suc=vet[i+1] if i<len(vet)-1 else None\n    print(f"[{i}] val={vet[i]} ant={ant} suc={suc}")`},
+{id:"06-06",title:"Soma de elementos opostos",desc:"Soma dos elementos opostos de um vetor de 100 elementos.\nvet[0]+vet[99], vet[1]+vet[98]...",sol:`import random\nvet=[random.randint(0,100) for _ in range(100)]\nfor i in range(50):\n    print(f"[{i}]+[{99-i}] = {vet[i]+vet[99-i]}")`},
+{id:"06-07",title:"Média e Desvio Padrão",desc:"Compute média e desvio padrão de um vetor. NÃO use funções built-in.",sol:`import random,math\nvet=[random.randint(0,100) for _ in range(20)]\nsoma=0\nfor v in vet: soma+=v\nmedia=soma/len(vet)\nvar=0\nfor v in vet: var+=(v-media)**2\ndesvio=math.sqrt(var/len(vet))\nprint(f"Média: {media:.2f}")\nprint(f"Desvio: {desvio:.2f}")`},
+{id:"06-08",title:"Soma pares e múltiplos",desc:"Vetor aleatório → soma dos pares + soma dos múltiplos de 5 + subvetor com múltiplos de 10.",sol:`import random\nvet=[random.randint(0,100) for _ in range(20)]\nsp=sm5=0; m10=[]\nfor v in vet:\n    if v%2==0: sp+=v\n    if v%5==0: sm5+=v\n    if v%10==0: m10.append(v)\nprint("Soma pares:",sp)\nprint("Soma mult5:",sm5)\nprint("Mult10:",m10)`},
+{id:"06-09",title:"Soma de dois vetores",desc:"Dois vetores de 5 elementos → terceiro resultante da soma.",sol:`import random\nv1=[random.randint(0,10) for _ in range(5)]\nv2=[random.randint(0,10) for _ in range(5)]\nv3=[]\nfor i in range(5): v3.append(v1[i]+v2[i])\nprint("V1:",v1)\nprint("V2:",v2)\nprint("V3:",v3)`},
+{id:"06-10",title:"Divide em 2 sub-vetores",desc:"Vetor de 20 elementos → dois sub-vetores de 10.",sol:`import random\nvet=[random.randint(0,100) for _ in range(20)]\nv1=vet[:10]; v2=vet[10:]\nprint("V1:",v1)\nprint("V2:",v2)`},
+{id:"06-11",title:"Maior elemento",desc:"Encontre o maior elemento. NÃO use max().",sol:`import random\nvet=[random.randint(0,100) for _ in range(20)]\nmaior=vet[0]\nfor v in vet:\n    if v>maior: maior=v\nprint("Vetor:",vet)\nprint("Maior:",maior)`},
+{id:"06-12",title:"Dois maiores elementos",desc:"Encontre os dois maiores. NÃO use max() nem sort().",sol:`import random\nvet=[random.randint(0,100) for _ in range(20)]\nm1=m2=float('-inf')\nfor v in vet:\n    if v>m1: m2=m1;m1=v\n    elif v>m2: m2=v\nprint("1º maior:",m1,"| 2º maior:",m2)`},
+{id:"06-13",title:"Rótulo acima/abaixo da média",desc:"Crie segundo vetor: 1 se acima da média, -1 se abaixo, 0 se igual.\nEx: [30,10,40,50,20] → [0,-1,1,1,-1]",sol:`import random\nvet=[random.randint(0,100) for _ in range(10)]\nsoma=0\nfor v in vet: soma+=v\nmed=soma/len(vet)\nrot=[]\nfor v in vet:\n    if v>med: rot.append(1)\n    elif v<med: rot.append(-1)\n    else: rot.append(0)\nprint("Vet:",vet)\nprint(f"Med:{med:.1f}")\nprint("Rot:",rot)`},
+{id:"06-14",title:"Pirâmide crescente",desc:"Vetor de 20 → imprimir como pirâmide:\n1\n12\n123\n...",sol:`vet=list(range(1,21))\nfor i in range(len(vet)):\n    print("".join(str(vet[j]) for j in range(i+1)))`},
+{id:"06-15",title:"Pirâmide inversa",desc:"Mesma pirâmide do exercício 14, mas na ordem inversa (de baixo para cima).",sol:`vet=list(range(1,21))\nfor i in range(len(vet)-1,-1,-1):\n    print("".join(str(vet[j]) for j in range(i+1)))`},
+{id:"06-16",title:"Constrói e desconstrói pirâmide",desc:"Construa a pirâmide crescente (ex14) e depois desconstrói (ex15) em sequência.",sol:`vet=list(range(1,21))\nfor i in range(len(vet)):\n    print("".join(str(vet[j]) for j in range(i+1)))\nfor i in range(len(vet)-1,-1,-1):\n    print("".join(str(vet[j]) for j in range(i+1)))`},
+{id:"06-17",title:"Forma de X",desc:"Dado um vetor, apresente os elementos em forma de 'X'.",sol:`vet=list(range(1,10))\nn=len(vet)\nfor i in range(n):\n    linha=[' ']*n\n    linha[i]=str(vet[i])\n    if n-1-i!=i: linha[n-1-i]=str(vet[n-1-i])\n    print("".join(linha))`},
+{id:"06-18",title:"Ordena vetor (Bubble Sort)",desc:"Ordene em ordem crescente SEM usar sort().\nEx: [5,2,1,3,4] → [1,2,3,4,5]",sol:`import random\nvet=[random.randint(0,100) for _ in range(10)]\nprint("Antes:",vet)\nn=len(vet)\nfor i in range(n):\n    for j in range(0,n-i-1):\n        if vet[j]>vet[j+1]: vet[j],vet[j+1]=vet[j+1],vet[j]\nprint("Depois:",vet)`},
+{id:"06-19",title:"Maior sequência de 0s",desc:"Maior sequência contígua de 0s em um vetor.\nEx: [1,0,0,1,1,0,1,0,0,0,0,1] → 4",sol:`vet=[1,0,0,1,1,0,1,0,0,0,0,1,1,0,0,0]\nmax_s=atual=0\nfor v in vet:\n    if v==0:\n        atual+=1\n        if atual>max_s: max_s=atual\n    else: atual=0\nprint("Maior sequência de 0s:",max_s)`},
+{id:"06-20",title:"Maior sequência crescente",desc:"Maior sequência de valores consecutivos (diferença de 1).\nEx: [64,65,12,13,14,15,21,33,34,35,36,37,...] → [33,34,35,36,37]",sol:`vet=[64,65,12,13,14,15,21,33,34,35,36,37,100,91,9,93,94]\nms=1;ms_s=0;cur=1;s=0\nfor i in range(1,len(vet)):\n    if vet[i]==vet[i-1]+1:\n        cur+=1\n        if cur>ms: ms=cur;ms_s=s\n    else: cur=1;s=i\nprint("Sequência:",vet[ms_s:ms_s+ms])`},
+{id:"06-21",title:"Validador de CPF",desc:"Implemente um validador de CPF.\nPesquise o algoritmo dos dígitos verificadores.",sol:`def valida_cpf(cpf):\n    d=[int(c) for c in cpf if c.isdigit()]\n    if len(d)!=11 or d==[d[0]]*11: return False\n    s=sum(d[i]*(10-i) for i in range(9))\n    v1=(s*10)%11\n    if v1==10: v1=0\n    if v1!=d[9]: return False\n    s=sum(d[i]*(11-i) for i in range(10))\n    v2=(s*10)%11\n    if v2==10: v2=0\n    return v2==d[10]\ncpf=input("CPF: ")\nprint("Válido!" if valida_cpf(cpf) else "Inválido!")`},
+]},{id:7,title:"T07 — Matrizes",full:"Tópico 07 — Arrays e Matrizes",sub:"listas 2D · double FOR · diagonais",color:"#a855f7",exercises:[
+{id:"07-01",title:"Matriz 3x3 do usuário",desc:"Usuário preenche matriz 3x3, imprima formatada.",sol:`m=[]\nfor i in range(3):\n    l=[]\n    for j in range(3): l.append(int(input(f"[{i}][{j}]: ")))\n    m.append(l)\nfor linha in m:\n    print(" | ".join(f"{v:4}" for v in linha))`},
+{id:"07-02",title:"Matriz 7x5: média e maior por coluna",desc:"Matriz 7x5 aleatória → média e maior elemento por coluna. NÃO use max() nem mean().",sol:`import random\nm=[[random.randint(0,100) for _ in range(5)] for _ in range(7)]\nfor col in range(5):\n    soma=0; maior=m[0][col]\n    for lin in range(7):\n        soma+=m[lin][col]\n        if m[lin][col]>maior: maior=m[lin][col]\n    print(f"Col {col+1}: Média={soma/7:.2f} Maior={maior}")`},
+{id:"07-03",title:"Diagonais 50x50",desc:"Matriz 50x50 aleatória → média das diagonais principal e secundária.",sol:`import random\nm=[[random.randint(1,100) for _ in range(50)] for _ in range(50)]\nsp=ss=0\nfor i in range(50):\n    sp+=m[i][i]; ss+=m[i][49-i]\nprint(f"Principal: {sp/50:.2f}")\nprint(f"Secundária: {ss/50:.2f}")`},
+{id:"07-04",title:"Campo Minado",desc:"Jogo campo minado básico.\nX = bomba, · = livre.\nMostrar campo oculto (?), revelar posições.",sol:`import random\nT=5;B=4\ncampo=[[' ']*T for _ in range(T)]\nbs=0\nwhile bs<B:\n    i,j=random.randint(0,T-1),random.randint(0,T-1)\n    if campo[i][j]!='X': campo[i][j]='X';bs+=1\noc=[['?']*T for _ in range(T)]\nrv=0;meta=T*T-B\nwhile rv<meta:\n    print("\\n".join(' '.join(r) for r in oc))\n    i=int(input("Linha: "))\n    j=int(input("Col: "))\n    if campo[i][j]=='X': print("BOOM! Perdeu!");break\n    oc[i][j]='·';rv+=1\nelse: print("Ganhou!")`},
+{id:"07-05",title:"Jogo da Velha",desc:"Implemente o jogo da velha (tic-tac-toe) para 2 jogadores, com verificação de vencedor e empate.",sol:`tab=[[' ']*3 for _ in range(3)]\ndef show():\n    for i,r in enumerate(tab):\n        print(' | '.join(r))\n        if i<2: print('---------')\ndef chk(p):\n    for i in range(3):\n        if all(tab[i][j]==p for j in range(3)): return True\n        if all(tab[j][i]==p for j in range(3)): return True\n    if all(tab[i][i]==p for i in range(3)): return True\n    if all(tab[i][2-i]==p for i in range(3)): return True\n    return False\npl='X'\nfor _ in range(9):\n    show()\n    i=int(input(f"{pl} Linha(0-2): "))\n    j=int(input(f"{pl} Col(0-2): "))\n    tab[i][j]=pl\n    if chk(pl): show();print(f"{pl} venceu!");break\n    pl='O' if pl=='X' else 'X'\nelse:\n    show();print("Empate!")`},
+]},{id:8,title:"T08 — Funções",full:"Tópico 08 — Funções e Recursão",sub:"def · parâmetros · retorno · recursão",color:"#14b8a6",exercises:[
+{id:"08-01",title:"max_() sem built-in",desc:"Função max_() que retorna o maior elemento de um vetor. NÃO use max().",sol:`def max_(v):\n    m=v[0]\n    for x in v:\n        if x>m: m=x\n    return m\nimport random\nvet=[random.randint(0,100) for _ in range(10)]\nprint(vet)\nprint("Maior:",max_(vet))`},
+{id:"08-02",title:"min_() sem built-in",desc:"Função min_() que retorna o menor elemento. NÃO use min().",sol:`def min_(v):\n    m=v[0]\n    for x in v:\n        if x<m: m=x\n    return m\nimport random\nvet=[random.randint(0,100) for _ in range(10)]\nprint(vet)\nprint("Menor:",min_(vet))`},
+{id:"08-03",title:"invert_() — inverte vetor",desc:"Função invert_() que inverte um vetor. NÃO use reverse() ou [::-1].",sol:`def invert_(v):\n    r=[]\n    for i in range(len(v)-1,-1,-1): r.append(v[i])\n    return r\nvet=[1,2,3,4,5]\nprint("Original:",vet)\nprint("Invertido:",invert_(vet))`},
+{id:"08-04",title:"sort_() — Bubble Sort",desc:"Função sort_() que ordena vetor crescente. NÃO use sort() nem sorted().",sol:`def sort_(v):\n    v=v[:]\n    n=len(v)\n    for i in range(n):\n        for j in range(0,n-i-1):\n            if v[j]>v[j+1]: v[j],v[j+1]=v[j+1],v[j]\n    return v\nimport random\nvet=[random.randint(0,50) for _ in range(8)]\nprint("Antes:",vet)\nprint("Depois:",sort_(vet))`},
+{id:"08-05",title:"exist_() — busca",desc:"Função exist_() que retorna True se valor existe no vetor.",sol:`def exist_(v,val):\n    for x in v:\n        if x==val: return True\n    return False\nvet=[3,7,1,9,4,6]\nprint(vet)\nprint("Existe 9?",exist_(vet,9))\nprint("Existe 5?",exist_(vet,5))`},
+{id:"08-06",title:"dev_padrao() — média e desvio",desc:"Função que recebe vetor e retorna (média, desvio_padrão).",sol:`import math\ndef dev_padrao(v):\n    n=len(v)\n    soma=0\n    for x in v: soma+=x\n    m=soma/n\n    var=0\n    for x in v: var+=(x-m)**2\n    return m,math.sqrt(var/n)\nimport random\nvet=[random.randint(0,100) for _ in range(20)]\nm,d=dev_padrao(vet)\nprint(f"Média:{m:.2f} Desvio:{d:.2f}")`},
+{id:"08-07",title:"Índices dos pares",desc:"Função que recebe vetor e retorna índices dos elementos pares.\nEx: [10,11,12,13,14] → [0,2,4]",sol:`def indices_pares(v):\n    idx=[]\n    for i in range(len(v)):\n        if v[i]%2==0: idx.append(i)\n    return idx\nvet=[10,11,12,13,14]\nprint("Índices pares:",indices_pares(vet))`},
+{id:"08-08",title:"Frequência dos elementos",desc:"Função que retorna frequência como matriz.\nEx: [1,2,1,3,3,4,3,1] → [[1,3],[2,1],[3,3],[4,1]]",sol:`def freq(v):\n    vis=[]; res=[]\n    for x in v:\n        if x not in vis:\n            vis.append(x)\n            c=0\n            for u in v:\n                if u==x: c+=1\n            res.append([x,c])\n    return res\nvet=[1,2,1,3,3,4,3,1,2,1,1]\nprint(freq(vet))`},
+{id:"08-09",title:"Validador de CPF (função)",desc:"Função valida_cpf(cpf) que valida um CPF usando o algoritmo dos dígitos verificadores.",sol:`def valida_cpf(cpf):\n    d=[int(c) for c in cpf if c.isdigit()]\n    if len(d)!=11 or d==[d[0]]*11: return False\n    s=sum(d[i]*(10-i) for i in range(9))\n    v=(s*10)%11\n    if v==10: v=0\n    if v!=d[9]: return False\n    s=sum(d[i]*(11-i) for i in range(10))\n    v=(s*10)%11\n    if v==10: v=0\n    return v==d[10]\ncpf=input("CPF: ")\nprint("Válido!" if valida_cpf(cpf) else "Inválido!")`},
+]}];
+
+const SK="ra_prog";
+let curT=null,curId=null;
+
+function gp(){try{return JSON.parse(localStorage.getItem(SK))||{}}catch{return{}}}
+function sp(p){localStorage.setItem(SK,JSON.stringify(p))}
+function gs(id){return gp()[id]||"none"}
+const SI={none:"○",done:"✅",review:"🔄"};
+
+function updateCd(){
+  const exam=new Date("2026-06-29T08:00:00"),now=new Date(),d=exam-now;
+  if(d<=0){document.getElementById("cd").textContent="HOJE!";return;}
+  const days=Math.floor(d/86400000),hrs=Math.floor((d%86400000)/3600000);
+  document.getElementById("cd").textContent=`${days}d ${hrs}h`;
+}
+
+function updateOvp(){
+  const p=gp();let tot=0,dn=0;
+  for(const t of TOPICS)for(const e of t.exercises){tot++;if(p[e.id]==="done")dn++;}
+  document.getElementById("ptxt").textContent=`${dn}/${tot}`;
+  document.getElementById("pfill").style.width=tot?`${(dn/tot)*100}%`:"0%";
+}
+
+function buildSb(){
+  const sb=document.getElementById("sb");sb.innerHTML="";
+  const p=gp();
+  for(const t of TOPICS){
+    const tot=t.exercises.length,dn=t.exercises.filter(e=>p[e.id]==="done").length;
+    const pct=Math.round((dn/tot)*100);
+    const b=document.createElement("button");
+    b.className="tbtn"+(curT?.id===t.id?" active":"");
+    b.innerHTML=`<div class="tdot" style="background:${t.color}"></div><div class="tinfo"><div class="tname">${t.title}</div><div class="tsub">${t.sub}</div><div class="mbar"><div class="mfill" style="width:${pct}%;background:${t.color}"></div></div></div><div class="tcnt">${dn}/${tot}</div>`;
+    b.onclick=()=>selT(t);sb.appendChild(b);
+  }
+}
+
+function buildEl(t){
+  const el=document.getElementById("exlist");el.innerHTML="";
+  const p=gp();
+  for(const ex of t.exercises){
+    const st=p[ex.id]||"none";
+    const c=document.createElement("div");
+    c.className="exc"+(curId===ex.id?" active":"");
+    c.innerHTML=`<div class="exc-row"><span class="exc-num">#${ex.id.split("-")[1]}</span><span class="exc-title">${ex.title}</span><span class="exc-st">${SI[st]}</span></div>`;
+    c.onclick=()=>selEx(ex);el.appendChild(c);
+  }
+}
+
+function selT(t){
+  curT=t;curId=null;buildSb();buildEl(t);
+  document.getElementById("emp").style.display="flex";
+  document.getElementById("exview").style.display="none";
+}
+
+function selEx(ex){
+  curId=ex.id;buildEl(curT);
+  document.getElementById("emp").style.display="none";
+  document.getElementById("exview").style.display="flex";
+  document.getElementById("xtitle").textContent=`${ex.id} — ${ex.title}`;
+  document.getElementById("xdesc").textContent=ex.desc;
+  document.getElementById("ce").value="";
+  document.getElementById("outbox").textContent="▶ clique Run para executar";
+  document.getElementById("outbox").className="outbox";
+  document.getElementById("solpanel").classList.remove("open");
+  document.getElementById("solcode").textContent=ex.sol;
+}
+
+function toggleSol(){document.getElementById("solpanel").classList.toggle("open");}
+function clearCode(){document.getElementById("ce").value="";}
+
+function mark(s){
+  if(!curId)return;
+  const p=gp();p[curId]=s;sp(p);
+  buildSb();buildEl(curT);updateOvp();
+}
+
+// Skulpt
+let irsolve=null;
+
+function runCode(){
+  const code=document.getElementById("ce").value;
+  if(!code.trim()){document.getElementById("outbox").textContent="Escreva seu código primeiro!";return;}
+  const ob=document.getElementById("outbox");
+  ob.textContent="";ob.className="outbox";
+
+  Sk.configure({
+    output:t=>ob.textContent+=t,
+    read:x=>{if(!Sk.builtinFiles?.files[x])throw"File not found: '"+x+"'";return Sk.builtinFiles.files[x];},
+    inputfun:prompt=>new Promise(res=>{
+      document.getElementById("iprmt").textContent=prompt||"Digite um valor:";
+      document.getElementById("ifield").value="";
+      document.getElementById("imodal").classList.add("open");
+      document.getElementById("ifield").focus();
+      irsolve=val=>{
+        document.getElementById("imodal").classList.remove("open");
+        ob.textContent+=prompt+val+"\n";res(val);
+      };
+    }),
+    inputfunTakesPrompt:true,
+    __future__:Sk.python3,
+  });
+
+  Sk.misceval.asyncToPromise(()=>Sk.importMainWithBody("<stdin>",false,code,true))
+    .then(()=>{if(!ob.textContent)ob.textContent="(sem saída)";})
+    .catch(e=>{ob.className="outbox err";ob.textContent=String(e);});
+}
+
+function okInput(){
+  const v=document.getElementById("ifield").value;
+  if(irsolve){irsolve(v);irsolve=null;}
+}
+
+document.addEventListener("DOMContentLoaded",()=>{
+  document.getElementById("ce").addEventListener("keydown",e=>{
+    if(e.key==="Tab"){
+      e.preventDefault();
+      const t=e.target,s=t.selectionStart;
+      t.value=t.value.substring(0,s)+"    "+t.value.substring(t.selectionEnd);
+      t.selectionStart=t.selectionEnd=s+4;
+    }
+  });
+  document.getElementById('dinp').addEventListener('keydown', drillCheck);
+});
+
+
+// ============================================================
+// DRILL MODE
+// ============================================================
+let dLines=[], dIdx=0, dMissed=[], dHintLevel=0;
+
+function findEx(id){for(const t of TOPICS)for(const e of t.exercises)if(e.id===id)return e;return null;}
+
+function startDrill(){
+  if(!curId)return;
+  const ex=findEx(curId);
+  if(!ex){alert("Selecione um exercício primeiro");return;}
+  dLines=ex.sol.split("\n").filter(l=>l.trim()!=="");
+  dIdx=0;dMissed=[];dHintLevel=0;
+  document.getElementById("ce").style.display="none";
+  document.getElementById("solpanel").style.display="none";
+  document.getElementById("drillwrap").style.display="flex";
+  document.getElementById("ddone").innerHTML="";
+  document.getElementById("dtot").textContent=dLines.length;
+  document.getElementById("dfb").textContent="";
+  document.getElementById("dfb").className="drill-fb";
+  document.getElementById("dinp").disabled=false;
+  document.getElementById("dinp").value="";
+  document.getElementById("dinp").focus();
+  dRenderHdr();dRenderCtx();
+}
+
+function dRenderHdr(){
+  document.getElementById("dln").textContent=Math.min(dIdx+1,dLines.length);
+  document.getElementById("derr").textContent=dMissed.length;
+}
+
+function dRenderCtx(){
+  if(dIdx>=dLines.length)return;
+  // show last 2 done lines as context (greyed)
+  const done=document.getElementById("ddone");
+  const ind=dLines[dIdx].match(/^(\s*)/)[1];
+  document.getElementById("dind").textContent=ind.length>0?`↹ ${ind.length} espaços`:"sem indentação";
+  document.getElementById("dctx").textContent=dIdx>0?"↑ linha anterior: "+dLines[dIdx-1]:"";
+}
+
+function drillCheck(e){
+  if(e.key!=="Enter")return;
+  if(dIdx>=dLines.length)return;
+  const inp=document.getElementById("dinp");
+  const val=inp.value;
+  const expected=dLines[dIdx];
+  const norm=s=>s.trimEnd();
+
+  if(norm(val)===norm(expected)){
+    // correct
+    inp.className="drill-inp ok";
+    const fb=document.getElementById("dfb");
+    fb.className="drill-fb ok"; fb.textContent="✅ Certo!";
+    appendDone(expected,"ok");
+    dHintLevel=0;
+    dIdx++;
+    setTimeout(()=>{
+      inp.className="drill-inp";inp.value="";
+      fb.textContent="";fb.className="drill-fb";
+      dRenderHdr();dRenderCtx();
+      if(dIdx>=dLines.length)dFinish();
+      else inp.focus();
+    },400);
+  } else {
+    // wrong
+    inp.className="drill-inp err";
+    dMissed.push(dIdx);
+    const fb=document.getElementById("dfb");
+    fb.className="drill-fb err";
+    fb.textContent="✕  era: "+expected;
+    dRenderHdr();
+    setTimeout(()=>{
+      appendDone(expected,"miss");
+      dIdx++;dHintLevel=0;
+      inp.className="drill-inp";inp.value="";
+      fb.textContent="";fb.className="drill-fb";
+      dRenderHdr();dRenderCtx();
+      if(dIdx>=dLines.length)dFinish();
+      else inp.focus();
+    },1800);
+  }
+}
+
+function appendDone(line,cls){
+  const d=document.getElementById("ddone");
+  const el=document.createElement("div");
+  el.className="dl "+cls;
+  el.textContent=line;
+  d.appendChild(el);
+  d.scrollTop=d.scrollHeight;
+}
+
+function drillHint(){
+  if(dIdx>=dLines.length)return;
+  const expected=dLines[dIdx];
+  dHintLevel=Math.min(dHintLevel+1,3);
+  const pct=[0.25,0.5,0.75][dHintLevel-1];
+  const chars=Math.max(1,Math.ceil(expected.length*pct));
+  document.getElementById("dinp").value=expected.substring(0,chars);
+  document.getElementById("dinp").focus();
+  const fb=document.getElementById("dfb");
+  fb.className="drill-fb"; fb.style.color="#a78bfa";
+  fb.textContent=`💡 Dica ${dHintLevel}/3 — ${Math.round(pct*100)}% revelado`;
+}
+
+function drillSkip(){
+  if(dIdx>=dLines.length)return;
+  dMissed.push(dIdx);
+  appendDone(dLines[dIdx],"skip");
+  dIdx++;dHintLevel=0;
+  document.getElementById("dinp").value="";
+  document.getElementById("dfb").textContent="";
+  document.getElementById("dfb").className="drill-fb";
+  dRenderHdr();dRenderCtx();
+  if(dIdx>=dLines.length)dFinish();
+  else document.getElementById("dinp").focus();
+}
+
+function dFinish(){
+  const inp=document.getElementById("dinp");
+  const fb=document.getElementById("dfb");
+  inp.disabled=true;
+  const unique=[...new Set(dMissed)];
+  if(unique.length===0){
+    fb.className="drill-fb ok";
+    fb.textContent=`🎉 Perfeito! ${dLines.length}/${dLines.length} linhas. Exercício dominado!`;
+    mark("done");
+  } else {
+    fb.className="drill-fb err";
+    fb.innerHTML=`${unique.length} linha(s) com erro. <button class="btn brun" style="font-size:10px;margin-left:8px" onclick="drillRetry()">🔁 Refazer erros</button>`;
+    mark("review");
+  }
+}
+
+function drillRetry(){
+  const unique=[...new Set(dMissed)];
+  dLines=unique.map(i=>dLines[i]);
+  dIdx=0;dMissed=[];dHintLevel=0;
+  document.getElementById("ddone").innerHTML="";
+  document.getElementById("dtot").textContent=dLines.length;
+  const inp=document.getElementById("dinp");
+  inp.disabled=false;inp.value="";inp.className="drill-inp";
+  document.getElementById("dfb").textContent="";
+  document.getElementById("dfb").className="drill-fb";
+  dRenderHdr();dRenderCtx();inp.focus();
+}
+
+function stopDrill(){
+  document.getElementById("drillwrap").style.display="none";
+  document.getElementById("ce").style.display="";
+  document.getElementById("solpanel").style.display="";
+}
+
+
+// ── CHEAT SHEETS ──────────────────────────────────────────────────────────────
+const REFS = {
+1:{title:"T01 — Introdução",sections:[
+  {h:"Tipos e conversão",code:"x = int(\"10\")      # str → int\ny = float(\"3.14\")  # str → float\nz = str(42)        # int → str"},
+  {h:"Operadores aritméticos",code:"+  -  *  /   # básicos\n//  %  **   # int-div, módulo, potência\n7 // 2  →  3\n7 %  2  →  1\n2 ** 3  →  8"},
+  {h:"Input e Print",code:"nome = input(\"Digite: \")   # sempre str!\nidade = int(input(\"Idade: \"))\nprint(f\"Olá {nome}, {idade} anos\")"},
+  {note:"Regra de ouro: input() sempre retorna string — converta antes de calcular."}
+]},
+2:{title:"T02 — IF",sections:[
+  {h:"Estrutura",code:"if condição:\n    # bloco\nelif outra:\n    # bloco\nelse:\n    # bloco"},
+  {h:"Operadores de comparação",code:"==  !=  >  <  >=  <="},
+  {h:"Operadores lógicos",code:"and   or   not"},
+  {h:"Armadilhas",code:"if a = b:   # ERRADO  (= é atribuição)\nif a == b:  # CERTO\n\nif num % 2 == 0:  # par\nif num % 2 != 0:  # ímpar"}
+]},
+3:{title:"T03 — ELIF",sections:[
+  {h:"if vs if/elif",code:"# if/if → testa TODOS\nif x < 5: print(\"a\")\nif x < 10: print(\"b\")  # pode printar 2x!\n\n# if/elif → para no 1º verdadeiro\nif x < 5: print(\"a\")\nelif x < 10: print(\"b\")  # só 1 executa"},
+  {h:"Faixas (padrão do professor)",code:"if val <= 100:   result = val * 0.05\nelif val <= 500:  result = val * 0.06\nelif val <= 1000: result = val * 0.07\nelse:            result = val * 0.08"},
+  {note:"Ordem importa: do menor para o maior threshold."}
+]},
+4:{title:"T04 — While",sections:[
+  {h:"Padrões fundamentais",code:"# Contador\ni = 0\nwhile i < 10:\n    print(i)\n    i += 1   # NÃO esquecer!\n\n# Acumulador\nsoma = 0\nwhile condição:\n    soma += valor\n\n# Sentinela\nwhile True:\n    x = input()\n    if x == \"SAIR\": break"},
+  {h:"Armadilha",code:"while i < 100:\n    soma += i   # Loop infinito!\n    # esqueceu i += 1"}
+]},
+5:{title:"T05 — FOR",sections:[
+  {h:"range()",code:"range(n)       → 0, 1, ..., n-1\nrange(a, b)    → a, ..., b-1\nrange(a, b, s) → a, a+s, ...\n\nfor i in range(5):      # 0 1 2 3 4\nfor i in range(1, 6):   # 1 2 3 4 5\nfor i in range(0,10,2): # 0 2 4 6 8"},
+  {h:"Acumulador com for",code:"fatorial = 1\nfor i in range(1, n+1):\n    fatorial *= i\n\n# PA: an = a1 + (n-1)*r\n# PG: an = a1 * r**(n-1)"}
+]},
+6:{title:"T06 — Vetores",sections:[
+  {h:"Operações básicas",code:"vet = []            # lista vazia\nvet.append(x)       # adiciona ao final\nvet[i]              # acessa índice i\nlen(vet)            # tamanho"},
+  {h:"Padrões sem built-ins",code:"# Máximo\nmaior = vet[0]\nfor v in vet:\n    if v > maior: maior = v\n\n# Média\nsoma = 0\nfor v in vet: soma += v\nmedia = soma / len(vet)\n\n# Bubble sort\nfor i in range(n):\n    for j in range(n-i-1):\n        if vet[j]>vet[j+1]:\n            vet[j],vet[j+1]=vet[j+1],vet[j]"},
+  {note:"Regra do professor: nunca usar max(), min(), sort(), sorted(), mean()"}
+]},
+7:{title:"T07 — Matrizes",sections:[
+  {h:"Criação e acesso",code:"# Criar\nmatriz = []\nfor i in range(linhas):\n    linha = []\n    for j in range(colunas):\n        linha.append(0)\n    matriz.append(linha)\n\n# Acesso\nmatriz[i][j]  # linha i, coluna j"},
+  {h:"Percorrer e diagonais",code:"# Todos\nfor i in range(len(matriz)):\n    for j in range(len(matriz[i])):\n        print(matriz[i][j])\n\n# Diagonal principal\nfor i in range(n): soma += m[i][i]\n\n# Diagonal secundária\nfor i in range(n): soma += m[i][n-1-i]"}
+]},
+8:{title:"T08 — Funções",sections:[
+  {h:"Estrutura",code:"def nome(param1, param2):\n    # corpo\n    return resultado\n\nresultado = nome(arg1, arg2)"},
+  {h:"Recursão",code:"def fatorial(n):\n    if n == 0:          # caso base\n        return 1\n    return n * fatorial(n-1)  # chamada recursiva\n\n# 1. Caso base  2. Chamada recursiva"},
+  {h:"Escopo",code:"x = 10          # global\ndef f():\n    x = 20      # local — não afeta global\nprint(x)        # ainda 10"}
+]}
+};
+
+// ── SIMULADOS ─────────────────────────────────────────────────────────────────
+const SIMS = [
+{id:"S1",title:"📋 Sim01 — Seleção",full:"Simulado 01 — Estruturas de Seleção",sub:"IF · ELIF · Testes de Mesa",color:"#f59e0b",sim:true,exercises:[
+  {id:"S1-T1a",title:"Trace: if aninhado",type:"trace",
+   desc:"Qual o resultado do print para as entradas 4, 7, -9, -5?",
+   code:`num = int(input("Digite um número inteiro: "))
+if num > 0:
+    if num % 2 == 0:
+        resultado = num / 2
+    else:
+        resultado = num * 3
+elif num == 0:
+    resultado = 0
+else:
+    if num % 3 == 0:
+        resultado = num ** 2
+    else:
+        resultado = num * -1
+print(f'Resultado == {resultado}')`,
+   sol:"num=4  → Resultado == 2.0\nnum=7  → Resultado == 21\nnum=-9 → Resultado == 81\nnum=-5 → Resultado == 5"},
+
+  {id:"S1-T1b",title:"Trace: and/or com result",type:"trace",
+   desc:"Qual o resultado para (x,y): (10,10), (15,15), (-10,-5), (0,-60)?",
+   code:`x = int(input("x: "))
+y = int(input("y: "))
+result = 0
+if x > 10 and y < 30 or x < 0:
+    result = x + y
+elif y < 0 and (x > 0 or (x+y) > 20):
+    result = y * (-1) + x**2
+print(result)`,
+   sol:"(10,10)  → 0\n(15,15)  → 30\n(-10,-5) → -15\n(0,-60)  → 0"},
+
+  {id:"S1-T1g",title:"Trace: swap de variáveis",type:"trace",
+   desc:"Qual o valor de a e b ao final?",
+   code:`a = 10
+b = 20
+temp = a
+a = b
+b = temp
+print(a, b)`,
+   sol:"Saída: 20 10\n(temp guarda o valor original de a antes de sobrescrever)"},
+
+  {id:"S1-D2a",title:"Debug: positivo/negativo",type:"debug",
+   desc:"Corrija os erros. Objetivo: determinar se número é positivo, negativo ou zero.",
+   code:`# CÓDIGO COM ERROS — corrija:
+if num < 0:
+    print(Positivo)
+else:
+    print("Negativo")
+else:
+    print("Zero")`,
+   sol:`# CORRETO:
+num = int(input("Número: "))
+if num > 0:
+    print("Positivo")
+elif num < 0:
+    print("Negativo")
+else:
+    print("Zero")
+
+# Erros: 1) print(Positivo) sem aspas  2) dois else  3) lógica invertida`},
+
+  {id:"S1-D2b",title:"Debug: comparação de igualdade",type:"debug",
+   desc:"Corrija os erros. Objetivo: verificar se dois números são iguais.",
+   code:`# CÓDIGO COM ERROS — corrija:
+if a = b:
+    print("Iguais")
+else:
+    print("Diferentes")`,
+   sol:`a = int(input("a: "))
+b = int(input("b: "))
+if a == b:    # = é atribuição; == é comparação
+    print("Iguais")
+else:
+    print("Diferentes")`},
+
+  {id:"S1-I3a",title:"Impl: Par ou Ímpar (dupla)",desc:"Implemente um jogo de dupla de par ou ímpar.",
+   sol:`j1 = int(input("J1 escolhe (par=0/impar=1): "))
+j2 = int(input("J2 escolhe (par=0/impar=1): "))
+n1 = int(input("J1 joga quantos dedos (0-5): "))
+n2 = int(input("J2 joga quantos dedos (0-5): "))
+soma = n1 + n2
+resultado = 0 if soma % 2 == 0 else 1
+if resultado == j1:
+    print("J1 venceu!")
+elif resultado == j2:
+    print("J2 venceu!")
+else:
+    print("Ninguém acertou!")`},
+
+  {id:"S1-I3b",title:"Impl: Positivo ou Negativo",desc:"Determine se um número é positivo, negativo ou zero.",
+   sol:`num = float(input("Número: "))
+if num > 0: print("Positivo")
+elif num < 0: print("Negativo")
+else: print("Zero")`},
+
+  {id:"S1-I3c",title:"Impl: Pode dirigir?",desc:"Receba o ano de nascimento e determine se a pessoa pode dirigir (≥18 anos).",
+   sol:`ano_nasc = int(input("Ano de nascimento: "))
+idade = 2026 - ano_nasc
+if idade >= 18:
+    print(f"Pode dirigir. Idade: {idade}")
+else:
+    print(f"Não pode dirigir. Faltam {18-idade} anos.")`},
+
+  {id:"S1-I3d",title:"Impl: Divisível por 3 ou 5",desc:"Receba um número e verifique divisibilidade por 3 ou 5.",
+   sol:`n = int(input("Número: "))
+if n % 3 == 0 and n % 5 == 0: print("Divisível por 3 E 5")
+elif n % 3 == 0: print("Divisível por 3")
+elif n % 5 == 0: print("Divisível por 5")
+else: print("Não divisível por 3 nem por 5")`},
+]},
+
+{id:"S2",title:"📋 Sim02 — Repetição",full:"Simulado 02 — Estruturas de Repetição",sub:"While · For · Testes de Mesa",color:"#22c55e",sim:true,exercises:[
+  {id:"S2-T1d",title:"Trace: acumuladores múltiplos",type:"trace",
+   desc:"Apresente os valores das 3 saídas para n de 0 a 10.",
+   code:`n = 0
+a = 0
+b = 0
+c = 0
+while n <= 10:
+    if n % 2 == 0:
+        b += n
+    else:
+        c += n
+    if n % 3 == 0:
+        a += n
+    n += 1
+print("Saída 1: ", a)
+print("Saída 2: ", b)
+print("Saída 3: ", c)`,
+   sol:"Saída 1:  18  (múlt. de 3: 0+3+6+9=18)\nSaída 2:  30  (pares: 0+2+4+6+8+10=30)\nSaída 3:  25  (ímpares: 1+3+5+7+9=25)"},
+
+  {id:"S2-T1c",title:"Trace: while com quadrado de r",type:"trace",
+   desc:"O que será impresso para (a,b): (10,14), (0,10), (1003,1005), (20,10)?",
+   code:`a = int(input("a: "))
+b = int(input("b: "))
+r = 2
+while (a < b and r < 50):
+    print(a, b, r)
+    a = a + 1
+    b = b - 1
+    r = r * r`,
+   sol:"(10,14): 10 14 2 → 11 13 4 → (a=12 não < b=12, para)\n(0,10):  0 10 2 → 1 9 4 → 2 8 16 → (r=256>50, para)\n(1003,1005): 1003 1005 2 → 1004 1004 4 → (a<b False, para)\n(20,10): não imprime nada (a<b False de início)"},
+
+  {id:"S2-D2a",title:"Debug: soma de ímpares",type:"debug",
+   desc:"Corrija os erros. Objetivo: somar os ímpares de 0 a 100.",
+   code:`# ERROS — corrija:
+soma_impares = 0
+i = 0
+while i < 100:
+    if i % 2 == 1:
+        soma_impares = soma_impares + i
+    i = i + 2
+print("Soma ímpares:", soma_impares)`,
+   sol:`# Erro: i começa em 0 (par) e pula de 2 em 2 → nunca entra no if
+# Correto:
+soma_impares = 0
+i = 1
+while i <= 100:   # <= para incluir 99
+    soma_impares += i
+    i += 2
+print("Soma ímpares:", soma_impares)  # 2500`},
+
+  {id:"S2-D2b",title:"Debug: soma de pares",type:"debug",
+   desc:"Corrija os erros. Objetivo: somar os pares de 0 a 100.",
+   code:`# ERROS — corrija:
+soma_par = 2
+i = 0
+while i <= 100:
+    if i % 2 == 0:
+        soma_pares = soma_pares + i
+        i = i + 1
+print("Soma pares:", soma_pares)`,
+   sol:`# Erros: 1) soma_par=2 (var errada, soma_pares não existe)
+#         2) i += 1 dentro do if → ímpares ficam presos em loop infinito
+soma_pares = 0
+i = 0
+while i <= 100:
+    if i % 2 == 0:
+        soma_pares += i
+    i += 1      # FORA do if
+print("Soma pares:", soma_pares)  # 2550`},
+
+  {id:"S2-I3a",title:"Impl: Tabuada",desc:"Peça um número inteiro e exiba sua tabuada de 1 a 10.",
+   sol:`num = int(input("Número: "))
+i = 1
+while i <= 10:
+    print(f"{num} x {i} = {num*i}")
+    i += 1`},
+
+  {id:"S2-I3b",title:"Impl: Número primo",desc:"Solicite um número e informe se é primo.",
+   sol:`num = int(input("Número: "))
+if num < 2:
+    print("Não é primo")
+else:
+    primo = True
+    i = 2
+    while i * i <= num:
+        if num % i == 0:
+            primo = False
+            break
+        i += 1
+    print("Primo" if primo else "Não é primo")`},
+
+  {id:"S2-I3c",title:"Impl: Divisores de 2 a 9",desc:"Solicite um número e imprima todos os seus divisores entre 2 e 9.",
+   sol:`num = int(input("Número: "))
+for d in range(2, 10):
+    if num % d == 0:
+        print(d)`},
+
+  {id:"S2-I3e",title:"Impl: Tabela de IMC",desc:"Calcule o IMC para 60–90kg (passo 5kg) × 1.60–1.90m (passo 0.10m).\nIMC = peso/altura²  |  <18.5=Abaixo  |  18.5-24.9=Normal  |  25-29.9=Sobrepeso  |  ≥30=Obeso",
+   sol:`peso = 60.0
+while peso <= 90:
+    altura = 1.60
+    while altura <= 1.91:
+        imc = peso / (altura ** 2)
+        if imc < 18.5: classe = "Abaixo"
+        elif imc < 25: classe = "Normal"
+        elif imc < 30: classe = "Sobrepeso"
+        else: classe = "Obeso"
+        print(f"{peso:.0f}kg {altura:.2f}m → IMC={imc:.1f} ({classe})")
+        altura = round(altura + 0.10, 2)
+    peso += 5`},
+]},
+
+{id:"S3",title:"📋 Sim03 — Vetores/Funções",full:"Simulado 03 — Vetores, Matrizes e Funções",sub:"Vetores · Matrizes · Funções · Recursão",color:"#a855f7",sim:true,exercises:[
+  {id:"S3-T1a",title:"Trace: manipulação de índices",type:"trace",
+   desc:"Qual valor será impresso?",
+   code:`vet = [1, 2, 3, 4, 5, 6]
+vet[0] = vet[3]
+vet[3] = vet[0]
+vet[2] = vet[4]
+vet[5] += vet[1] + vet[3]
+print(vet)`,
+   sol:"Passo a passo:\nvet = [1,2,3,4,5,6]\nvet[0] = vet[3] → vet[0]=4 → [4,2,3,4,5,6]\nvet[3] = vet[0] → vet[3]=4 (vet[0] já é 4!) → [4,2,3,4,5,6]\nvet[2] = vet[4] → vet[2]=5 → [4,2,5,4,5,6]\nvet[5] += vet[1]+vet[3] → 6+2+4=12 → [4,2,5,4,5,12]\nSaída: [4, 2, 5, 4, 5, 12]"},
+
+  {id:"S3-T1b",title:"Trace: Fibonacci com for",type:"trace",
+   desc:"Qual valor será impresso?",
+   code:`vet = [0, 1]
+for i in range(2, 8):
+    vet.append(vet[i-1] + vet[i-2])
+print(vet)`,
+   sol:"Constrói Fibonacci:\ni=2: 1+0=1 | i=3: 1+1=2 | i=4: 2+1=3 | i=5: 3+2=5 | i=6: 5+3=8 | i=7: 8+5=13\nSaída: [0, 1, 1, 2, 3, 5, 8, 13]"},
+
+  {id:"S3-T1c",title:"Trace: conta letras (ord/chr)",type:"trace",
+   desc:"Qual valor será impresso? (A-Z = 65-90, a-z = 97-122)",
+   code:`def avalia(string):
+    count = 0
+    for char in string:
+        ascii_value = ord(char)
+        if 65 <= ascii_value <= 90 or 97 <= ascii_value <= 122:
+            count += 1
+    return count
+
+texto = "aB@c@dabra1234"
+resultado = avalia(texto)
+print(resultado)`,
+   sol:"Conta apenas letras (ignora @, @, 1, 2, 3, 4)\nLetras: a,B,c,d,a,b,r,a = 8\nSaída: 8"},
+
+  {id:"S3-T1d",title:"Trace: troca maiúsc/minúsc",type:"trace",
+   desc:"Qual valor será impresso?",
+   code:`def modifica(string):
+    new_str = ''
+    for char in string:
+        ascii_value = ord(char)
+        if 65 <= ascii_value <= 90:
+            new_str += chr(ascii_value + 32)
+        elif 97 <= ascii_value <= 122:
+            new_str += chr(ascii_value - 32)
+        else:
+            new_str += char
+    return new_str
+
+texto = "Em 24/06/2023 fez UM belo DIA de Sol"
+resultado = modifica(texto)
+print(resultado)`,
+   sol:"Inverte maiúsculas e minúsculas, mantém outros chars:\nSaída: \"eM 24/06/2023 FEZ um BELO dia DE sOL\""},
+
+  {id:"S3-I2a",title:"Impl: 1000 pares aleatórios",desc:"Crie um vetor com 1000 números aleatórios pares (use while, não for).",
+   sol:`import random
+vet = []
+while len(vet) < 1000:
+    n = random.randint(0, 10000)
+    if n % 2 == 0:
+        vet.append(n)
+print(f"Tamanho: {len(vet)}, Primeiros 5: {vet[:5]}")`},
+
+  {id:"S3-I2e",title:"Impl: Fibonacci até N (função)",desc:"Função fibo(n) que retorna vetor com sequência de Fibonacci até N.",
+   sol:`def fibo(n):
+    vet = [0, 1]
+    while True:
+        prox = vet[-1] + vet[-2]
+        if prox > n:
+            break
+        vet.append(prox)
+    return [x for x in vet if x <= n]
+
+n = int(input("N: "))
+print(fibo(n))`},
+
+  {id:"S3-I2f",title:"Impl: Binário → Decimal",desc:"Converta string binária em decimal.\n'1011' → 1×2³ + 0×2² + 1×2¹ + 1×2⁰ = 11",
+   sol:`def bin_para_dec(s):
+    resultado = 0
+    n = len(s)
+    for i in range(n):
+        resultado += int(s[i]) * (2 ** (n-1-i))
+    return resultado
+
+b = input("Binário: ")
+print(f"Decimal: {bin_para_dec(b)}")`},
+
+  {id:"S3-I2k",title:"Impl: Pirâmide de string",desc:"Imprima a string crescendo:\n'casaco' → c / ca / cas / casa / casac / casaco",
+   sol:`s = input("String: ")
+for i in range(1, len(s)+1):
+    print(s[:i])`},
+
+  {id:"S3-I2l",title:"Impl: Validador de senha",desc:"Senha válida: 8 dígitos, mínimo 3 maiúsculas e 3 números.",
+   sol:`def valida_senha(s):
+    if len(s) != 8: return False, "deve ter 8 dígitos"
+    mais = sum(1 for c in s if c.isupper())
+    nums = sum(1 for c in s if c.isdigit())
+    if mais < 3: return False, f"só {mais} maiúsculas (mín. 3)"
+    if nums < 3: return False, f"só {nums} números (mín. 3)"
+    return True, "válida"
+
+s = input("Senha: ")
+ok, msg = valida_senha(s)
+print("Válida!" if ok else f"Inválida: {msg}")`},
+]},
+];
+
+// ── FILTER ────────────────────────────────────────────────────────────────────
+let filterReview = false;
+function toggleFilter(){
+  filterReview = !filterReview;
+  const btn = document.getElementById("fbtn");
+  btn.classList.toggle("on", filterReview);
+  btn.textContent = filterReview ? "🔄 Mostrando Rever" : "🔄 Rever";
+  if(curT) buildEl(curT);
+}
+
+// ── CHEAT SHEET ───────────────────────────────────────────────────────────────
+function showRef(t){
+  const ref = REFS[t.id];
+  const panel = document.getElementById("refpanel");
+  if(!ref){ panel.style.display="none"; return; }
+  let h2 = `<h2>📖 ${ref.title} — Referência Rápida</h2>`;
+  let body = "";
+  for(const s of ref.sections){
+    if(s.note){ body+=`<div class="ref-note">ℹ️ ${s.note}</div>`; continue; }
+    const safe = s.code.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+    body+=`<div class="ref-section"><h3>${s.h}</h3><div class="ref-block">${safe}</div></div>`;
+  }
+  panel.innerHTML = h2+body;
+  panel.style.display="block";
+}
+
+// ── OVERRIDE: use SIMS in sidebar and exercise list ───────────────────────────
+function buildSb(){
+  const sb=document.getElementById("sb");
+  const hdr = sb.querySelector(".sb-hdr");
+  sb.innerHTML="";
+  if(hdr) sb.appendChild(hdr);
+  const p=gp();
+  for(const t of TOPICS){
+    const tot=t.exercises.length,dn=t.exercises.filter(e=>p[e.id]==="done").length;
+    const pct=Math.round((dn/tot)*100);
+    const b=document.createElement("button");
+    b.className="tbtn"+(curT&&curT.id===t.id?" active":"");
+    b.innerHTML=`<div class="tdot" style="background:${t.color}"></div><div class="tinfo"><div class="tname">${t.title}</div><div class="tsub">${t.sub}</div><div class="mbar"><div class="mfill" style="width:${pct}%;background:${t.color}"></div></div></div><div class="tcnt">${dn}/${tot}</div>`;
+    b.onclick=()=>selT(t); sb.appendChild(b);
+  }
+  const sep=document.createElement("div");
+  sep.className="sim-sep"; sep.textContent="Simulados do Professor";
+  sb.appendChild(sep);
+  for(const t of SIMS){
+    const tot=t.exercises.length,dn=t.exercises.filter(e=>p[e.id]==="done").length;
+    const pct=Math.round((dn/tot)*100);
+    const b=document.createElement("button");
+    b.className="tbtn"+(curT&&curT.id===t.id?" active":"");
+    b.innerHTML=`<div class="tdot" style="background:${t.color}"></div><div class="tinfo"><div class="tname">${t.title}</div><div class="tsub">${t.sub}</div><div class="mbar"><div class="mfill" style="width:${pct}%;background:${t.color}"></div></div></div><div class="tcnt">${dn}/${tot}</div>`;
+    b.onclick=()=>selT(t); sb.appendChild(b);
+  }
+}
+
+function buildEl(t){
+  const el=document.getElementById("exlist"); el.innerHTML="";
+  const p=gp();
+  for(const ex of t.exercises){
+    const st=p[ex.id]||"none";
+    if(filterReview && st==="done") continue;
+    const c=document.createElement("div");
+    c.className="exc"+(curId===ex.id?" active":"");
+    const badge = ex.type==="trace" ? '<span class="badge badge-trace">TRACE</span>'
+                : ex.type==="debug" ? '<span class="badge badge-debug">DEBUG</span>'
+                : (t.sim ? '<span class="badge badge-sim">SIM</span>' : "");
+    c.innerHTML=`<div class="exc-row"><span class="exc-num">#${ex.id.split("-").pop()}</span><span class="exc-title">${ex.title}${badge}</span><span class="exc-st">${SI[st]}</span></div>`;
+    c.onclick=()=>selEx(ex); el.appendChild(c);
+  }
+  if(el.children.length===0){
+    el.innerHTML=`<div style="padding:14px;color:var(--mut);font-size:11px">Nenhum exercício pendente ✅</div>`;
+  }
+}
+
+function selT(t){
+  curT=t; curId=null; buildSb(); buildEl(t);
+  document.getElementById("emp").style.display="none";
+  document.getElementById("refpanel").style.display="none";
+  document.getElementById("exview").style.display="none";
+  showRef(t);
+  if(!REFS[t.id]) document.getElementById("emp").style.display="flex";
+}
+
+function selEx(ex){
+  curId=ex.id; buildEl(curT);
+  document.getElementById("emp").style.display="none";
+  document.getElementById("refpanel").style.display="none";
+  document.getElementById("exview").style.display="flex";
+  document.getElementById("xtitle").textContent=`${ex.id} — ${ex.title}`;
+  document.getElementById("xdesc").textContent=ex.desc;
+  const ce=document.getElementById("ce");
+  if((ex.type==="trace"||ex.type==="debug") && ex.code){
+    ce.value=ex.code;
+  } else {
+    ce.value="";
+  }
+  document.getElementById("outbox").textContent="▶ clique Run para executar";
+  document.getElementById("outbox").className="outbox";
+  document.getElementById("solpanel").classList.remove("open");
+  document.getElementById("solcode").textContent=ex.sol||"(sem solução disponível)";
+}
+
+function findEx(id){
+  const all=[...TOPICS,...SIMS];
+  for(const t of all) for(const e of t.exercises) if(e.id===id) return e;
+  return null;
+}
+
+function updateOvp(){
+  const p=gp(); let tot=0,dn=0;
+  const all=[...TOPICS,...SIMS];
+  for(const t of all) for(const e of t.exercises){tot++;if(p[e.id]==="done")dn++;}
+  document.getElementById("ptxt").textContent=`${dn}/${tot}`;
+  document.getElementById("pfill").style.width=tot?`${(dn/tot)*100}%`:"0%";
+}
+
+
+// ── MISSING EXERCISES: push into existing topics ─────────────────────────────
+// T06 (index 5) — arys1-3: string/char basics
+TOPICS[5].exercises.push(
+  {id:"06-22",title:"Iteração char a char",
+   desc:"Dado a string 'Hello', imprima cada caractere em uma linha separada sem usar split.",
+   sol:`strl = 'Hello'
+tam = len(strl)
+for i in range(0, tam, 1):
+    print(strl[i])`},
+
+  {id:"06-23",title:"Código ASCII de um char",
+   desc:"Dada a letra 'e', imprima o caractere e seu código ASCII.\nUse a função ord().",
+   sol:`c = 'e'
+n = ord(c)
+print(c, n)    # e 101`},
+
+  {id:"06-24",title:"Tabela char → código ASCII",
+   desc:"Dada a string 'abABcC', imprima cada caractere com seu código ASCII.\n(Observe a diferença entre maiúsculas e minúsculas!)",
+   sol:`strl = 'abABcC'
+for i in range(len(strl)):
+    c = strl[i]
+    n = ord(c)
+    print(c, n)
+# a=97, b=98, A=65, B=66, c=99, C=67`}
+);
+
+// T08 (index 7) — f2 + FuncoesRecursivasEx
+TOPICS[7].exercises.push(
+  {id:"08-10",title:"fibonacci_normal() — iterativo",
+   desc:"Implemente uma função fibonacci_normal(n) que retorna o N-ésimo número de Fibonacci.\nUse abordagem iterativa (a, b = 0, 1) sem recursão.",
+   sol:`def fibonacci_normal(n):
+    a, b = 0, 1
+    for i in range(n):
+        a, b = b, a + b
+    return a
+
+print(fibonacci_normal(0))   # 0
+print(fibonacci_normal(1))   # 1
+print(fibonacci_normal(4))   # 3
+print(fibonacci_normal(10))  # 55`},
+
+  {id:"08-11",title:"Recursão: imprime de N até 0",
+   desc:"Implemente P(n) recursiva que imprime de n até 0.\n(Não use loop — use apenas recursão!)\nBase: P(-1) retorna sem imprimir.",
+   sol:`def P(n):
+    if n == -1:
+        return
+    print(n)
+    P(n-1)
+
+P(5)   # imprime 5, 4, 3, 2, 1, 0`},
+
+  {id:"08-12",title:"Recursão: soma dos dígitos",
+   desc:"Implemente soma_digitos(n) recursiva que soma todos os dígitos de um número.\nExemplo: soma_digitos(23) = 2+3 = 5\nDica: último dígito = n % 10, resto = n // 10",
+   sol:`def soma_digitos(n):
+    if n == 0:
+        return 0
+    return n % 10 + soma_digitos(n // 10)
+
+print(soma_digitos(23))   # 5
+print(soma_digitos(123))  # 6`},
+
+  {id:"08-13",title:"Recursão: soma de 0 a N",
+   desc:"Implemente soma(n) recursiva que calcula a soma de 0 até n.\nExemplo: soma(5) = 0+1+2+3+4+5 = 15",
+   sol:`def soma(n):
+    if n == 0:
+        return 0
+    return n + soma(n-1)
+
+print(soma(5))   # 15
+print(soma(10))  # 55`},
+
+  {id:"08-14",title:"Recursão: soma de um vetor",
+   desc:"Implemente soma_vetor(vet, ind) recursiva que soma todos os elementos.\nComeça no índice ind. Caso base: ind == último índice.",
+   sol:`def soma_vetor(vet, ind):
+    T = len(vet)
+    if ind == T - 1:
+        return vet[ind]
+    return vet[ind] + soma_vetor(vet, ind + 1)
+
+vetor = [1, 32, 44]
+print("Soma:", soma_vetor(vetor, 0))   # 77`}
+);
+
+// ── EXAM COUNTDOWN ────────────────────────────────────────────────────────────
+function updateCountdown(){
+  const el = document.getElementById("cdown");
+  if(!el) return;
+  const exam = new Date('2026-06-29T08:00:00-03:00');
+  const now = new Date();
+  const diff = exam - now;
+  if(diff <= 0){ el.textContent='🎓 DIA DA PROVA!'; el.style.color='#4ade80'; return; }
+  const d = Math.floor(diff / 86400000);
+  const h = Math.floor((diff % 86400000) / 3600000);
+  const m = Math.floor((diff % 3600000) / 60000);
+  el.textContent = d > 0 ? `📅 ${d}d ${h}h p/ prova` : `⏰ ${h}h ${m}min p/ prova`;
+}
+updateCountdown();
+setInterval(updateCountdown, 60000);
+
+// ── SURPREENDA-ME ─────────────────────────────────────────────────────────────
+function surprise(){
+  const all = [...TOPICS, ...SIMS];
+  const p = gp();
+  const pool = [];
+  for(const t of all){
+    for(const e of t.exercises){
+      const st = p[e.id] || "none";
+      // review → peso 4, none → peso 1, done → skip
+      const w = st==="review" ? 4 : st==="none" ? 1 : 0;
+      for(let i=0; i<w; i++) pool.push({t, e});
+    }
+  }
+  if(!pool.length){
+    // tudo done — sorteia qualquer
+    for(const t of all) for(const e of t.exercises) pool.push({t, e});
+  }
+  const pick = pool[Math.floor(Math.random() * pool.length)];
+  curT = pick.t;
+  buildSb();
+  buildEl(pick.t);
+  selEx(pick.e);
+  // scroll exercise into view
+  setTimeout(()=>{
+    const active = document.querySelector('.exc.active');
+    if(active) active.scrollIntoView({block:'center', behavior:'smooth'});
+  }, 100);
+}
+
+buildSb();updateOvp();updateCd();
+setInterval(updateCd,60000);
+</script>
+  <button id="surpbtn" onclick="surprise()" title="Exercício aleatório (pesa os 🔄)">🎲</button>
+</body>
+</html>
