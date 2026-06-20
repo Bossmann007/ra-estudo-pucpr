@@ -528,16 +528,33 @@ elif respostas_positivas == 5:
 else:
     print("\nA pessoa é inocente.")`},
 ]},{id:4,title:"T04 — While",full:"Tópico 04 — Estruturas de Repetição (While)",sub:"while · break · acumuladores",color:"#22c55e",exercises:[
-{id:"04-01",title:"Múltiplos de 3 (0–100)",desc:"Exiba os múltiplos de 3 de 0 a 100.",sol:`i = 0
+{id:"04-01",title:"Múltiplos de 3 (0–100)",desc:"Exiba os múltiplos de 3 de 0 a 100.",drill:`i = 0
+while i <= 100:
+    print(i)
+    i += 3
+print("Fim do programa")`,
+sol:`i = 0
 while i <= 100:
     if i % 3 == 0:
         print(i)
     i += 1`},
-{id:"04-02",title:"Contagem regressiva",desc:"Contagem regressiva de 10 a 0.",sol:`i = 10
+{id:"04-02",title:"Contagem regressiva",desc:"Contagem regressiva de 10 a 0.",drill:`i = 10
+while i >= 0:
+ print(i)
+ i-=1`,
+sol:`i = 10
 while i >= 0:
     print(i)
     i -= 1`},
-{id:"04-03",title:"Soma dos ímpares",desc:"Calcule a soma dos números ímpares de 1 a 100.",sol:`soma = 0
+{id:"04-03",title:"Soma dos ímpares",desc:"Calcule a soma dos números ímpares de 1 a 100.",drill:`i = 0
+soma = 0
+while i <= 100:
+    if i % 2 != 0:
+       soma += i
+       print(i)
+    i += 1
+print(soma)`,
+sol:`soma = 0
 i = 1
 
 while i <= 100:
@@ -546,7 +563,22 @@ while i <= 100:
     i += 1
 
 print(f"A soma dos números ímpares de 1 a 100 é {soma}")`},
-{id:"04-04",title:"Adivinhe o número",desc:"Gere número aleatório 1–100 e peça ao usuário adivinhar (sem limite de tentativas).",sol:`import random
+{id:"04-04",title:"Adivinhe o número",desc:"Gere número aleatório 1–100 e peça ao usuário adivinhar (sem limite de tentativas).",drill:`import random
+
+i = random.randint(1,100)
+tentativa = 0
+
+while True:
+    tentativa = int(input("Digite um numero:"))
+    tentativa+=1
+    if tentativa == i:
+        print("Voce Acertou!")
+        break
+    elif tentativa > i:
+        print("Menor")
+    else:
+        print("Maior")`,
+sol:`import random
 
 numero = random.randint(1, 100)
 tentativas = 0
@@ -561,14 +593,29 @@ while True:
         print("Tente um número maior.")
     else:
         print("Tente um número menor.")`},
-{id:"04-05",title:"Tabuada",desc:"Solicite um número inteiro e exiba sua tabuada de 1 a 10.",sol:`n = int(input("Digite um número inteiro: "))
+{id:"04-05",title:"Tabuada",desc:"Solicite um número inteiro e exiba sua tabuada de 1 a 10.",drill:`num = int(input("Digite um numero inteiro:"))
+multiplicador = 1
+
+while multiplicador <= 10:
+    i = num * multiplicador
+    print(f" {num} * {multiplicador} =: {i}")
+    multiplicador +=1`,
+sol:`n = int(input("Digite um número inteiro: "))
 i = 1
 
 while i <= 10:
     resultado = n * i
     print(f"{n} x {i} = {resultado}")
     i += 1`},
-{id:"04-06",title:"Soma dos dígitos",desc:"Solicite um número inteiro e calcule a soma de seus dígitos.",sol:`numero = int(input("Digite um número inteiro: "))
+{id:"04-06",title:"Soma dos dígitos",desc:"Solicite um número inteiro e calcule a soma de seus dígitos.",drill:`num = int(input("Digite um numero:"))
+soma = 0
+
+while num > 0:
+    resto = num % 10
+    soma += resto
+    num = num // 10
+print(soma)`,
+sol:`numero = int(input("Digite um número inteiro: "))
 soma = 0
 
 while numero > 0:
@@ -577,7 +624,17 @@ while numero > 0:
     numero = numero // 10
 
 print(f"A soma dos dígitos é {soma}")`},
-{id:"04-07",title:"Fibonacci",desc:"Imprima os N primeiros números da sequência de Fibonacci.",sol:`n = int(input("Digite o número de elementos da sequência de Fibonacci: "))
+{id:"04-07",title:"Fibonacci",desc:"Imprima os N primeiros números da sequência de Fibonacci.",drill:`n = int(input("Digite o número de elementos da sequência de Fibonacci: "))
+anterior = 0
+atual = 1
+i= 1
+while i < n:
+    print(anterior)
+    proximo = atual + anterior
+    anterior = atual
+    atual = proximo
+    i += 1`,
+sol:`n = int(input("Digite o número de elementos da sequência de Fibonacci: "))
 anterior = 0
 atual = 1
 i = 1
@@ -588,7 +645,17 @@ while i <= n:
     anterior = atual
     atual = proximo
     i += 1`},
-{id:"04-08",title:"Número primo",desc:"Informe se um número é primo ou não.",sol:`numero = int(input("Digite um número inteiro: "))
+{id:"04-08",title:"Número primo",desc:"Informe se um número é primo ou não.",drill:`numero = int(input("Digite um número inteiro: "))
+i = 2
+
+while i < numero:
+    if numero % i == 0:
+       print(f"{numero} nao eh primo")
+       break
+    i += 1
+else:
+    print(f"{numero} eh primo")`,
+sol:`numero = int(input("Digite um número inteiro: "))
 i = 2
 
 while i < numero:
@@ -670,19 +737,47 @@ elif carlos_votos > jose_votos:
 else:
     print("Houve empate na votação.")`},
 ]},{id:5,title:"T05 — FOR",full:"Tópico 05 — Estruturas de Repetição (FOR)",sub:"for · range · iteração definida",color:"#06b6d4",exercises:[
-{id:"05-01",title:"-100 a 100",desc:"Imprima os números de -100 a 100 usando 'for'.",sol:`for i in range(-100, 101):
+{id:"05-01",title:"-100 a 100",desc:"Imprima os números de -100 a 100 usando 'for'.",drill:`for i in range(-100,101):
+    print(i)`,
+sol:`for i in range(-100, 101):
     print(i)`},
-{id:"05-02",title:"Pares 0–1000",desc:"Imprima os números pares de 0 a 1000.",sol:`for i in range(0, 1001, 2):
+{id:"05-02",title:"Pares 0–1000",desc:"Imprima os números pares de 0 a 1000.",drill:`for i in range(0,1001,2):
+    print(i)`,
+sol:`for i in range(0, 1001, 2):
     print(i)`},
-{id:"05-03",title:"Fatorial",desc:"Calcule o fatorial de N.\nEx: 5! = 120",sol:`for i in range(0, 1001, 1):
+{id:"05-03",title:"Fatorial",desc:"Calcule o fatorial de N.\nEx: 5! = 120",drill:`num = int(input("Digite um numero:"))
+fatorial = 1
+
+for i in range(1,num+1):
+    fatorial *= i
+    print(fatorial)`,
+sol:`for i in range(0, 1001, 1):
     if i % 2 == 0:
     	print(i)`},
-{id:"05-04",title:"Juros compostos",desc:"Calcule quanto um investimento X rende em Y anos com taxa T.\nFórmula: montante = X * (1 + T)^ano",sol:`n = int(input("Digite um número para calcular o fatorial: "))
+{id:"05-04",title:"Juros compostos",desc:"Calcule quanto um investimento X rende em Y anos com taxa T.\nFórmula: montante = X * (1 + T)^ano",drill:`a = int(input("digite o a1:"))
+n = int(input("digite o n:"))
+razao = int(input("digite a razao:"))
+
+atual = a
+
+for i in range(2,n+1):
+    atual += razao
+    print(i,atual)`,
+sol:`n = int(input("Digite um número para calcular o fatorial: "))
 fatorial = 1
 for i in range(1, n + 1):
     fatorial *= i
 print(f"O fatorial de {n} é {fatorial}")`},
-{id:"05-05",title:"N-ésimo da PA",desc:"N-ésimo elemento de uma PA de razão R.\nFórmula: an = a1 + (n-1) * r",sol:`valor_inicial = float(input("Digite o valor inicial do investimento: "))
+{id:"05-05",title:"N-ésimo da PA",desc:"N-ésimo elemento de uma PA de razão R.\nFórmula: an = a1 + (n-1) * r",drill:`a = int(input("digite o a1:"))
+n = int(input("digite o n:"))
+razao = int(input("digite a razao:"))
+
+atual = a
+
+for i in range(2,n+1):
+    atual *= razao
+    print(i,atual)`,
+sol:`valor_inicial = float(input("Digite o valor inicial do investimento: "))
 taxa_juros = float(input("Digite a taxa de juros anual (em %): ")) / 100
 anos = int(input("Digite o número de anos: "))
 
@@ -701,7 +796,15 @@ for i in range(1, n):
     print(i,atual)
 print(f"O {n}º termo da P.A é: {atual}")`},
 ]},{id:6,title:"T06 — Vetores",full:"Tópico 06 — Arrays e Vetores",sub:"listas 1D · índices · sem built-ins",color:"#f97316",exercises:[
-{id:"06-01",title:"20 elementos aleatórios",desc:"Crie um vetor de 20 elementos aleatórios.",sol:`   import random
+{id:"06-01",title:"20 elementos aleatórios",desc:"Crie um vetor de 20 elementos aleatórios.",drill:`import random
+vet = []
+
+while len(vet) < 20:
+    num = random.randint(1,20)
+    vet.append(num)
+
+print(vet)`,
+sol:`   import random
    
    # Criando um vetor vazio
    vetor = []
@@ -713,7 +816,18 @@ print(f"O {n}º termo da P.A é: {atual}")`},
    # Imprimindo o vetor na tela
    print(vetor)
    `},
-{id:"06-02",title:"Incremento de 5 em 5",desc:"Crie vetor de 20 elementos incrementando de 5 em 5.",sol:`   import random
+{id:"06-02",title:"Incremento de 5 em 5",desc:"Crie vetor de 20 elementos incrementando de 5 em 5.",drill:`vet = []
+
+for i in range(20):
+    vet.append(i*5)
+print(vet)
+
+veta = [0] * 20
+
+for i in range(20):
+    veta[i] = i*5
+print(veta)`,
+sol:`   import random
    
    # Criando um vetor vazio de tamanho 20
    vetor = [0] * 20
@@ -725,7 +839,17 @@ print(f"O {n}º termo da P.A é: {atual}")`},
    # Imprimindo o vetor na tela
    print(vetor)
    `},
-{id:"06-03",title:"N elementos do usuário",desc:"Crie um vetor com N elementos digitados pelo usuário.",sol:`   # Criando um vetor vazio
+{id:"06-03",title:"N elementos do usuário",desc:"Crie um vetor com N elementos digitados pelo usuário.",drill:`import random
+
+vet = []
+
+N = int(input("Digite um numero:"))
+
+for n in range(N):
+    n = random.randint(1,100)
+    vet.append(n)
+print(vet)`,
+sol:`   # Criando um vetor vazio
    vetor = []
    
    # Preenchendo o vetor com números incrementais de 5 em 5
@@ -735,7 +859,17 @@ print(f"O {n}º termo da P.A é: {atual}")`},
    # Imprimindo o vetor na tela
    print(vetor)
    `},
-{id:"06-04",title:"N pares do usuário",desc:"Crie vetor com N elementos PARES digitados pelo usuário (só aceitar pares).",sol:`   # Criando um vetor vazio
+{id:"06-04",title:"N pares do usuário",desc:"Crie vetor com N elementos PARES digitados pelo usuário (só aceitar pares).",drill:`import random
+
+vet = []
+
+n = int(input("Digite um numero de elementos:"))
+
+for N in range(0,n):
+    N = random.randrange(0,100,2)
+    vet.append(N)
+print(vet)`,
+sol:`   # Criando um vetor vazio
    vetor = [0] * 20
    
    # Preenchendo o vetor com números incrementais de 5 em 5
@@ -745,7 +879,15 @@ print(f"O {n}º termo da P.A é: {atual}")`},
    # Imprimindo o vetor na tela
    print(vetor)
    `},
-{id:"06-05",title:"Antecessor/Sucessor por índice",desc:"Para cada posição [i], imprima valor atual, antecessor e sucessor.",sol:`   # Lendo o tamanho do vetor N
+{id:"06-05",title:"Antecessor/Sucessor por índice",desc:"Para cada posição [i], imprima valor atual, antecessor e sucessor.",drill:`vet = [2,10,3,5]
+
+tam = len(vet)-1
+
+for i in range(0,tam):
+    print("Atual:",vet[i])
+    print("Antecessor:",vet[i-1])
+    print("Sucessor:",vet[i+1])`,
+sol:`   # Lendo o tamanho do vetor N
    N = int(input("Digite o tamanho do vetor: "))
    
    # Criando um vetor vazio
@@ -759,7 +901,18 @@ print(f"O {n}º termo da P.A é: {atual}")`},
    # Imprimindo o vetor na tela
    print(vetor)
    `},
-{id:"06-06",title:"Soma de elementos opostos",desc:"Soma dos elementos opostos de um vetor de 100 elementos.\nvet[0]+vet[99], vet[1]+vet[98]...",sol:`   # Criando um vetor vazio
+{id:"06-06",title:"Soma de elementos opostos",desc:"Soma dos elementos opostos de um vetor de 100 elementos.\nvet[0]+vet[99], vet[1]+vet[98]...",drill:`vet = []
+
+for i in range(101):
+    vet.append(i)
+print(vet)
+
+soma = 0
+
+for j in range(50):
+   soma += vet[j] + vet[99-j] 
+   print(soma)`,
+sol:`   # Criando um vetor vazio
    vetor = []
    
    # Lendo os elementos do vetor até que o usuário digite um número negativo
@@ -771,7 +924,23 @@ print(f"O {n}º termo da P.A é: {atual}")`},
    # Imprimindo o vetor na tela
    print(vetor)
    `},
-{id:"06-07",title:"Média e Desvio Padrão",desc:"Compute média e desvio padrão de um vetor. NÃO use funções built-in.",sol:`   # Criando um vetor vazio
+{id:"06-07",title:"Média e Desvio Padrão",desc:"Compute média e desvio padrão de um vetor. NÃO use funções built-in.",drill:`vet = []
+
+for i in range(50):
+    vet.append(i)
+print(vet)
+
+tam = len(vet)
+soma = 0
+
+for i in range(0,tam):
+    soma += vet[i]
+    print(soma)
+
+media = soma / tam
+
+print("media:",media)`,
+sol:`   # Criando um vetor vazio
    vetor = []
    
    # Lendo os elementos pares do vetor e adicionando-os ao vetor
@@ -784,14 +953,53 @@ print(f"O {n}º termo da P.A é: {atual}")`},
    # Imprimindo o vetor na tela
    print(vetor)
    `},
-{id:"06-08",title:"Soma pares e múltiplos",desc:"Vetor aleatório → soma dos pares + soma dos múltiplos de 5 + subvetor com múltiplos de 10.",sol:`   vetor = [1, 3, 5, 7, 9]
+{id:"06-08",title:"Soma pares e múltiplos",desc:"Vetor aleatório → soma dos pares + soma dos múltiplos de 5 + subvetor com múltiplos de 10.",drill:`import random
+
+vet = []
+vet10 = []
+
+n = int(input("Digite o numero de elementos:"))
+somapar = 0
+soma5 = 0
+
+for i in range(0,n):
+    a = random.randint(1,100)
+    vet.append(a)
+    if a % 2 == 0:
+        somapar += a
+    if a % 5 == 0:
+        soma5 += a
+    if a % 10 == 0:
+        vet10.append(a)
+
+print(vet)
+print(somapar)
+print(soma5)
+print(vet10)`,
+sol:`   vetor = [1, 3, 5, 7, 9]
    
    for i in range(1, len(vetor)-1):
        print("Valor atual:", vetor[i])
        print("Antecessor:", vetor[i-1])
        print("Sucessor:", vetor[i+1])
    `},
-{id:"06-09",title:"Soma de dois vetores",desc:"Dois vetores de 5 elementos → terceiro resultante da soma.",sol:`   vetor = [i+1 for i in range(100)]
+{id:"06-09",title:"Soma de dois vetores",desc:"Dois vetores de 5 elementos → terceiro resultante da soma.",drill:`import random
+
+vet = []
+veta = []
+vetsoma = []
+
+for i in range(0,5):
+    n = random.randint(1,10) 
+    n2 = random.randint(1,10)
+    
+    vet.append(n)
+    veta.append(n2)
+    vetsoma.append(n+n2)
+print(vet)
+print(veta)
+print(vetsoma)`,
+sol:`   vetor = [i+1 for i in range(100)]
    soma = 0
    
    for i in range(50):
@@ -799,7 +1007,21 @@ print(f"O {n}º termo da P.A é: {atual}")`},
    
    print("A soma dos elementos opostos do vetor é:", soma)
    `},
-{id:"06-10",title:"Divide em 2 sub-vetores",desc:"Vetor de 20 elementos → dois sub-vetores de 10.",sol:`   # Importando a biblioteca math para usar a função sqrt
+{id:"06-10",title:"Divide em 2 sub-vetores",desc:"Vetor de 20 elementos → dois sub-vetores de 10.",drill:`vet = list(range(20))
+
+print(vet)
+
+vet1 = []
+vet2 = []
+
+for i in range(20):
+    if i < 10:
+        vet1.append(i)
+    else:
+        vet2.append(i)
+print(vet1)
+print(vet2)`,
+sol:`   # Importando a biblioteca math para usar a função sqrt
    import math
    
    # Definindo o vetor
@@ -822,7 +1044,23 @@ print(f"O {n}º termo da P.A é: {atual}")`},
    print("Média:", media)
    print("Desvio padrão:", desvio_padrao)
    `},
-{id:"06-11",title:"Maior elemento",desc:"Encontre o maior elemento. NÃO use max().",sol:`   import random
+{id:"06-11",title:"Maior elemento",desc:"Encontre o maior elemento. NÃO use max().",drill:`import random
+
+vet = []
+
+for i in range(0,10):
+    i = random.randint(1,100)
+    vet.append(i)
+print(vet)
+
+tam = len(vet)
+maior = 0
+
+for i in range(tam):
+    if vet[i] > maior:
+        maior = vet[i]
+print(maior)`,
+sol:`   import random
    
    # Criando um vetor aleatório de tamanho 10 com valores entre 0 e 100
    vetor = []
@@ -854,7 +1092,27 @@ print(f"O {n}º termo da P.A é: {atual}")`},
        i += 1
    print("Vetor com os múltiplos de 10 do vetor original:", mult_10)
    `},
-{id:"06-12",title:"Dois maiores elementos",desc:"Encontre os dois maiores. NÃO use max() nem sort().",sol:`    # Criando os dois vetores de 5 elementos
+{id:"06-12",title:"Dois maiores elementos",desc:"Encontre os dois maiores. NÃO use max() nem sort().",drill:`import random
+
+vet =[]
+
+for i in range(0,10):
+    i = random.randint(0,10)
+    vet.append(i)
+print(vet)
+
+maior = vet[0]
+maior2 = vet[1]
+
+for j in range(0,10):
+    if vet[j] > maior:
+        maior2 = maior
+        maior = vet[j]
+    elif vet[j] > maior2:
+        maior2 = vet[j]
+print(maior)
+print(maior2)`,
+sol:`    # Criando os dois vetores de 5 elementos
     vetor1 = []
     vetor2 = []
     for i in range(5):
@@ -869,7 +1127,28 @@ print(f"O {n}º termo da P.A é: {atual}")`},
         vetor3.append(vetor1[i] + vetor2[i])
     print("Vetor 3 (soma de Vetor 1 e Vetor
     `},
-{id:"06-13",title:"Rótulo acima/abaixo da média",desc:"Crie segundo vetor: 1 se acima da média, -1 se abaixo, 0 se igual.\nEx: [30,10,40,50,20] → [0,-1,1,1,-1]",sol:`    # Criando um vetor de 20 elementos
+{id:"06-13",title:"Rótulo acima/abaixo da média",desc:"Crie segundo vetor: 1 se acima da média, -1 se abaixo, 0 se igual.\nEx: [30,10,40,50,20] → [0,-1,1,1,-1]",drill:`vet = [30,10,40,50,20]
+
+soma = 0
+tam = len(vet)
+
+for i in range(tam):
+    soma += vet[i]
+    media = soma // tam
+print(vet)
+print(media)
+
+vetmedia = []
+
+for i in range(tam):
+    if vet[i] > media:
+        vetmedia.append(1)
+    elif vet[i] < media:
+        vetmedia.append(-1)
+    else:
+        vetmedia.append(0)
+print(vetmedia)`,
+sol:`    # Criando um vetor de 20 elementos
     vetor = list(range(20))
     print("Vetor original:", vetor)
     
@@ -885,7 +1164,15 @@ print(f"O {n}º termo da P.A é: {atual}")`},
     print("Sub-vetor 1:", sub_vetor1)
     print("Sub-vetor 2:", sub_vetor2)
     `},
-{id:"06-14",title:"Pirâmide crescente",desc:"Vetor de 20 → imprimir como pirâmide:\n1\n12\n123\n...",sol:`    # Criando um vetor aleatório
+{id:"06-14",title:"Pirâmide crescente",desc:"Vetor de 20 → imprimir como pirâmide:\n1\n12\n123\n...",drill:`vet = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]
+
+tam = len(vet)
+
+for i in range(tam):
+    for j in range(i+1):
+        print(vet[j], end="")
+    print("")`,
+sol:`    # Criando um vetor aleatório
     vetor = [3, 8, 2, 1, 10, 5]
     
     # Inicializando a variável maior_elemento com o primeiro valor do vetor
@@ -899,7 +1186,17 @@ print(f"O {n}º termo da P.A é: {atual}")`},
     # Imprimindo o resultado na tela
     print("Maior elemento do vetor:", maior_elemento)
     `},
-{id:"06-15",title:"Pirâmide inversa",desc:"Mesma pirâmide do exercício 14, mas na ordem inversa (de baixo para cima).",sol:`    # Criando um vetor aleatório
+{id:"06-15",title:"Pirâmide inversa",desc:"Mesma pirâmide do exercício 14, mas na ordem inversa (de baixo para cima).",drill:`vet = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]
+
+vetinv = vet[::-1]
+
+taminv =len(vetinv)
+
+for a in range(taminv):
+    for b in range(vetinv[a]):
+        print(vetinv[b], end="")
+    print("")`,
+sol:`    # Criando um vetor aleatório
     vetor = [3, 8, 2, 1, 10, 5]
     
     # Inicializando as variáveis para os dois maiores elementos com os dois primeiros valores do vetor
@@ -1005,7 +1302,21 @@ print(f"O {n}º termo da P.A é: {atual}")`},
     print(arr)
     `},
 ]},{id:7,title:"T07 — Matrizes",full:"Tópico 07 — Arrays e Matrizes",sub:"listas 2D · double FOR · diagonais",color:"#a855f7",exercises:[
-{id:"07-01",title:"Matriz 3x3 do usuário",desc:"Usuário preenche matriz 3x3, imprima formatada.",sol:`# Entrada de uma matriz 3x3 pelo usuário
+{id:"07-01",title:"Matriz 3x3 do usuário",desc:"Usuário preenche matriz 3x3, imprima formatada.",drill:`matriz = []
+print("Digite os 9 números da matriz 3x3:")
+
+for i in range(3):
+    linha = []
+    for j in range(3):
+        valor = int(input(f"Elemento [{i+1}] [{j+1}]:"))
+        linha.append(valor)
+    matriz.append(linha)
+
+for linha in matriz:
+    for elemento in linha:
+        print(f"|\t{elemento}\t|", end="")
+    print()`,
+sol:`# Entrada de uma matriz 3x3 pelo usuário
 matriz = []
 print("Digite os 9 números da matriz 3x3:")
 
@@ -1022,7 +1333,31 @@ for linha in matriz:
     for elemento in linha:
         print(f"|\t{elemento}\t|", end="")
     print()`},
-{id:"07-02",title:"Matriz 7x5: média e maior por coluna",desc:"Matriz 7x5 aleatória → média e maior elemento por coluna. NÃO use max() nem mean().",sol:`import random
+{id:"07-02",title:"Matriz 7x5: média e maior por coluna",desc:"Matriz 7x5 aleatória → média e maior elemento por coluna. NÃO use max() nem mean().",drill:`import random
+
+matriz = []
+
+for i in range(7):
+    linha =[]
+    for j in range(5):
+        linha.append(random.randint(1,100))
+    matriz.append(linha)
+
+for linha in matriz:
+    for elemento in linha:
+        print(f"|\t{elemento}\t|", end="")
+    print()
+
+for j in range(5):
+    soma = 0
+    maior = matriz [0][j]
+    for i in range(7):
+        soma += matriz[i][j]
+        if matriz [i][j] > maior:
+            maior = matriz [i][j]
+    media = soma / 7
+    print(media)`,
+sol:`import random
 
 # Criação da matriz 7x5 sem list comprehension
 matriz = []
@@ -1369,7 +1704,7 @@ function startDrill(){
   if(!curId)return;
   const ex=findEx(curId);
   if(!ex){alert("Selecione um exercício primeiro");return;}
-  dLines=ex.sol.split("\n").filter(l=>l.trim()!=="");
+  dLines=(ex.drill||ex.sol).split("\n").filter(l=>l.trim()!=="");
   dIdx=0;dMissed=[];dHintLevel=0;
   document.getElementById("ce").style.display="none";
   document.getElementById("solpanel").style.display="none";
