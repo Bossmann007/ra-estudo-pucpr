@@ -1035,7 +1035,7 @@ for i in range(20):
 
 # Imprimindo o vetor na tela
 print(vetor)
-`}],
+   `}],
 sol:`# Criando um vetor vazio de tamanho 20
 vetor = [0] * 20
 
@@ -1357,14 +1357,21 @@ for i in range(0,5):
     vetsoma.append(n+n2)
 print(vet)
 print(veta)
-print(vetsoma)`},{label:"Resolução (professor)",code:`   vetor = [i+1 for i in range(100)]
-   soma = 0
-   
-   for i in range(50):
-       soma += vetor[i] + vetor[99-i]
-   
-   print("A soma dos elementos opostos do vetor é:", soma)
-   `}],
+print(vetsoma)`},{label:"Resolução (professor)",code:`import random
+
+# Criando dois vetores de 5 elementos com valores aleatórios
+vetor1 = [0] * 5
+vetor2 = [0] * 5
+vetor3 = [0] * 5
+
+for i in range(5):
+    vetor1[i] = random.randint(1, 10)
+    vetor2[i] = random.randint(1, 10)
+    vetor3[i] = vetor1[i] + vetor2[i]
+
+print("Vetor 1:", vetor1)
+print("Vetor 2:", vetor2)
+print("Vetor 3 (soma):", vetor3)`}],
 sol:`import random
 
 # Criando dois vetores de 5 elementos com valores aleatórios
@@ -1407,29 +1414,25 @@ for i in range(20):
     else:
         vet2.append(i)
 print(vet1)
-print(vet2)`},{label:"Resolução (professor)",code:`   # Importando a biblioteca math para usar a função sqrt
-   import math
-   
-   # Definindo o vetor
-   vetor = [1, 2, 3, 4, 5]
-   
-   soma = 0
-   # Calculando a média
-   for i in range(0,len(vetor)):
-       soma += vetor[i]
-   media = soma / len(vetor)
-   
-   soma_var = 0
-   # Calculando a soma da variancia
-   for i in range(0,len(vetor)):
-       soma_var += (vet[i] - media) ** 2
-   
-   desvio_padrao = math.sqrt(soma_var)
-   
-   # Imprimindo os resultados
-   print("Média:", media)
-   print("Desvio padrão:", desvio_padrao)
-   `}],
+print(vet2)`},{label:"Resolução (professor)",code:`# Criando um vetor de 20 elementos
+vetor = []
+for i in range(20):
+    vetor.append(i + 1)
+
+print("Vetor original:", vetor)
+
+# Dividindo em dois sub-vetores de 10 elementos
+vetor1 = []
+vetor2 = []
+
+for i in range(20):
+    if i < 10:
+        vetor1.append(vetor[i])
+    else:
+        vetor2.append(vetor[i])
+
+print("Sub-vetor 1:", vetor1)
+print("Sub-vetor 2:", vetor2)`}],
 sol:`# Criando um vetor de 20 elementos
 vetor = []
 for i in range(20):
@@ -1583,21 +1586,30 @@ for j in range(0,10):
     elif vet[j] > maior2:
         maior2 = vet[j]
 print(maior)
-print(maior2)`},{label:"Resolução (professor)",code:`    # Criando os dois vetores de 5 elementos
-    vetor1 = []
-    vetor2 = []
-    for i in range(5):
-        vetor1.append(i)
-        vetor2.append(i*2)
-    print("Vetor 1:", vetor1)
-    print("Vetor 2:", vetor2)
-    
-    # Criando o terceiro vetor com a soma dos dois vetores anteriores
-    vetor3 = []
-    for i in range(5):
-        vetor3.append(vetor1[i] + vetor2[i])
-    print("Vetor 3 (soma de Vetor 1 e Vetor
-    `}],
+print(maior2)`},{label:"Resolução (professor)",code:`import random
+
+# Criando vetor aleatório
+vetor = []
+for i in range(10):
+    vetor.append(random.randint(0, 100))
+print("Vetor:", vetor)
+
+# Encontrando os dois maiores sem max() nem sort()
+maior = vetor[0]
+segundo_maior = vetor[1]
+
+if segundo_maior > maior:
+    maior, segundo_maior = segundo_maior, maior
+
+for i in range(2, len(vetor)):
+    if vetor[i] > maior:
+        segundo_maior = maior
+        maior = vetor[i]
+    elif vetor[i] > segundo_maior:
+        segundo_maior = vetor[i]
+
+print("Maior:", maior)
+print("Segundo maior:", segundo_maior)`}],
 sol:`import random
 
 # Criando vetor aleatório
@@ -1663,22 +1675,29 @@ for i in range(tam):
         vetmedia.append(-1)
     else:
         vetmedia.append(0)
-print(vetmedia)`},{label:"Resolução (professor)",code:`    # Criando um vetor de 20 elementos
-    vetor = list(range(20))
-    print("Vetor original:", vetor)
-    
-    # Dividindo o vetor em dois sub-vetores de 10 elementos cada
-    sub_vetor1 = []
-    sub_vetor2 = []
-    for i in range(len(vetor)):
-        if i < 10:
-            sub_vetor1.append(vetor[i])
-        else:
-            sub_vetor2.append(vetor[i])
-    
-    print("Sub-vetor 1:", sub_vetor1)
-    print("Sub-vetor 2:", sub_vetor2)
-    `}],
+print(vetmedia)`},{label:"Resolução (professor)",code:`import random
+
+# Criando vetor aleatório
+vetor = []
+for i in range(10):
+    vetor.append(random.randint(0, 100))
+print("Vetor:", vetor)
+
+# Calculando a média
+soma = 0
+for i in range(len(vetor)):
+    soma += vetor[i]
+media = soma / len(vetor)
+print("Média:", media)
+
+# Criando vetor de rótulos: 1 se acima da média, 0 se abaixo
+rotulos = []
+for i in range(len(vetor)):
+    if vetor[i] > media:
+        rotulos.append(1)
+    else:
+        rotulos.append(0)
+print("Rótulos (1=acima, 0=abaixo):", rotulos)`}],
 sol:`import random
 
 # Criando vetor aleatório
@@ -2861,7 +2880,7 @@ function drillCheck(e){
   const inp=document.getElementById("dinp");
   const val=inp.value;
   const expected=dLines[dIdx];
-  const norm=s=>s.trimEnd().replace(/"/g,"'");
+  const norm=s=>s.trim().replace(/"/g,"'");
 
   if(norm(val)===norm(expected)){
     // correct
