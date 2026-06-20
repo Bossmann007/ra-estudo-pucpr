@@ -1189,24 +1189,20 @@ soma = 0
 
 for j in range(50):
    soma += vet[j] + vet[99-j] 
-   print(soma)`},{label:"Resolução (professor)",code:`vetor = []
-n = int(input("Quantidade de elementos: "))
-for i in range(n):
-    valor = int(input(f"Elemento {i+1}: "))
-    vetor.append(valor)
+   print(soma)`},{label:"Resolução (professor)",code:`vetor = [i+1 for i in range(100)]
+soma = 0
 
-for i in range(n // 2):
-    soma = vetor[i] + vetor[n - 1 - i]
-    print(f"vetor[{i}] + vetor[{n-1-i}] = {soma}")`}],
-sol:`vetor = []
-n = int(input("Quantidade de elementos: "))
-for i in range(n):
-    valor = int(input(f"Elemento {i+1}: "))
-    vetor.append(valor)
+for i in range(50):
+    soma += vetor[i] + vetor[99-i]
 
-for i in range(n // 2):
-    soma = vetor[i] + vetor[n - 1 - i]
-    print(f"vetor[{i}] + vetor[{n-1-i}] = {soma}")`},
+print("A soma dos elementos opostos do vetor é:", soma)`}],
+sol:`vetor = [i+1 for i in range(100)]
+soma = 0
+
+for i in range(50):
+    soma += vetor[i] + vetor[99-i]
+
+print("A soma dos elementos opostos do vetor é:", soma)`},
 {id:"06-07",title:"Média e Desvio Padrão",desc:"Compute média e desvio padrão de um vetor. NÃO use funções built-in.",drill:`vet = []
 
 for i in range(50):
@@ -1240,32 +1236,38 @@ media = soma / tam
 
 print("media:",media)`},{label:"Resolução (professor)",code:`import math
 
-vetor = []
-n = int(input("Quantidade de elementos: "))
-for i in range(n):
-    valor = float(input(f"Elemento {i+1}: "))
-    vetor.append(valor)
+vetor = [1, 2, 3, 4, 5]
 
-media = sum(vetor) / n
-print(f"Média: {media:.2f}")
+soma = 0
+for i in range(0, len(vetor)):
+    soma += vetor[i]
+media = soma / len(vetor)
 
-variancia = sum((x - media) ** 2 for x in vetor) / n
-desvio = math.sqrt(variancia)
-print(f"Desvio padrão: {desvio:.2f}")`}],
+soma_var = 0
+for i in range(0, len(vetor)):
+    soma_var += (vetor[i] - media) ** 2
+
+desvio_padrao = math.sqrt(soma_var)
+
+print("Média:", media)
+print("Desvio padrão:", desvio_padrao)`}],
 sol:`import math
 
-vetor = []
-n = int(input("Quantidade de elementos: "))
-for i in range(n):
-    valor = float(input(f"Elemento {i+1}: "))
-    vetor.append(valor)
+vetor = [1, 2, 3, 4, 5]
 
-media = sum(vetor) / n
-print(f"Média: {media:.2f}")
+soma = 0
+for i in range(0, len(vetor)):
+    soma += vetor[i]
+media = soma / len(vetor)
 
-variancia = sum((x - media) ** 2 for x in vetor) / n
-desvio = math.sqrt(variancia)
-print(f"Desvio padrão: {desvio:.2f}")`},
+soma_var = 0
+for i in range(0, len(vetor)):
+    soma_var += (vetor[i] - media) ** 2
+
+desvio_padrao = math.sqrt(soma_var)
+
+print("Média:", media)
+print("Desvio padrão:", desvio_padrao)`},
 {id:"06-08",title:"Soma pares e múltiplos",desc:"Vetor aleatório → soma dos pares + soma dos múltiplos de 5 + subvetor com múltiplos de 10.",drill:`import random
 
 vet = []
@@ -1402,35 +1404,35 @@ for i in range(0,5):
     vetsoma.append(n+n2)
 print(vet)
 print(veta)
-print(vetsoma)`},{label:"Resolução (professor)",code:`import random
-
-# Criando dois vetores de 5 elementos com valores aleatórios
-vetor1 = [0] * 5
-vetor2 = [0] * 5
-vetor3 = [0] * 5
+print(vetsoma)`},{label:"Resolução (professor)",code:`vetor1 = []
+vetor2 = []
 
 for i in range(5):
-    vetor1[i] = random.randint(1, 10)
-    vetor2[i] = random.randint(1, 10)
-    vetor3[i] = vetor1[i] + vetor2[i]
+    vetor1.append(i)
+    vetor2.append(i * 2)
 
 print("Vetor 1:", vetor1)
 print("Vetor 2:", vetor2)
+
+vetor3 = []
+for i in range(5):
+    vetor3.append(vetor1[i] + vetor2[i])
+
 print("Vetor 3 (soma):", vetor3)`}],
-sol:`import random
-
-# Criando dois vetores de 5 elementos com valores aleatórios
-vetor1 = [0] * 5
-vetor2 = [0] * 5
-vetor3 = [0] * 5
+sol:`vetor1 = []
+vetor2 = []
 
 for i in range(5):
-    vetor1[i] = random.randint(1, 10)
-    vetor2[i] = random.randint(1, 10)
-    vetor3[i] = vetor1[i] + vetor2[i]
+    vetor1.append(i)
+    vetor2.append(i * 2)
 
 print("Vetor 1:", vetor1)
 print("Vetor 2:", vetor2)
+
+vetor3 = []
+for i in range(5):
+    vetor3.append(vetor1[i] + vetor2[i])
+
 print("Vetor 3 (soma):", vetor3)`},
 {id:"06-10",title:"Divide em 2 sub-vetores",desc:"Vetor de 20 elementos → dois sub-vetores de 10.",drill:`vet = list(range(20))
 
@@ -1459,44 +1461,34 @@ for i in range(20):
     else:
         vet2.append(i)
 print(vet1)
-print(vet2)`},{label:"Resolução (professor)",code:`# Criando um vetor de 20 elementos
-vetor = []
-for i in range(20):
-    vetor.append(i + 1)
-
+print(vet2)`},{label:"Resolução (professor)",code:`vetor = list(range(20))
 print("Vetor original:", vetor)
 
-# Dividindo em dois sub-vetores de 10 elementos
-vetor1 = []
-vetor2 = []
+sub_vetor1 = []
+sub_vetor2 = []
 
-for i in range(20):
+for i in range(len(vetor)):
     if i < 10:
-        vetor1.append(vetor[i])
+        sub_vetor1.append(vetor[i])
     else:
-        vetor2.append(vetor[i])
+        sub_vetor2.append(vetor[i])
 
-print("Sub-vetor 1:", vetor1)
-print("Sub-vetor 2:", vetor2)`}],
-sol:`# Criando um vetor de 20 elementos
-vetor = []
-for i in range(20):
-    vetor.append(i + 1)
-
+print("Sub-vetor 1:", sub_vetor1)
+print("Sub-vetor 2:", sub_vetor2)`}],
+sol:`vetor = list(range(20))
 print("Vetor original:", vetor)
 
-# Dividindo em dois sub-vetores de 10 elementos
-vetor1 = []
-vetor2 = []
+sub_vetor1 = []
+sub_vetor2 = []
 
-for i in range(20):
+for i in range(len(vetor)):
     if i < 10:
-        vetor1.append(vetor[i])
+        sub_vetor1.append(vetor[i])
     else:
-        vetor2.append(vetor[i])
+        sub_vetor2.append(vetor[i])
 
-print("Sub-vetor 1:", vetor1)
-print("Sub-vetor 2:", vetor2)`},
+print("Sub-vetor 1:", sub_vetor1)
+print("Sub-vetor 2:", sub_vetor2)`},
 {id:"06-11",title:"Maior elemento",desc:"Encontre o maior elemento. NÃO use max().",drill:`import random
 
 vet = []
@@ -1528,30 +1520,22 @@ maior = 0
 for i in range(tam):
     if vet[i] > maior:
         maior = vet[i]
-print(maior)`},{label:"Resolução (professor)",code:`import random
+print(maior)`},{label:"Resolução (professor)",code:`vetor = [3, 8, 2, 1, 10, 5]
 
-vetor = []
-for i in range(10):
-    vetor.append(random.randint(0, 100))
-print("Vetor:", vetor)
+maior_elemento = vetor[0]
+for i in range(len(vetor)):
+    if vetor[i] > maior_elemento:
+        maior_elemento = vetor[i]
 
-maior = vetor[0]
-for i in range(1, len(vetor)):
-    if vetor[i] > maior:
-        maior = vetor[i]
-print("Maior elemento:", maior)`}],
-sol:`import random
+print("Maior elemento do vetor:", maior_elemento)`}],
+sol:`vetor = [3, 8, 2, 1, 10, 5]
 
-vetor = []
-for i in range(10):
-    vetor.append(random.randint(0, 100))
-print("Vetor:", vetor)
+maior_elemento = vetor[0]
+for i in range(len(vetor)):
+    if vetor[i] > maior_elemento:
+        maior_elemento = vetor[i]
 
-maior = vetor[0]
-for i in range(1, len(vetor)):
-    if vetor[i] > maior:
-        maior = vetor[i]
-print("Maior elemento:", maior)`},
+print("Maior elemento do vetor:", maior_elemento)`},
 {id:"06-12",title:"Dois maiores elementos",desc:"Encontre os dois maiores. NÃO use max() nem sort().",drill:`import random
 
 vet =[]
@@ -1591,54 +1575,42 @@ for j in range(0,10):
     elif vet[j] > maior2:
         maior2 = vet[j]
 print(maior)
-print(maior2)`},{label:"Resolução (professor)",code:`import random
+print(maior2)`},{label:"Resolução (professor)",code:`# Criando um vetor aleatório
+vetor = [3, 8, 2, 1, 10, 5]
 
-# Criando vetor aleatório
-vetor = []
-for i in range(10):
-    vetor.append(random.randint(0, 100))
-print("Vetor:", vetor)
+# Inicializando as variáveis para os dois maiores elementos com os dois primeiros valores do vetor
+maior_elemento = vetor[0]
+segundo_maior_elemento = vetor[1]
 
-# Encontrando os dois maiores sem max() nem sort()
-maior = vetor[0]
-segundo_maior = vetor[1]
+# Percorrendo o vetor e atualizando as variáveis para os dois maiores elementos
+for i in range(len(vetor)):
+    if vetor[i] > maior_elemento:
+        segundo_maior_elemento = maior_elemento
+        maior_elemento = vetor[i]
+    elif vetor[i] > segundo_maior_elemento:
+        segundo_maior_elemento = vetor[i]
 
-if segundo_maior > maior:
-    maior, segundo_maior = segundo_maior, maior
+# Imprimindo o resultado na tela
+print("Maior elemento do vetor:", maior_elemento)
+print("Segundo maior elemento do vetor:", segundo_maior_elemento)`}],
+sol:`# Criando um vetor aleatório
+vetor = [3, 8, 2, 1, 10, 5]
 
-for i in range(2, len(vetor)):
-    if vetor[i] > maior:
-        segundo_maior = maior
-        maior = vetor[i]
-    elif vetor[i] > segundo_maior:
-        segundo_maior = vetor[i]
+# Inicializando as variáveis para os dois maiores elementos com os dois primeiros valores do vetor
+maior_elemento = vetor[0]
+segundo_maior_elemento = vetor[1]
 
-print("Maior:", maior)
-print("Segundo maior:", segundo_maior)`}],
-sol:`import random
+# Percorrendo o vetor e atualizando as variáveis para os dois maiores elementos
+for i in range(len(vetor)):
+    if vetor[i] > maior_elemento:
+        segundo_maior_elemento = maior_elemento
+        maior_elemento = vetor[i]
+    elif vetor[i] > segundo_maior_elemento:
+        segundo_maior_elemento = vetor[i]
 
-# Criando vetor aleatório
-vetor = []
-for i in range(10):
-    vetor.append(random.randint(0, 100))
-print("Vetor:", vetor)
-
-# Encontrando os dois maiores sem max() nem sort()
-maior = vetor[0]
-segundo_maior = vetor[1]
-
-if segundo_maior > maior:
-    maior, segundo_maior = segundo_maior, maior
-
-for i in range(2, len(vetor)):
-    if vetor[i] > maior:
-        segundo_maior = maior
-        maior = vetor[i]
-    elif vetor[i] > segundo_maior:
-        segundo_maior = vetor[i]
-
-print("Maior:", maior)
-print("Segundo maior:", segundo_maior)`},
+# Imprimindo o resultado na tela
+print("Maior elemento do vetor:", maior_elemento)
+print("Segundo maior elemento do vetor:", segundo_maior_elemento)`},
 {id:"06-13",title:"Rótulo acima/abaixo da média",desc:"Crie segundo vetor: 1 se acima da média, -1 se abaixo, 0 se igual.\nEx: [30,10,40,50,20] → [0,-1,1,1,-1]",drill:`vet = [30,10,40,50,20]
 
 soma = 0
@@ -1680,52 +1652,50 @@ for i in range(tam):
         vetmedia.append(-1)
     else:
         vetmedia.append(0)
-print(vetmedia)`},{label:"Resolução (professor)",code:`import random
+print(vetmedia)`},{label:"Resolução (professor)",code:`# criar vetor aleatório
+vetor = [2, 4, 5, 8, 12, 7, 3, 9, 6, 10]
 
-# Criando vetor aleatório
-vetor = []
-for i in range(10):
-    vetor.append(random.randint(0, 100))
-print("Vetor:", vetor)
-
-# Calculando a média
+# calcular média do vetor
 soma = 0
 for i in range(len(vetor)):
     soma += vetor[i]
 media = soma / len(vetor)
-print("Média:", media)
 
-# Criando vetor de rótulos: 1 se acima da média, 0 se abaixo
+# rotular índices
 rotulos = []
 for i in range(len(vetor)):
-    if vetor[i] > media:
+    if vetor[i] < media:
+        rotulos.append(-1)
+    elif vetor[i] > media:
         rotulos.append(1)
     else:
         rotulos.append(0)
-print("Rótulos (1=acima, 0=abaixo):", rotulos)`}],
-sol:`import random
 
-# Criando vetor aleatório
-vetor = []
-for i in range(10):
-    vetor.append(random.randint(0, 100))
 print("Vetor:", vetor)
+print("Média:", media)
+print("Rótulos:", rotulos)`}],
+sol:`# criar vetor aleatório
+vetor = [2, 4, 5, 8, 12, 7, 3, 9, 6, 10]
 
-# Calculando a média
+# calcular média do vetor
 soma = 0
 for i in range(len(vetor)):
     soma += vetor[i]
 media = soma / len(vetor)
-print("Média:", media)
 
-# Criando vetor de rótulos: 1 se acima da média, 0 se abaixo
+# rotular índices
 rotulos = []
 for i in range(len(vetor)):
-    if vetor[i] > media:
+    if vetor[i] < media:
+        rotulos.append(-1)
+    elif vetor[i] > media:
         rotulos.append(1)
     else:
         rotulos.append(0)
-print("Rótulos (1=acima, 0=abaixo):", rotulos)`},
+
+print("Vetor:", vetor)
+print("Média:", media)
+print("Rótulos:", rotulos)`},
 {id:"06-14",title:"Pirâmide crescente",desc:"Vetor de 20 → imprimir como pirâmide:\n1\n12\n123\n...",drill:`vet = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]
 
 tam = len(vet)
@@ -1741,34 +1711,20 @@ tam = len(vet)
 for i in range(tam):
     for j in range(i+1):
         print(vet[j], end="")
-    print("")`},{label:"Resolução (professor)",code:`    # Criando um vetor aleatório
-    vetor = [3, 8, 2, 1, 10, 5]
-    
-    # Inicializando a variável maior_elemento com o primeiro valor do vetor
-    maior_elemento = vetor[0]
-    
-    # Percorrendo o vetor e comparando cada elemento com o maior_elemento atual
-    for i in range(len(vetor)):
-        if vetor[i] > maior_elemento:
-            maior_elemento = vetor[i]
-    
-    # Imprimindo o resultado na tela
-    print("Maior elemento do vetor:", maior_elemento)
-    `}],
-sol:`    # Criando um vetor aleatório
-    vetor = [3, 8, 2, 1, 10, 5]
-    
-    # Inicializando a variável maior_elemento com o primeiro valor do vetor
-    maior_elemento = vetor[0]
-    
-    # Percorrendo o vetor e comparando cada elemento com o maior_elemento atual
-    for i in range(len(vetor)):
-        if vetor[i] > maior_elemento:
-            maior_elemento = vetor[i]
-    
-    # Imprimindo o resultado na tela
-    print("Maior elemento do vetor:", maior_elemento)
-    `},
+    print("")`},{label:"Resolução (professor)",code:`vet = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
+n = len(vet)
+
+for i in range(n):
+    for j in range(i + 1):
+        print(vet[j], end=" ")
+    print('')`}],
+sol:`vet = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
+n = len(vet)
+
+for i in range(n):
+    for j in range(i + 1):
+        print(vet[j], end=" ")
+    print('')`},
 {id:"06-15",title:"Pirâmide inversa",desc:"Mesma pirâmide do exercício 14, mas na ordem inversa (de baixo para cima).",drill:`vet = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]
 
 vetinv = vet[::-1]
@@ -1788,44 +1744,20 @@ taminv =len(vetinv)
 for a in range(taminv):
     for b in range(vetinv[a]):
         print(vetinv[b], end="")
-    print("")`},{label:"Resolução (professor)",code:`    # Criando um vetor aleatório
-    vetor = [3, 8, 2, 1, 10, 5]
-    
-    # Inicializando as variáveis para os dois maiores elementos com os dois primeiros valores do vetor
-    maior_elemento = vetor[0]
-    segundo_maior_elemento = vetor[1]
-    
-    # Percorrendo o vetor e atualizando as variáveis para os dois maiores elementos
-    for i in range(len(vetor)):
-        if vetor[i] > maior_elemento:
-            segundo_maior_elemento = maior_elemento
-            maior_elemento = vetor[i]
-        elif vetor[i] > segundo_maior_elemento:
-            segundo_maior_elemento = vetor[i]
-    
-    # Imprimindo o resultado na tela
-    print("Maior elemento do vetor:", maior_elemento)
-    print("Segundo maior elemento do vetor:", segundo_maior_elemento)
-    `}],
-sol:`    # Criando um vetor aleatório
-    vetor = [3, 8, 2, 1, 10, 5]
-    
-    # Inicializando as variáveis para os dois maiores elementos com os dois primeiros valores do vetor
-    maior_elemento = vetor[0]
-    segundo_maior_elemento = vetor[1]
-    
-    # Percorrendo o vetor e atualizando as variáveis para os dois maiores elementos
-    for i in range(len(vetor)):
-        if vetor[i] > maior_elemento:
-            segundo_maior_elemento = maior_elemento
-            maior_elemento = vetor[i]
-        elif vetor[i] > segundo_maior_elemento:
-            segundo_maior_elemento = vetor[i]
-    
-    # Imprimindo o resultado na tela
-    print("Maior elemento do vetor:", maior_elemento)
-    print("Segundo maior elemento do vetor:", segundo_maior_elemento)
-    `},
+    print("")`},{label:"Resolução (professor)",code:`vet = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
+n = len(vet)
+
+for i in range(n - 1, 0, -1):
+    for j in range(i + 1):
+        print(vet[j], end=" ")
+    print('')`}],
+sol:`vet = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
+n = len(vet)
+
+for i in range(n - 1, 0, -1):
+    for j in range(i + 1):
+        print(vet[j], end=" ")
+    print('')`},
 {id:"06-16",title:"Constrói e desconstrói pirâmide",desc:"Construa a pirâmide crescente (ex14) e depois desconstrói (ex15) em sequência.",drill:`vet = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]
 n = len(vet)
 for i in range(n):
@@ -1845,50 +1777,32 @@ for i in range(n):
 for i in range(n-1,0,-1):
     for j in range(i+1):
         print(vet[j], end=" ")
-    print('')`},{label:"Resolução (professor)",code:`    # criar vetor aleatório
-    vetor = [2, 4, 5, 8, 12, 7, 3, 9, 6, 10]
-    
-    # calcular média do vetor
-    soma = 0
-    for i in range(len(vetor)):
-        soma += vetor[i]
-    media = soma / len(vetor)
-    
-    # rotular índices
-    rotulos = []
-    for i in range(len(vetor)):
-        if vetor[i] < media:
-            rotulos.append(-1)
-        elif vetor[i] > media:
-            rotulos.append(1)
-        else:
-            rotulos.append(0)
-    
-    print("Vetor original:", vetor)
-    print("Rotulos:", rotulos)
-    `}],
-sol:`    # criar vetor aleatório
-    vetor = [2, 4, 5, 8, 12, 7, 3, 9, 6, 10]
-    
-    # calcular média do vetor
-    soma = 0
-    for i in range(len(vetor)):
-        soma += vetor[i]
-    media = soma / len(vetor)
-    
-    # rotular índices
-    rotulos = []
-    for i in range(len(vetor)):
-        if vetor[i] < media:
-            rotulos.append(-1)
-        elif vetor[i] > media:
-            rotulos.append(1)
-        else:
-            rotulos.append(0)
-    
-    print("Vetor original:", vetor)
-    print("Rotulos:", rotulos)
-    `},
+    print('')`},{label:"Resolução (professor)",code:`vet = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
+n = len(vet)
+
+for i in range(n):
+    for j in range(i + 1):
+        print(vet[j], end=" ")
+    print('')
+
+# Desconstrução
+for i in range(n - 1, 0, -1):
+    for j in range(i + 1):
+        print(vet[j], end=" ")
+    print('')`}],
+sol:`vet = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
+n = len(vet)
+
+for i in range(n):
+    for j in range(i + 1):
+        print(vet[j], end=" ")
+    print('')
+
+# Desconstrução
+for i in range(n - 1, 0, -1):
+    for j in range(i + 1):
+        print(vet[j], end=" ")
+    print('')`},
 {id:"06-17",title:"Forma de X",desc:"Dado um vetor, apresente os elementos em forma de 'X'.",drill:`vet = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]
 n = len(vet)
 for i in range(n):
@@ -2483,26 +2397,26 @@ alts:[{label:"Compacta",code:`def invert_(vet):
         vetinv.append(vet[i])
     return vetinv
 
-print(invert_([1,2,3,4,5]))`},{label:"Resolução (professor)",code:`def invert_(vet):
-    n = len(vet)
-    for i in range(n // 2):
-        vet[i], vet[n - 1 - i] = vet[n - 1 - i], vet[i]
-    return vet
+print(invert_([1,2,3,4,5]))`},{label:"Resolução (professor)",code:`def invert_(vetor):
+    invertido = []
+    for i in range(len(vetor) - 1, -1, -1):
+        invertido.append(vetor[i])
+    return invertido
 
-vet = [1, 2, 3, 4, 5]
-print("Original:", vet)
-invert_(vet)
-print("Invertido:", vet)`}],
-sol:`def invert_(vet):
-    n = len(vet)
-    for i in range(n // 2):
-        vet[i], vet[n - 1 - i] = vet[n - 1 - i], vet[i]
-    return vet
+vetor = [1, 2, 3, 4, 5]
+print("Original:", vetor)
+invertido = invert_(vetor)
+print("Invertido:", invertido)`}],
+sol:`def invert_(vetor):
+    invertido = []
+    for i in range(len(vetor) - 1, -1, -1):
+        invertido.append(vetor[i])
+    return invertido
 
-vet = [1, 2, 3, 4, 5]
-print("Original:", vet)
-invert_(vet)
-print("Invertido:", vet)`},
+vetor = [1, 2, 3, 4, 5]
+print("Original:", vetor)
+invertido = invert_(vetor)
+print("Invertido:", invertido)`},
 {id:"08-04",title:"sort_() — Bubble Sort",desc:"Função sort_() que ordena vetor crescente. NÃO use sort() nem sorted().",drill:`def sort_(vet):
     n = len(vet)
     for i in range(n):
@@ -2559,30 +2473,30 @@ alts:[{label:"Compacta",code:`def exist_(vet, val):
     return False
 
 print(exist_([1,2,3,4,5], 3))
-print(exist_([1,2,3,4,5], 9))`},{label:"Resolução (professor)",code:`def exist_(vet, valor):
-    for i in range(len(vet)):
-        if vet[i] == valor:
+print(exist_([1,2,3,4,5], 9))`},{label:"Resolução (professor)",code:`def exist_(vetor, valor):
+    for elemento in vetor:
+        if elemento == valor:
             return True
     return False
 
-vet = [10, 20, 30, 40, 50]
+vetor = [10, 20, 30, 40, 50]
 v = int(input("Valor a buscar: "))
-if exist_(vet, v):
-    print(f"{v} encontrado no vetor")
+if exist_(vetor, v):
+    print(v, "encontrado no vetor")
 else:
-    print(f"{v} não encontrado no vetor")`}],
-sol:`def exist_(vet, valor):
-    for i in range(len(vet)):
-        if vet[i] == valor:
+    print(v, "não encontrado no vetor")`}],
+sol:`def exist_(vetor, valor):
+    for elemento in vetor:
+        if elemento == valor:
             return True
     return False
 
-vet = [10, 20, 30, 40, 50]
+vetor = [10, 20, 30, 40, 50]
 v = int(input("Valor a buscar: "))
-if exist_(vet, v):
-    print(f"{v} encontrado no vetor")
+if exist_(vetor, v):
+    print(v, "encontrado no vetor")
 else:
-    print(f"{v} não encontrado no vetor")`},
+    print(v, "não encontrado no vetor")`},
 {id:"08-06",title:"dev_padrao() — média e desvio",desc:"Função que recebe vetor e retorna (média, desvio_padrão).",drill:`import math
 
 def dev_padrao(vet):
@@ -2602,30 +2516,44 @@ def dev_padrao(vet):
     return media, math.sqrt(variancia)
 
 m, dp = dev_padrao([1,2,3,4,5])
-print(f"media: {m}, dp: {dp:.2f}")`},{label:"Resolução (professor)",code:`import math
+print(f"media: {m}, dp: {dp:.2f}")`},{label:"Resolução (professor)",code:`def dev_padrao(vetor):
+    soma = 0
+    for valor in vetor:
+        soma += valor
+    media = soma / len(vetor)
 
-def dev_padrao(vet):
-    n = len(vet)
-    media = sum(vet) / n
-    variancia = sum((x - media) ** 2 for x in vet) / n
-    return media, math.sqrt(variancia)
+    soma_diferencas = 0
+    for valor in vetor:
+        soma_diferencas += (valor - media) ** 2
 
-vet = [10, 20, 30, 40, 50]
-media, dp = dev_padrao(vet)
-print(f"Média: {media:.2f}")
-print(f"Desvio padrão: {dp:.2f}")`}],
-sol:`import math
+    variancia = soma_diferencas / len(vetor)
+    desvio = variancia ** 0.5
 
-def dev_padrao(vet):
-    n = len(vet)
-    media = sum(vet) / n
-    variancia = sum((x - media) ** 2 for x in vet) / n
-    return media, math.sqrt(variancia)
+    return media, desvio
 
-vet = [10, 20, 30, 40, 50]
-media, dp = dev_padrao(vet)
-print(f"Média: {media:.2f}")
-print(f"Desvio padrão: {dp:.2f}")`},
+vetor = [10, 20, 30, 40, 50]
+media, desvio = dev_padrao(vetor)
+print("Média:", media)
+print("Desvio padrão:", desvio)`}],
+sol:`def dev_padrao(vetor):
+    soma = 0
+    for valor in vetor:
+        soma += valor
+    media = soma / len(vetor)
+
+    soma_diferencas = 0
+    for valor in vetor:
+        soma_diferencas += (valor - media) ** 2
+
+    variancia = soma_diferencas / len(vetor)
+    desvio = variancia ** 0.5
+
+    return media, desvio
+
+vetor = [10, 20, 30, 40, 50]
+media, desvio = dev_padrao(vetor)
+print("Média:", media)
+print("Desvio padrão:", desvio)`},
 {id:"08-07",title:"Índices dos pares",desc:"Função que recebe vetor e retorna índices dos elementos pares.\nEx: [10,11,12,13,14] → [0,2,4]",drill:`def indices_pares(vet):
     idx = []
     for i in range(len(vet)):
@@ -2680,34 +2608,48 @@ alts:[{label:"Compacta",code:`def frequencia(vet):
             freq.append([x, vet.count(x)])
     return freq
 
-print(frequencia([1,2,1,3,3,4,3,1]))`},{label:"Resolução (professor)",code:`def frequencia(vet):
-    freq = {}
-    for elem in vet:
-        if elem in freq:
-            freq[elem] += 1
-        else:
-            freq[elem] = 1
-    return freq
+print(frequencia([1,2,1,3,3,4,3,1]))`},{label:"Resolução (professor)",code:`def frequencia(vetor):
+    resultado = []
+    for i in range(len(vetor)):
+        valor = vetor[i]
+        ja_contado = False
+        for j in range(len(resultado)):
+            if resultado[j][0] == valor:
+                ja_contado = True
+        if not ja_contado:
+            cont = 0
+            for k in range(len(vetor)):
+                if vetor[k] == valor:
+                    cont += 1
+            resultado.append([valor, cont])
+    return resultado
 
-vet = [1, 2, 2, 3, 3, 3, 4, 4, 4, 4]
-print("Vetor:", vet)
-freq = frequencia(vet)
-for elem, cnt in freq.items():
-    print(f"  {elem}: {cnt}x")`}],
-sol:`def frequencia(vet):
-    freq = {}
-    for elem in vet:
-        if elem in freq:
-            freq[elem] += 1
-        else:
-            freq[elem] = 1
-    return freq
+vetor = [1, 2, 2, 3, 3, 3, 4, 4, 4, 4]
+print("Vetor:", vetor)
+resultado = frequencia(vetor)
+for par in resultado:
+    print(" ", par[0], ":", par[1], "vez(es)")`}],
+sol:`def frequencia(vetor):
+    resultado = []
+    for i in range(len(vetor)):
+        valor = vetor[i]
+        ja_contado = False
+        for j in range(len(resultado)):
+            if resultado[j][0] == valor:
+                ja_contado = True
+        if not ja_contado:
+            cont = 0
+            for k in range(len(vetor)):
+                if vetor[k] == valor:
+                    cont += 1
+            resultado.append([valor, cont])
+    return resultado
 
-vet = [1, 2, 2, 3, 3, 3, 4, 4, 4, 4]
-print("Vetor:", vet)
-freq = frequencia(vet)
-for elem, cnt in freq.items():
-    print(f"  {elem}: {cnt}x")`},
+vetor = [1, 2, 2, 3, 3, 3, 4, 4, 4, 4]
+print("Vetor:", vetor)
+resultado = frequencia(vetor)
+for par in resultado:
+    print(" ", par[0], ":", par[1], "vez(es)")`},
 {id:"08-09",title:"Validador de CPF (função)",desc:"Função valida_cpf(cpf) que valida um CPF usando o algoritmo dos dígitos verificadores.",drill:`def valida_cpf(cpf):
     nums = [int(c) for c in cpf if c.isdigit()]
     if len(nums) != 11:
