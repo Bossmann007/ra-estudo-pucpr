@@ -56,7 +56,9 @@ main{flex:1;display:flex;overflow:hidden}
 .bdone{background:var(--grn);color:#000}
 .brev{background:var(--yel);color:#000}
 .marks{margin-left:auto;display:flex;gap:5px}
-textarea.ce{flex:1;background:#0d1117;color:#e6edf3;font-family:'Consolas','Courier New',monospace;font-size:12.5px;line-height:1.65;padding:12px;border:none;outline:none;resize:none;tab-size:4}
+.ce-wrap{display:flex;flex:1;overflow:hidden}
+#linenos{background:#0d1117;color:#3d4f63;font-family:'Consolas','Courier New',monospace;font-size:12.5px;line-height:1.65;padding:12px 6px 12px 8px;text-align:right;user-select:none;min-width:32px;overflow:hidden;white-space:pre;border-right:1px solid #1e2a3a;flex-shrink:0}
+textarea.ce{flex:1;background:#0d1117;color:#e6edf3;font-family:'Consolas','Courier New',monospace;font-size:12.5px;line-height:1.65;padding:12px 12px 12px 8px;border:none;outline:none;resize:none;tab-size:4}
 .outcol{width:260px;display:flex;flex-direction:column;flex-shrink:0}
 .obar{padding:6px 10px;background:#12151e;border-bottom:1px solid var(--bdr);font-size:10px;color:var(--mut);font-weight:600;text-transform:uppercase}
 .outbox{flex:1;padding:10px;font-family:monospace;font-size:11.5px;color:#a8ff78;background:#0d1117;overflow-y:auto;white-space:pre-wrap}
@@ -183,7 +185,10 @@ textarea.ce{flex:1;background:#0d1117;color:#e6edf3;font-family:'Consolas','Cour
                 </div>
               </div>
             </div>
-            <textarea class="ce" id="ce" placeholder="# escreva aqui..." spellcheck="false"></textarea>
+            <div class="ce-wrap">
+              <div id="linenos">1</div>
+              <textarea class="ce" id="ce" placeholder="# escreva aqui..." spellcheck="false"></textarea>
+            </div>
             <div class="solpanel" id="solpanel">
               <div class="solhdr">💡 Solução do Professor<span onclick="toggleSol()">✕</span></div>
               <div class="solcode" id="solcode"></div>
@@ -351,6 +356,15 @@ function selT(t){
   document.getElementById("exview").style.display="none";
 }
 
+function updateLinenos(){
+  const ta = document.getElementById("ce");
+  const ln = document.getElementById("linenos");
+  if(!ta || !ln) return;
+  const count = ta.value.split("\n").length;
+  ln.textContent = Array.from({length: count}, (_, i) => i + 1).join("\n");
+  ln.scrollTop = ta.scrollTop;
+}
+
 function selEx(ex){
   curId=ex.id;buildEl(curT);
   document.getElementById("emp").style.display="none";
@@ -362,6 +376,7 @@ function selEx(ex){
   document.getElementById("outbox").className="outbox";
   document.getElementById("solpanel").classList.remove("open");
   document.getElementById("solcode").textContent=ex.sol;
+  updateLinenos();
 }
 
 function toggleSol(){document.getElementById("solpanel").classList.toggle("open");}
@@ -1197,6 +1212,14 @@ function surprise(){
 
 buildSb();updateOvp();updateCd();
 setInterval(updateCd,60000);
+
+// ── LINE NUMBERS ──────────────────────────────────────────────────────────────
+const _ce = document.getElementById("ce");
+_ce.addEventListener("input", updateLinenos);
+_ce.addEventListener("scroll", () => {
+  document.getElementById("linenos").scrollTop = _ce.scrollTop;
+});
+updateLinenos();
 </script>
   <button id="surpbtn" onclick="surprise()" title="Exercício aleatório (pesa os 🔄)">🎲</button>
 </body>
