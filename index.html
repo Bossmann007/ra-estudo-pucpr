@@ -1156,34 +1156,18 @@ tam = len(vet)-1
 for i in range(0,tam):
     print("Atual:",vet[i])
     print("Antecessor:",vet[i-1])
-    print("Sucessor:",vet[i+1])`},{label:"Resolução (professor)",code:`   # Lendo o tamanho do vetor N
-   N = int(input("Digite o tamanho do vetor: "))
-   
-   # Criando um vetor vazio
-   vetor = []
-   
-   # Lendo os elementos e adicionando-os ao final do vetor
-   for i in range(N):
-       valor = int(input("Digite o valor do elemento %d: " % (i+1)))
-       vetor.append(valor)
-   
-   # Imprimindo o vetor na tela
-   print(vetor)
-   `}],
-sol:`   # Lendo o tamanho do vetor N
-   N = int(input("Digite o tamanho do vetor: "))
-   
-   # Criando um vetor vazio
-   vetor = []
-   
-   # Lendo os elementos e adicionando-os ao final do vetor
-   for i in range(N):
-       valor = int(input("Digite o valor do elemento %d: " % (i+1)))
-       vetor.append(valor)
-   
-   # Imprimindo o vetor na tela
-   print(vetor)
-   `},
+    print("Sucessor:",vet[i+1])`},{label:"Resolução (professor)",code:`vetor = [1, 3, 5, 7, 9]
+
+for i in range(1, len(vetor)-1):
+    print("Valor atual:", vetor[i])
+    print("Antecessor:", vetor[i-1])
+    print("Sucessor:", vetor[i+1])`}],
+sol:`vetor = [1, 3, 5, 7, 9]
+
+for i in range(1, len(vetor)-1):
+    print("Valor atual:", vetor[i])
+    print("Antecessor:", vetor[i-1])
+    print("Sucessor:", vetor[i+1])`},
 {id:"06-06",title:"Soma de elementos opostos",desc:"Soma dos elementos opostos de um vetor de 100 elementos.\nvet[0]+vet[99], vet[1]+vet[98]...",drill:`vet = []
 
 for i in range(101):
@@ -1205,30 +1189,24 @@ soma = 0
 
 for j in range(50):
    soma += vet[j] + vet[99-j] 
-   print(soma)`},{label:"Resolução (professor)",code:`   # Criando um vetor vazio
-   vetor = []
-   
-   # Lendo os elementos do vetor até que o usuário digite um número negativo
-   valor = int(input("Digite um número (digite um número negativo para sair): "))
-   while valor >= 0:
-       vetor.append(valor)
-       valor = int(input("Digite um número (digite um número negativo para sair): "))
-   
-   # Imprimindo o vetor na tela
-   print(vetor)
-   `}],
-sol:`   # Criando um vetor vazio
-   vetor = []
-   
-   # Lendo os elementos do vetor até que o usuário digite um número negativo
-   valor = int(input("Digite um número (digite um número negativo para sair): "))
-   while valor >= 0:
-       vetor.append(valor)
-       valor = int(input("Digite um número (digite um número negativo para sair): "))
-   
-   # Imprimindo o vetor na tela
-   print(vetor)
-   `},
+   print(soma)`},{label:"Resolução (professor)",code:`vetor = []
+n = int(input("Quantidade de elementos: "))
+for i in range(n):
+    valor = int(input(f"Elemento {i+1}: "))
+    vetor.append(valor)
+
+for i in range(n // 2):
+    soma = vetor[i] + vetor[n - 1 - i]
+    print(f"vetor[{i}] + vetor[{n-1-i}] = {soma}")`}],
+sol:`vetor = []
+n = int(input("Quantidade de elementos: "))
+for i in range(n):
+    valor = int(input(f"Elemento {i+1}: "))
+    vetor.append(valor)
+
+for i in range(n // 2):
+    soma = vetor[i] + vetor[n - 1 - i]
+    print(f"vetor[{i}] + vetor[{n-1-i}] = {soma}")`},
 {id:"06-07",title:"Média e Desvio Padrão",desc:"Compute média e desvio padrão de um vetor. NÃO use funções built-in.",drill:`vet = []
 
 for i in range(50):
@@ -1260,32 +1238,34 @@ for i in range(0,tam):
 
 media = soma / tam
 
-print("media:",media)`},{label:"Resolução (professor)",code:`   # Criando um vetor vazio
-   vetor = []
-   
-   # Lendo os elementos pares do vetor e adicionando-os ao vetor
-   valor = int(input("Digite um número (digite 0 para sair): "))
-   while valor != 0:
-       if valor % 2 == 0:
-           vetor.append(valor)
-       valor = int(input("Digite um número (digite 0 para sair): "))
-   
-   # Imprimindo o vetor na tela
-   print(vetor)
-   `}],
-sol:`   # Criando um vetor vazio
-   vetor = []
-   
-   # Lendo os elementos pares do vetor e adicionando-os ao vetor
-   valor = int(input("Digite um número (digite 0 para sair): "))
-   while valor != 0:
-       if valor % 2 == 0:
-           vetor.append(valor)
-       valor = int(input("Digite um número (digite 0 para sair): "))
-   
-   # Imprimindo o vetor na tela
-   print(vetor)
-   `},
+print("media:",media)`},{label:"Resolução (professor)",code:`import math
+
+vetor = []
+n = int(input("Quantidade de elementos: "))
+for i in range(n):
+    valor = float(input(f"Elemento {i+1}: "))
+    vetor.append(valor)
+
+media = sum(vetor) / n
+print(f"Média: {media:.2f}")
+
+variancia = sum((x - media) ** 2 for x in vetor) / n
+desvio = math.sqrt(variancia)
+print(f"Desvio padrão: {desvio:.2f}")`}],
+sol:`import math
+
+vetor = []
+n = int(input("Quantidade de elementos: "))
+for i in range(n):
+    valor = float(input(f"Elemento {i+1}: "))
+    vetor.append(valor)
+
+media = sum(vetor) / n
+print(f"Média: {media:.2f}")
+
+variancia = sum((x - media) ** 2 for x in vetor) / n
+desvio = math.sqrt(variancia)
+print(f"Desvio padrão: {desvio:.2f}")`},
 {id:"06-08",title:"Soma pares e múltiplos",desc:"Vetor aleatório → soma dos pares + soma dos múltiplos de 5 + subvetor com múltiplos de 10.",drill:`import random
 
 vet = []
@@ -1331,20 +1311,66 @@ for i in range(0,n):
 print(vet)
 print(somapar)
 print(soma5)
-print(vet10)`},{label:"Resolução (professor)",code:`   vetor = [1, 3, 5, 7, 9]
-   
-   for i in range(1, len(vetor)-1):
-       print("Valor atual:", vetor[i])
-       print("Antecessor:", vetor[i-1])
-       print("Sucessor:", vetor[i+1])
-   `}],
-sol:`   vetor = [1, 3, 5, 7, 9]
-   
-   for i in range(1, len(vetor)-1):
-       print("Valor atual:", vetor[i])
-       print("Antecessor:", vetor[i-1])
-       print("Sucessor:", vetor[i+1])
-   `},
+print(vet10)`},{label:"Resolução (professor)",code:`import random
+
+# Criando um vetor aleatório de tamanho 10 com valores entre 0 e 100
+vetor = []
+for i in range(10):
+    vetor.append(random.randint(0, 100))
+print("Vetor aleatório:", vetor)
+
+# Soma dos números pares (iterando por valor)
+soma_pares = 0
+for valor in vetor:
+    if valor % 2 == 0:
+        soma_pares += valor
+print("Soma dos números pares:", soma_pares)
+
+# Soma dos múltiplos de 5 (iterando por indice)
+soma_mult_5 = 0
+for i in range(len(vetor)):
+    if vetor[i] % 5 == 0:
+        soma_mult_5 += vetor[i]
+print("Soma dos múltiplos de 5:", soma_mult_5)
+
+# Vetor com os múltiplos de 10 do vetor original (while para exemplificar)
+mult_10 = []
+i = 0
+while i < len(vetor):
+    if vetor[i] % 10 == 0:
+        mult_10.append(vetor[i])
+    i += 1
+print("Vetor com os múltiplos de 10 do vetor original:", mult_10)`}],
+sol:`import random
+
+# Criando um vetor aleatório de tamanho 10 com valores entre 0 e 100
+vetor = []
+for i in range(10):
+    vetor.append(random.randint(0, 100))
+print("Vetor aleatório:", vetor)
+
+# Soma dos números pares (iterando por valor)
+soma_pares = 0
+for valor in vetor:
+    if valor % 2 == 0:
+        soma_pares += valor
+print("Soma dos números pares:", soma_pares)
+
+# Soma dos múltiplos de 5 (iterando por indice)
+soma_mult_5 = 0
+for i in range(len(vetor)):
+    if vetor[i] % 5 == 0:
+        soma_mult_5 += vetor[i]
+print("Soma dos múltiplos de 5:", soma_mult_5)
+
+# Vetor com os múltiplos de 10 do vetor original (while para exemplificar)
+mult_10 = []
+i = 0
+while i < len(vetor):
+    if vetor[i] % 10 == 0:
+        mult_10.append(vetor[i])
+    i += 1
+print("Vetor com os múltiplos de 10 do vetor original:", mult_10)`},
 {id:"06-09",title:"Soma de dois vetores",desc:"Dois vetores de 5 elementos → terceiro resultante da soma.",drill:`import random
 
 vet = []
@@ -1502,70 +1528,30 @@ maior = 0
 for i in range(tam):
     if vet[i] > maior:
         maior = vet[i]
-print(maior)`},{label:"Resolução (professor)",code:`   import random
-   
-   # Criando um vetor aleatório de tamanho 10 com valores entre 0 e 100
-   vetor = []
-   for i in range(10):
-       vetor.append(random.randint(0, 100))
-   print("Vetor aleatório:", vetor)
-   
-   # Soma dos números pares (iterando por valor)
-   soma_pares = 0
-   for valor in vetor:
-       if valor % 2 == 0:
-           soma_pares += valor
-   print("Soma dos números pares:", soma_pares)
-   
-   # Soma dos múltiplos de 5 (iterando por indice)
-   soma_mult_5 = 0
-   for i in range(len(vetor)): 
-       if vetor[i] % 5 == 0:
-           soma_mult_5 += vetor[i]
-   print("Soma dos múltiplos de 5:", soma_mult_5)
-   
-   # Vetor com os múltiplos de 10 do vetor original 
-   #(aqui usei while pare exemplificar)
-   mult_10 = []
-   i = 0
-   while i < len(vetor):
-       if vetor[i] % 10 == 0:
-           mult_10.append(vetor[i])
-       i += 1
-   print("Vetor com os múltiplos de 10 do vetor original:", mult_10)
-   `}],
-sol:`   import random
-   
-   # Criando um vetor aleatório de tamanho 10 com valores entre 0 e 100
-   vetor = []
-   for i in range(10):
-       vetor.append(random.randint(0, 100))
-   print("Vetor aleatório:", vetor)
-   
-   # Soma dos números pares (iterando por valor)
-   soma_pares = 0
-   for valor in vetor:
-       if valor % 2 == 0:
-           soma_pares += valor
-   print("Soma dos números pares:", soma_pares)
-   
-   # Soma dos múltiplos de 5 (iterando por indice)
-   soma_mult_5 = 0
-   for i in range(len(vetor)): 
-       if vetor[i] % 5 == 0:
-           soma_mult_5 += vetor[i]
-   print("Soma dos múltiplos de 5:", soma_mult_5)
-   
-   # Vetor com os múltiplos de 10 do vetor original 
-   #(aqui usei while pare exemplificar)
-   mult_10 = []
-   i = 0
-   while i < len(vetor):
-       if vetor[i] % 10 == 0:
-           mult_10.append(vetor[i])
-       i += 1
-   print("Vetor com os múltiplos de 10 do vetor original:", mult_10)
-   `},
+print(maior)`},{label:"Resolução (professor)",code:`import random
+
+vetor = []
+for i in range(10):
+    vetor.append(random.randint(0, 100))
+print("Vetor:", vetor)
+
+maior = vetor[0]
+for i in range(1, len(vetor)):
+    if vetor[i] > maior:
+        maior = vetor[i]
+print("Maior elemento:", maior)`}],
+sol:`import random
+
+vetor = []
+for i in range(10):
+    vetor.append(random.randint(0, 100))
+print("Vetor:", vetor)
+
+maior = vetor[0]
+for i in range(1, len(vetor)):
+    if vetor[i] > maior:
+        maior = vetor[i]
+print("Maior elemento:", maior)`},
 {id:"06-12",title:"Dois maiores elementos",desc:"Encontre os dois maiores. NÃO use max() nem sort().",drill:`import random
 
 vet =[]
@@ -2291,7 +2277,9 @@ for col in range(5):
             maior = matriz[lin][col]
     media = soma / 7
     print("Coluna", col + 1, ": Média =", round(media, 2), ", Maior =", maior)`},
-{id:"07-03",title:"Diagonais 50x50",desc:"Matriz 50x50 aleatória → média das diagonais principal e secundária.",sol:`# Criação da matriz 50x50
+{id:"07-03",title:"Diagonais 50x50",desc:"Matriz 50x50 aleatória → média das diagonais principal e secundária.",sol:`import random
+
+# Criação da matriz 50x50
 matriz = []
 for i in range(50):
     linha = []
@@ -2312,7 +2300,9 @@ media_secundaria = soma_secundaria / 50
 
 print("Média da diagonal principal:", round(media_principal, 2))
 print("Média da diagonal secundária:", round(media_secundaria, 2))`},
-{id:"07-04",title:"Campo Minado",desc:"Jogo campo minado básico.\nX = bomba, · = livre.\nMostrar campo oculto (?), revelar posições.",sol:`def gerar_campo(tamanho, bombas):
+{id:"07-04",title:"Campo Minado",desc:"Jogo campo minado básico.\nX = bomba, · = livre.\nMostrar campo oculto (?), revelar posições.",sol:`import random
+
+def gerar_campo(tamanho, bombas):
     campo = []
     for i in range(tamanho):
         linha = []
