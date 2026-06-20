@@ -2807,7 +2807,28 @@ document.addEventListener("DOMContentLoaded",()=>{
 // ============================================================
 // DRILL MODE
 // ============================================================
-let dLines=[], dIdx=0, dMissed=[], dHintLevel=0;
+let dLines=[], dIdx=0, dMissed=[], dHintLevel=0, dWrongTimer=null;
+
+function dOverride(){
+  clearTimeout(dWrongTimer);
+  // remove from missed (last entry)
+  dMissed.pop();
+  const inp=document.getElementById("dinp");
+  const fb=document.getElementById("dfb");
+  const typed=inp.value;
+  inp.className="drill-inp ok";
+  fb.className="drill-fb ok"; fb.textContent="✅ Aceito!";
+  appendDone(typed,"ok");
+  dHintLevel=0;
+  dIdx++;
+  setTimeout(()=>{
+    inp.className="drill-inp";inp.value="";
+    fb.textContent="";fb.className="drill-fb";
+    dRenderHdr();dRenderCtx();
+    if(dIdx>=dLines.length)dFinish();
+    else inp.focus();
+  },400);
+}
 
 function findEx(id){for(const t of TOPICS)for(const e of t.exercises)if(e.id===id)return e;return null;}
 
@@ -2903,9 +2924,10 @@ function drillCheck(e){
     dMissed.push(dIdx);
     const fb=document.getElementById("dfb");
     fb.className="drill-fb err";
-    fb.textContent="✕  era: "+expected;
+    fb.innerHTML="✕  era: <code style='background:rgba(0,0,0,.3);padding:1px 4px;border-radius:3px'>"+expected+"</code>"
+      +"<button onclick='dOverride()' style='margin-left:8px;font-size:10px;padding:2px 7px;border-radius:4px;border:1px solid #a78bfa;background:transparent;color:#a78bfa;cursor:pointer'>✓ meu código está certo</button>";
     dRenderHdr();
-    setTimeout(()=>{
+    dWrongTimer=setTimeout(()=>{
       appendDone(expected,"miss");
       dIdx++;dHintLevel=0;
       inp.className="drill-inp";inp.value="";
