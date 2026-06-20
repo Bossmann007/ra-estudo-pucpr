@@ -458,81 +458,69 @@ elif (num3 <= num1 and num1 <= num2):
     print("Os números em ordem crescente são:", num3, num1, num2);
 else:
     print("Os números em ordem crescente são:", num3, num2, num1);`},
-{id:"03-06",title:"Pedra-Papel-Tesoura",desc:"Simule um jogo de pedra-papel-tesoura entre dois jogadores.",sol:`num1 = float(input("Digite o primeiro número: "))
-num2 = float(input("Digite o segundo número: "))
-num3 = float(input("Digite o terceiro número: "))
-
-if num2 < num1 and num2 < num3:
-  aux = num1;
-  num1 = num2;
-  num2 = aux;
-
-if num3 < num1:
-  aux = num1;
-  num1 = num3;
-  num3 = aux;
-
-if num3 < num2:
-  aux = num2;
-  num2 = num3;
-  num3 = aux;
-
-print("Os números em ordem crescente são:", num1, num2, num3);`},
-{id:"03-07",title:"Detetive",desc:"5 perguntas sobre um crime [S/N]:\n• Telefonou para a vítima?\n• Esteve no local?\n• Mora perto?\n• Tinha dívida?\n• Já trabalhou com a vítima?\n\n0-1 = Inocente | 2 = Suspeito | 3-4 = Cúmplice | 5 = Assassino",sol:`jogador1 = input("Jogador 1: escolha pedra, papel ou tesoura: ")
+{id:"03-06",title:"Pedra-Papel-Tesoura",desc:"Simule um jogo de pedra-papel-tesoura entre dois jogadores.",sol:`jogador1 = input("Jogador 1: escolha pedra, papel ou tesoura: ")
 jogador2 = input("Jogador 2: escolha pedra, papel ou tesoura: ")
+
 if jogador1 == jogador2:
     print("Empate!")
-elif jogador1 == "pedra":
-    if jogador2 == "tesoura":
-        print("Jogador 1 ganhou!")
-    else:
-        print("Jogador 2 ganhou!")
-elif jogador1 == "papel":
-    if jogador2 == "pedra":
-        print("Jogador 1 ganhou!")
-    else:
-        print("Jogador 2 ganhou!")
+elif (jogador1 == "pedra" and jogador2 == "tesoura") or \
+     (jogador1 == "papel" and jogador2 == "pedra") or \
+     (jogador1 == "tesoura" and jogador2 == "papel"):
+    print("Jogador 1 venceu!")
 else:
-    if jogador2 == "papel":
-        print("Jogador 1 ganhou!")
-    else:
-        print("Jogador 2 ganhou!")`},
-{id:"03-08",title:"Recomendação de roupas",desc:"Crie um sistema de recomendação de roupa:\n• Profissional ou lazer?\n• Calor ou frio?\n• Fechado ou aberto?\nSugira desde terno até bermuda.",sol:`print("Bem-vindo ao jogo Detetive!")
-print("Você é um detetive encarregado de investigar um crime. Sua missão é fazer perguntas para determinar a classificação da pessoa no crime.")
+    print("Jogador 2 venceu!")`},
+{id:"03-07",title:"Detetive",desc:"5 perguntas sobre um crime [S/N]:\n• Telefonou para a vítima?\n• Esteve no local?\n• Mora perto?\n• Tinha dívida?\n• Já trabalhou com a vítima?\n\n0-1 = Inocente | 2 = Suspeito | 3-4 = Cúmplice | 5 = Assassino",sol:`print("Bem-vindo ao jogo Detetive!")
+print("Você é um detetive encarregado de investigar um crime.")
 
-# Fazer as perguntas
-pergunta1 = "Telefonou para a vítima? [S/N] "
-resposta1 = input(pergunta1)
-pergunta2 = "Esteve no local do crime? [S/N] "
-resposta2 = input(pergunta2)
-pergunta3 = "Mora perto da vítima? [S/N] "
-resposta3 = input(pergunta3)
-pergunta4 = "Devia para a vítima? [S/N] "
-resposta4 = input(pergunta4)
-pergunta5 = "Já trabalhou com a vítima? [S/N] "
-resposta5 = input(pergunta5)
+perguntas = [
+    "O suspeito telefonou para a vítima?",
+    "O suspeito esteve no local do crime?",
+    "O suspeito mora perto da vítima?",
+    "O suspeito tinha dívida com a vítima?",
+    "O suspeito já trabalhou com a vítima?"
+]
 
-# Determinar a classificação
-respostas_positivas = 0
-if resposta1 == "S":
-    respostas_positivas += 1
-if resposta2 == "S":
-    respostas_positivas += 1
-if resposta3 == "S":
-    respostas_positivas += 1
-if resposta4 == "S":
-    respostas_positivas += 1
-if resposta5 == "S":
-    respostas_positivas += 1
+respostas_sim = 0
 
-if respostas_positivas == 2:
-    print("\nA pessoa é suspeita.")
-elif respostas_positivas >= 3 and respostas_positivas <= 4:
-    print("\nA pessoa é cúmplice.")
-elif respostas_positivas == 5:
-    print("\nA pessoa é o assassino.")
+for pergunta in perguntas:
+    resposta = input(pergunta + " (S/N): ")
+    if resposta.upper() == "S":
+        respostas_sim += 1
+
+if respostas_sim <= 1:
+    print("O suspeito é Inocente")
+elif respostas_sim == 2:
+    print("O suspeito é Suspeito")
+elif respostas_sim <= 4:
+    print("O suspeito é Cúmplice")
 else:
-    print("\nA pessoa é inocente.")`},
+    print("O suspeito é o Assassino")`},
+{id:"03-08",title:"Recomendação de roupas",desc:"Crie um sistema de recomendação de roupa:\n• Profissional ou lazer?\n• Calor ou frio?\n• Fechado ou aberto?\nSugira desde terno até bermuda.",sol:`ocasiao = input("Ocasião (profissional/lazer): ").lower()
+temperatura = input("Temperatura (calor/frio): ").lower()
+ambiente = input("Ambiente (fechado/aberto): ").lower()
+
+if ocasiao == "profissional":
+    if temperatura == "calor":
+        if ambiente == "fechado":
+            print("Recomendação: Camisa social e calça social")
+        else:
+            print("Recomendação: Camisa polo e calça jeans")
+    else:
+        if ambiente == "fechado":
+            print("Recomendação: Terno completo")
+        else:
+            print("Recomendação: Casaco e calça social")
+else:
+    if temperatura == "calor":
+        if ambiente == "fechado":
+            print("Recomendação: Camiseta e shorts")
+        else:
+            print("Recomendação: Camiseta e bermuda")
+    else:
+        if ambiente == "fechado":
+            print("Recomendação: Moletom e calça jeans")
+        else:
+            print("Recomendação: Casaco e calça jeans")`},
 ]},{id:4,title:"T04 — While",full:"Tópico 04 — Estruturas de Repetição (While)",sub:"while · break · acumuladores",color:"#22c55e",exercises:[
 {id:"04-01",title:"Múltiplos de 3 (0–100)",desc:"Exiba os múltiplos de 3 de 0 a 100.",drill:`i = 0
 while i <= 100:
@@ -900,9 +888,13 @@ for i in range(1,num+1):
     print(fatorial)`},{label:"Resolução (professor)",code:`for i in range(0, 1001, 1):
     if i % 2 == 0:
     	print(i)`}],
-sol:`for i in range(0, 1001, 1):
-    if i % 2 == 0:
-    	print(i)`},
+sol:`n = int(input("Digite um número para calcular o fatorial: "))
+fatorial = 1
+
+for i in range(1, n + 1):
+    fatorial *= i
+
+print(f"O fatorial de {n} é {fatorial}")`},
 {id:"05-04",title:"Juros compostos",desc:"Calcule quanto um investimento X rende em Y anos com taxa T.\nFórmula: montante = X * (1 + T)^ano",drill:`a = int(input("digite o a1:"))
 n = int(input("digite o n:"))
 razao = int(input("digite a razao:"))
@@ -925,11 +917,15 @@ fatorial = 1
 for i in range(1, n + 1):
     fatorial *= i
 print(f"O fatorial de {n} é {fatorial}")`}],
-sol:`n = int(input("Digite um número para calcular o fatorial: "))
-fatorial = 1
-for i in range(1, n + 1):
-    fatorial *= i
-print(f"O fatorial de {n} é {fatorial}")`},
+sol:`valor_inicial = float(input("Digite o valor inicial do investimento: "))
+taxa_juros = float(input("Digite a taxa de juros anual (em %): ")) / 100
+anos = int(input("Digite o número de anos: "))
+
+montante = valor_inicial
+for i in range(anos):
+    montante = montante * (1 + taxa_juros)
+
+print(f"Montante após {anos} anos: R\${montante:.2f}")`},
 {id:"05-05",title:"N-ésimo da PA",desc:"N-ésimo elemento de uma PA de razão R.\nFórmula: an = a1 + (n-1) * r",drill:`a = int(input("digite o a1:"))
 n = int(input("digite o n:"))
 razao = int(input("digite a razao:"))
@@ -956,24 +952,22 @@ for i in range(0,anos):
     valor_final *= (1 + taxa_juros)
 
 print(f"O valor final após {anos} anos será de R$ {valor_final:.2f}")`}],
-sol:`valor_inicial = float(input("Digite o valor inicial do investimento: "))
-taxa_juros = float(input("Digite a taxa de juros anual (em %): ")) / 100
-anos = int(input("Digite o número de anos: "))
+sol:`a1 = float(input("Digite o primeiro termo da PA: "))
+razao = float(input("Digite a razão da PA: "))
+n = int(input("Digite o número do termo desejado: "))
 
-valor_final = valor_inicial
-for i in range(0,anos):
-    valor_final *= (1 + taxa_juros)
+an = a1 + (n - 1) * razao
 
-print(f"O valor final após {anos} anos será de R$ {valor_final:.2f}")`},
-{id:"05-06",title:"N-ésimo da PG",desc:"N-ésimo elemento de uma PG de razão R.\nFórmula: an = a1 * r^(n-1)",sol:`a1 = float(input("Digite o primeiro termo da P.A: "))
-razao = float(input("Digite a razão da P.A: "))
+print(f"O {n}º termo da PA é: {an}")`},
+{id:"05-06",title:"N-ésimo da PG",desc:"N-ésimo elemento de uma PG de razão R.\nFórmula: an = a1 * r^(n-1)",sol:`a1 = float(input("Digite o primeiro termo da PG: "))
+razao = float(input("Digite a razão da PG: "))
 n = int(input("Digite o número do termo desejado: "))
 
 atual = a1
 for i in range(1, n):
-    atual += razao
-    print(i,atual)
-print(f"O {n}º termo da P.A é: {atual}")`},
+    atual *= razao
+
+print(f"O {n}º termo da PG é: {atual}")`},
 ]},{id:6,title:"T06 — Vetores",full:"Tópico 06 — Arrays e Vetores",sub:"listas 1D · índices · sem built-ins",color:"#f97316",exercises:[
 {id:"06-01",title:"20 elementos aleatórios",desc:"Crie um vetor de 20 elementos aleatórios.",drill:`import random
 vet = []
