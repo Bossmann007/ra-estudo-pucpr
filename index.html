@@ -1102,26 +1102,32 @@ n = int(input("Digite um numero de elementos:"))
 for N in range(0,n):
     N = random.randrange(0,100,2)
     vet.append(N)
-print(vet)`},{label:"Resolução (professor)",code:`   # Criando um vetor vazio
-   vetor = [0] * 20
-   
-   # Preenchendo o vetor com números incrementais de 5 em 5
-   for i in range(20):
-       vetor[i] = i * 5
-   
-   # Imprimindo o vetor na tela
-   print(vetor)
-   `}],
-sol:`   # Criando um vetor vazio
-   vetor = [0] * 20
-   
-   # Preenchendo o vetor com números incrementais de 5 em 5
-   for i in range(20):
-       vetor[i] = i * 5
-   
-   # Imprimindo o vetor na tela
-   print(vetor)
-   `},
+print(vet)`},{label:"Resolução (professor)",code:`vetor = []
+n = int(input("Quantidade de elementos: "))
+
+for i in range(n):
+    while True:
+        num = int(input(f"Digite um número par: "))
+        if num % 2 == 0:
+            vetor.append(num)
+            break
+        print("Número inválido, digite um par.")
+
+print(vetor)
+`}],
+sol:`vetor = []
+n = int(input("Quantidade de elementos: "))
+
+for i in range(n):
+    while True:
+        num = int(input(f"Digite um número par: "))
+        if num % 2 == 0:
+            vetor.append(num)
+            break
+        print("Número inválido, digite um par.")
+
+print(vetor)
+`},
 {id:"06-05",title:"Antecessor/Sucessor por índice",desc:"Para cada posição [i], imprima valor atual, antecessor e sucessor.",drill:`vet = [2,10,3,5]
 
 tam = len(vet)-1
