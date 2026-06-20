@@ -215,91 +215,1012 @@ textarea.ce{flex:1;background:#0d1117;color:#e6edf3;font-family:'Consolas','Cour
 
 <script>
 const TOPICS=[{id:1,title:"T01 — Introdução",full:"Tópico 01 — Introdução",sub:"Variáveis · Tipos · Operadores",color:"#6366f1",exercises:[
-{id:"01-01",title:"Soma de dois números",desc:"Calcule a soma de dois números.",sol:`num1 = 10\nnum2 = 20\nsoma = num1 + num2\nprint("A soma de", num1, "com", num2, "é:", soma)`},
-{id:"01-02",title:"Antecessor e Sucessor",desc:"Calcule o antecessor e o sucessor de um número.",sol:`num = 10\nprint("Antecessor:", num - 1)\nprint("Sucessor:", num + 1)`},
-{id:"01-03",title:"Troco de compra",desc:"Calcular o troco de uma compra (valor_compra e valor_pago).",sol:`valor_compra = 232.75\nvalor_pago = 250.00\ntroco = valor_pago - valor_compra\nprint("Troco:", troco)`},
-{id:"01-04",title:"Gorjeta 10%",desc:"Calcule a gorjeta de um garçom (10%).",sol:`valor_conta = 325.50\ngorjeta = valor_conta * 0.1\nprint("Gorjeta:", gorjeta)`},
-{id:"01-05",title:"Metragem quadrada",desc:"Calcule a metragem quadrada de uma área (comprimento × largura).",sol:`comprimento = 30.57\nlargura = 65.21\narea = comprimento * largura\nprint("Área:", area, "m²")`},
-{id:"01-06",title:"Casa com 3 pavimentos",desc:"Calcule a metragem quadrada de uma casa com 3 pavimentos.",sol:`comprimento = 12.5\nlargura = 5.35\narea = comprimento * largura * 3\nprint("Casa tem", area, "m²")`},
-{id:"01-07",title:"Média de 5 idades",desc:"Calcule a média de idade de 5 pessoas.",sol:`idades = [25, 30, 35, 40, 45]\nmedia = (idades[0]+idades[1]+idades[2]+idades[3]+idades[4]) / 5\nprint("Média:", media, "anos")`},
-{id:"01-08",title:"Idade em anos/meses/dias",desc:"Calcule a idade a partir do ano de nascimento (em anos, meses e dias).",sol:`ano_nasc = 1983\nano_atual = 2026\nanos = ano_atual - ano_nasc\nprint("Anos:", anos)\nprint("Meses:", anos * 12)\nprint("Dias:", anos * 365)`},
-{id:"01-09",title:"Gorjeta de N%",desc:"Generalização: calcule a gorjeta de N% (use variável para a porcentagem).",sol:`valor_conta = 325.50\nperc = 0.1\ngorjeta = valor_conta * perc\nprint("Gorjeta:", gorjeta)`},
-{id:"01-10",title:"Casa com N pavimentos",desc:"Generalização: metragem de uma casa com N pavimentos (variável).",sol:`comprimento = 12.5\nlargura = 5.35\npavimentos = 3\narea = comprimento * largura * pavimentos\nprint("Casa tem", area, "m²")`},
+{id:"01-01",title:"Soma de dois números",desc:"Calcule a soma de dois números.",sol:`num1 = 10
+num2 = 20
+
+soma = num1 + num2
+
+print("A soma de ",num1, " com ", num2, " é igual a: ", soma)`},
+{id:"01-02",title:"Antecessor e Sucessor",desc:"Calcule o antecessor e o sucessor de um número.",sol:`num = 10
+
+# Antecessor
+antecessor = num - 1
+
+# Sucessor
+sucessor = num + 1
+
+# Exibir o resultado
+print("Antecessor:", antecessor)
+print("Sucessor:", sucessor)`},
+{id:"01-03",title:"Troco de compra",desc:"Calcular o troco de uma compra (valor_compra e valor_pago).",sol:`valor_compra = 232.75
+valor_pago = 250.00
+troco = valor_pago - valor_compra
+
+print("O troco é de: ", troco)`},
+{id:"01-04",title:"Gorjeta 10%",desc:"Calcule a gorjeta de um garçom (10%).",sol:`valor_conta = 325.50
+gorjeta = valor_conta * 0.1
+
+print("O Garçom receberá: ", gorjeta)`},
+{id:"01-05",title:"Metragem quadrada",desc:"Calcule a metragem quadrada de uma área (comprimento × largura).",sol:`comprimento = 30.57
+largura = 65.21
+
+area = comprimento * largura
+
+print("A área é de", area,"metros quadrados")`},
+{id:"01-06",title:"Casa com 3 pavimentos",desc:"Calcule a metragem quadrada de uma casa com 3 pavimentos.",sol:`comprimento = 12.5
+largura = 5.35
+area = comprimento * largura * 3
+print("A casa tem", area, "metros quadrados")`},
+{id:"01-07",title:"Média de 5 idades",desc:"Calcule a média de idade de 5 pessoas.",sol:`idade1 = 25
+idade2 = 30
+idade3 = 35
+idade4 = 40
+idade5 = 45
+media = (idade1 + idade2 + idade3 + idade4 + idade5) / 5
+print("A média de idade é de", media ,"anos")`},
+{id:"01-08",title:"Idade em anos/meses/dias",desc:"Calcule a idade a partir do ano de nascimento (em anos, meses e dias).",sol:`  ano_nascimento = 1983
+  ano_atual = 2023
+  idade_em_anos = ano_atual - ano_nascimento
+  
+  print("A idade em anos é de", idade_em_anos, "anos")  
+  `},
+{id:"01-09",title:"Gorjeta de N%",desc:"Generalização: calcule a gorjeta de N% (use variável para a porcentagem).",sol:`  ano_nascimento = 1983
+  ano_atual = 2023
+  idade_em_anos = ano_atual - ano_nascimento
+  idade_em_meses = idade_em_anos * 12
+  
+  print("A idade em meses é de", idade_em_meses, "meses")
+  `},
+{id:"01-10",title:"Casa com N pavimentos",desc:"Generalização: metragem de uma casa com N pavimentos (variável).",sol:`  ano_nascimento = 1983
+  ano_atual = 2023
+  idade_em_anos = ano_atual - ano_nascimento
+  idade_em_dias = idade_em_anos * 365
+  
+  print("A idade em dias é de", idade_em_dias, "dias")
+  `},
 ]},{id:2,title:"T02 — IF",full:"Tópico 02 — Estruturas de Seleção (IF)",sub:"if · else · comparações",color:"#ec4899",exercises:[
-{id:"02-01",title:"Mesmo nome",desc:"Informe se uma pessoa tem o mesmo nome que você.",sol:`nome = input("Nome da pessoa: ")\neu = input("Seu nome: ")\nif nome == eu:\n    print("Mesmo nome!")\nelse:\n    print("Nomes diferentes.")`},
-{id:"02-02",title:"Vogal ou Consoante",desc:"Informe se o usuário digitou uma vogal ou consoante.",sol:`letra = input("Digite uma letra: ")\nif letra.lower() in "aeiou":\n    print("Vogal")\nelse:\n    print("Consoante")`},
-{id:"02-03",title:"Dia da semana",desc:"Informe o dia da semana a partir de um número (1=Domingo ... 7=Sábado). Número inválido → mensagem.",sol:`dia = int(input("Número (1-7): "))\nif dia==1: print("Domingo")\nelif dia==2: print("Segunda")\nelif dia==3: print("Terça")\nelif dia==4: print("Quarta")\nelif dia==5: print("Quinta")\nelif dia==6: print("Sexta")\nelif dia==7: print("Sábado")\nelse: print("Valor inválido")`},
-{id:"02-04",title:"Maior de dois números",desc:"Informe o maior número entre dois quaisquer.",sol:`a = int(input("Número 1: "))\nb = int(input("Número 2: "))\nif a > b:\n    print("Maior:", a)\nelse:\n    print("Maior:", b)`},
-{id:"02-05",title:"Maior e menor de dois",desc:"Informe o maior e o menor entre dois números.",sol:`a = int(input("Número 1: "))\nb = int(input("Número 2: "))\nif a > b:\n    print("Maior:", a, "| Menor:", b)\nelse:\n    print("Maior:", b, "| Menor:", a)`},
-{id:"02-06",title:"Ano bissexto",desc:"Informe se um ano é bissexto ou não.\nDica: divisível por 4 E não por 100, OU divisível por 400.",sol:`ano = int(input("Ano: "))\nif (ano % 4 == 0 and ano % 100 != 0) or (ano % 400 == 0):\n    print("Bissexto")\nelse:\n    print("Não bissexto")`},
-{id:"02-07",title:"Par ou Ímpar",desc:"Informe se um número é par ou ímpar (use o operador %).",sol:`num = int(input("Número: "))\nif num % 2 == 0:\n    print("Par")\nelse:\n    print("Ímpar")`},
-{id:"02-08",title:"Múltiplo de N",desc:"Informe se um número é múltiplo de um número N.",sol:`num = int(input("Número: "))\nn = int(input("N: "))\nif num % n == 0:\n    print(num, "é múltiplo de", n)\nelse:\n    print(num, "não é múltiplo de", n)`},
-{id:"02-09",title:"Aprovação por média",desc:"3 notas → média → aprovado (≥70) ou reprovado.",sol:`n1 = float(input("Nota 1: "))\nn2 = float(input("Nota 2: "))\nn3 = float(input("Nota 3: "))\nmedia = (n1+n2+n3)/3\nif media >= 70:\n    print("Aprovado — média:", round(media,1))\nelse:\n    print("Reprovado — média:", round(media,1))`},
+{id:"02-01",title:"Mesmo nome",desc:"Informe se uma pessoa tem o mesmo nome que você.",sol:`nome_pessoa = input("Informe o nome da pessoa: ")
+seu_nome = input("Informe seu nome: ")
+
+if nome_pessoa == seu_nome:
+    print("A pessoa tem o mesmo nome que você")
+else:
+    print("A pessoa não tem o mesmo nome que você")`},
+{id:"02-02",title:"Vogal ou Consoante",desc:"Informe se o usuário digitou uma vogal ou consoante.",sol:`letra = input("Digite uma letra: ")
+
+
+if letra == "a" or letra == "e" or letra == "i" \
+    or letra == "o" or letra == "u" or letra == "A"\
+        or letra == "E" or letra == "I" or letra == "O"\
+            or letra == "U":
+
+    print("A letra digitada é uma vogal")
+
+else:
+    print("A letra digitada é uma consoante")`},
+{id:"02-03",title:"Dia da semana",desc:"Informe o dia da semana a partir de um número (1=Domingo ... 7=Sábado). Número inválido → mensagem.",sol:`dia = int(input("Digite um número entre 1 e 7: "))
+
+if dia == 1:
+    print("Domingo")
+
+if dia == 2:
+    print("Segunda")
+
+if dia == 3:
+    print("Terça")
+
+if dia == 4:
+    print("Quarta")
+
+if dia == 5:
+    print("Quinta")
+
+if dia == 6:
+    print("Sexta")
+
+if dia == 7:
+    print("Sábado")
+
+if dia < 1 and dia > 7:
+    print("Valor inválido")`},
+{id:"02-04",title:"Maior de dois números",desc:"Informe o maior número entre dois quaisquer.",sol:`num1 = int(input("Digite um número: "))
+num2 = int(input("Digite outro número: "))
+
+if num1 > num2:
+    print("O maior número é", num1)
+else:
+    print("O maior número é", num2)`},
+{id:"02-05",title:"Maior e menor de dois",desc:"Informe o maior e o menor entre dois números.",sol:`num1 = int(input("Digite um número: "))
+num2 = int(input("Digite outro número: "))
+
+if num1 > num2:
+    print("O maior número é", num1)
+    print("O menor número é", num2)
+else:
+    print("O maior número é", num2)
+    print("O menor número é", num1)`},
+{id:"02-06",title:"Ano bissexto",desc:"Informe se um ano é bissexto ou não.\nDica: divisível por 4 E não por 100, OU divisível por 400.",sol:`ano = int(input("Digite um ano qualquer : "))
+
+if (ano % 4 == 0 and ano % 100 != 0) or (ano % 400 == 0):
+    print("O ano é bissexto")
+else:
+    print("O ano não é bissexto")`},
+{id:"02-07",title:"Par ou Ímpar",desc:"Informe se um número é par ou ímpar (use o operador %).",sol:`num = int(input("Digite um número qualquer : "))
+
+if num % 2 == 0:
+    print("O número é par")
+else:
+    print("O número é impar")`},
+{id:"02-08",title:"Múltiplo de N",desc:"Informe se um número é múltiplo de um número N.",sol:`num = int(input("Digite um número: "))
+n = int(input("Digite o múltiplo N: "))
+
+if num % n == 0:
+  print(num, "é múltiplo de", n)
+else:
+  print(num, "não é múltiplo de", n)`},
+{id:"02-09",title:"Aprovação por média",desc:"3 notas → média → aprovado (≥70) ou reprovado.",sol:`nota1 = float(input("Digite a primeira nota: "))
+nota2 = float(input("Digite a segunda nota: "))
+nota3 = float(input("Digite a terceira nota: "))
+
+media = (nota1 + nota2 + nota3) / 3
+if media >= 70.0:
+  print("Aluno aprovado com média", media)
+else:
+  print("Aluno reprovado com média", media)`},
 ]},{id:3,title:"T03 — ELIF",full:"Tópico 03 — Seleção Múltipla (ELIF)",sub:"elif · lógica encadeada",color:"#f59e0b",exercises:[
-{id:"03-01",title:"Seletor de canais",desc:"Canais: 2=BAND, 4=SBT, 6=CNT, 7=RECORD, 9=CULTURA, 12=GLOBO\nMensagem de erro para canal inválido.",sol:`c = int(input("Canal: "))\nif c==2: print("BANDEIRANTES")\nelif c==4: print("SBT")\nelif c==6: print("CNT")\nelif c==7: print("RECORD")\nelif c==9: print("CULTURA")\nelif c==12: print("GLOBO")\nelse: print("Canal inválido")`},
-{id:"03-02",title:"Comissão progressiva",desc:"Comissão:\na. 5% para vendas ≤ R$100\nb. 6% ≤ R$500\nc. 7% ≤ R$1000\nd. 8% acima de R$1000",sol:`v = float(input("Vendas: R$"))\nif v<=100: c=v*0.05\nelif v<=500: c=v*0.06\nelif v<=1000: c=v*0.07\nelse: c=v*0.08\nprint(f"Comissão: R\${c:.2f}")`},
-{id:"03-03",title:"Conceito por média",desc:"3 notas → média → conceito:\nA(≥9) B(≥7.5) C(≥6) D(≥4) E(<4)\nAbaixo de C = Reprovado.",sol:`n1=float(input("Nota 1: "))\nn2=float(input("Nota 2: "))\nn3=float(input("Nota 3: "))\nm=(n1+n2+n3)/3\nif m>=9: c="A"\nelif m>=7.5: c="B"\nelif m>=6: c="C"\nelif m>=4: c="D"\nelse: c="E"\nprint(f"Média: {m:.1f} | Conceito: {c}")\nprint("APROVADO" if m>=6 else "REPROVADO")`},
-{id:"03-04",title:"IRPF",desc:"Calcule o IRPF:\n≤R$1903.98 → Isento\nR$1903.99–2826.65 → 7.5%\nR$2826.66–3751.05 → 15%\nR$3751.06–4664.68 → 22.5%",sol:`s=float(input("Salário: R$"))\nif s<=1903.98: print("Isento")\nelif s<=2826.65: print(f"IRPF: R\${s*0.075:.2f}")\nelif s<=3751.05: print(f"IRPF: R\${s*0.15:.2f}")\nelif s<=4664.68: print(f"IRPF: R\${s*0.225:.2f}")\nelse: print(f"IRPF: R\${s*0.275:.2f}")`},
-{id:"03-05",title:"Ordena 3 números",desc:"Ordene três números em ordem crescente usando apenas if/elif/else.",sol:`a=float(input("N1: "))\nb=float(input("N2: "))\nc=float(input("N3: "))\nif a>b: a,b=b,a\nif b>c: b,c=c,b\nif a>b: a,b=b,a\nprint("Ordem crescente:", a, b, c)`},
-{id:"03-06",title:"Pedra-Papel-Tesoura",desc:"Simule um jogo de pedra-papel-tesoura entre dois jogadores.",sol:`j1=input("J1 (pedra/papel/tesoura): ").lower()\nj2=input("J2 (pedra/papel/tesoura): ").lower()\nif j1==j2: print("Empate!")\nelif (j1=="pedra" and j2=="tesoura") or \\\n     (j1=="tesoura" and j2=="papel") or \\\n     (j1=="papel" and j2=="pedra"): print("J1 venceu!")\nelse: print("J2 venceu!")`},
-{id:"03-07",title:"Detetive",desc:"5 perguntas sobre um crime [S/N]:\n• Telefonou para a vítima?\n• Esteve no local?\n• Mora perto?\n• Tinha dívida?\n• Já trabalhou com a vítima?\n\n0-1 = Inocente | 2 = Suspeito | 3-4 = Cúmplice | 5 = Assassino",sol:`perguntas=["Telefonou para a vítima? [S/N]: ","Esteve no local? [S/N]: ","Mora perto? [S/N]: ","Tinha dívida? [S/N]: ","Trabalhou com ela? [S/N]: "]\npos=0\nfor p in perguntas:\n    if input(p).upper()=="S": pos+=1\nif pos==5: print("ASSASSINO")\nelif pos>=3: print("CÚMPLICE")\nelif pos==2: print("SUSPEITO")\nelse: print("INOCENTE")`},
-{id:"03-08",title:"Recomendação de roupas",desc:"Crie um sistema de recomendação de roupa:\n• Profissional ou lazer?\n• Calor ou frio?\n• Fechado ou aberto?\nSugira desde terno até bermuda.",sol:`ev=input("Evento (profissional/lazer): ").lower()\ntmp=input("Temperatura (calor/frio): ").lower()\nlocal=input("Local (fechado/aberto): ").lower()\nif ev=="profissional":\n    if tmp=="frio": print("Terno com sobretudo")\n    else: print("Terno social leve")\nelse:\n    if tmp=="frio":\n        if local=="fechado": print("Calça + suéter")\n        else: print("Jaqueta + calça")\n    else:\n        if local=="aberto": print("Bermuda + camiseta")\n        else: print("Calça leve + camisa")`},
+{id:"03-01",title:"Seletor de canais",desc:"Canais: 2=BAND, 4=SBT, 6=CNT, 7=RECORD, 9=CULTURA, 12=GLOBO\nMensagem de erro para canal inválido.",sol:`canal = int(input("Digite o número do canal que está assistindo: "))
+if canal == 2:
+    print("Você está assistindo o canal BANDEIRANTES.")
+elif canal == 4:
+    print("Você está assistindo o canal SBT.")
+elif canal == 6:
+    print("Você está assistindo o canal CNT.")
+elif canal == 7:
+    print("Você está assistindo o canal RECORD.")
+elif canal == 9:
+    print("Você está assistindo o canal CULTURA.")
+elif canal == 12:
+    print("Você está assistindo o canal GLOBO.")
+else:
+    print("Canal inválido. Por favor, digite um número de canal válido.")`},
+{id:"03-02",title:"Comissão progressiva",desc:"Comissão:\na. 5% para vendas ≤ R$100\nb. 6% ≤ R$500\nc. 7% ≤ R$1000\nd. 8% acima de R$1000",sol:`valor_vendas = float(input("Digite o valor das vendas: "))
+
+if valor_vendas <= 100:
+    comissao = valor_vendas * 0.05
+elif valor_vendas <= 500:
+    comissao = valor_vendas * 0.06
+elif valor_vendas <= 1000:
+    comissao = valor_vendas * 0.07
+else:
+    comissao = valor_vendas * 0.08
+
+print(f"A comissão é de R${comissao:.2f}")`},
+{id:"03-03",title:"Conceito por média",desc:"3 notas → média → conceito:\nA(≥9) B(≥7.5) C(≥6) D(≥4) E(<4)\nAbaixo de C = Reprovado.",sol:`print("Sistema de cálculo de conceito e situação de aprovação")
+nota1 = float(input("Informe a primeira nota: "))
+nota2 = float(input("Informe a segunda nota: "))
+nota3 = float(input("Informe a terceira nota: "))
+
+media = (nota1 + nota2 + nota3) / 3
+
+if media >= 9.0:
+    conceito = "A"
+elif media >= 7.5:
+    conceito = "B"
+elif media >= 6.0:
+    conceito = "C"
+elif media >= 4.0:
+    conceito = "D"
+else:
+    conceito = "E"
+
+print("A média do aluno é: %.1f" % media)
+print("O conceito do aluno é: %s" % conceito)
+
+if media >= 6.0:
+    print("Situação: APROVADO")
+else:
+    print("Situação: REPROVADO")`},
+{id:"03-04",title:"IRPF",desc:"Calcule o IRPF:\n≤R$1903.98 → Isento\nR$1903.99–2826.65 → 7.5%\nR$2826.66–3751.05 → 15%\nR$3751.06–4664.68 → 22.5%",sol:`print("Calculadora de imposto de renda (IRPF)")
+salario = float(input("Informe o salário: R$"))
+
+if salario <= 1903.98:
+    print("Você está isento de imposto de renda.")
+else:
+    if salario <= 2826.65:
+        irpf = salario * 0.075
+    elif salario <= 3751.05:
+        irpf = salario * 0.15
+    elif salario <= 4664.68:
+        irpf = salario * 0.225
+    else:
+        irpf = salario * 0.275
+
+    print("O valor do imposto a recolher é: R$%.2f" % irpf)`},
+{id:"03-05",title:"Ordena 3 números",desc:"Ordene três números em ordem crescente usando apenas if/elif/else.",sol:`num1 = float(input("Digite o primeiro número: "))
+num2 = float(input("Digite o segundo número: "))
+num3 = float(input("Digite o terceiro número: "))
+
+if (num1 <= num2 and num2 <= num3):
+    print("Os números em ordem crescente são:", num1, num2, num3);
+elif (num1 <= num3 and num3 <= num2):
+    print("Os números em ordem crescente são:", num1, num3, num2);
+elif (num2 <= num1 and num1 <= num3):
+    print("Os números em ordem crescente são:", num2, num1, num3);
+elif (num2 <= num3 and num3 <= num1):
+    print("Os números em ordem crescent são:", num2, num3, num1);
+elif (num3 <= num1 and num1 <= num2):
+    print("Os números em ordem crescente são:", num3, num1, num2);
+else:
+    print("Os números em ordem crescente são:", num3, num2, num1);`},
+{id:"03-06",title:"Pedra-Papel-Tesoura",desc:"Simule um jogo de pedra-papel-tesoura entre dois jogadores.",sol:`num1 = float(input("Digite o primeiro número: "))
+num2 = float(input("Digite o segundo número: "))
+num3 = float(input("Digite o terceiro número: "))
+
+if num2 < num1 and num2 < num3:
+  aux = num1;
+  num1 = num2;
+  num2 = aux;
+
+if num3 < num1:
+  aux = num1;
+  num1 = num3;
+  num3 = aux;
+
+if num3 < num2:
+  aux = num2;
+  num2 = num3;
+  num3 = aux;
+
+print("Os números em ordem crescente são:", num1, num2, num3);`},
+{id:"03-07",title:"Detetive",desc:"5 perguntas sobre um crime [S/N]:\n• Telefonou para a vítima?\n• Esteve no local?\n• Mora perto?\n• Tinha dívida?\n• Já trabalhou com a vítima?\n\n0-1 = Inocente | 2 = Suspeito | 3-4 = Cúmplice | 5 = Assassino",sol:`jogador1 = input("Jogador 1: escolha pedra, papel ou tesoura: ")
+jogador2 = input("Jogador 2: escolha pedra, papel ou tesoura: ")
+if jogador1 == jogador2:
+    print("Empate!")
+elif jogador1 == "pedra":
+    if jogador2 == "tesoura":
+        print("Jogador 1 ganhou!")
+    else:
+        print("Jogador 2 ganhou!")
+elif jogador1 == "papel":
+    if jogador2 == "pedra":
+        print("Jogador 1 ganhou!")
+    else:
+        print("Jogador 2 ganhou!")
+else:
+    if jogador2 == "papel":
+        print("Jogador 1 ganhou!")
+    else:
+        print("Jogador 2 ganhou!")`},
+{id:"03-08",title:"Recomendação de roupas",desc:"Crie um sistema de recomendação de roupa:\n• Profissional ou lazer?\n• Calor ou frio?\n• Fechado ou aberto?\nSugira desde terno até bermuda.",sol:`print("Bem-vindo ao jogo Detetive!")
+print("Você é um detetive encarregado de investigar um crime. Sua missão é fazer perguntas para determinar a classificação da pessoa no crime.")
+
+# Fazer as perguntas
+pergunta1 = "Telefonou para a vítima? [S/N] "
+resposta1 = input(pergunta1)
+pergunta2 = "Esteve no local do crime? [S/N] "
+resposta2 = input(pergunta2)
+pergunta3 = "Mora perto da vítima? [S/N] "
+resposta3 = input(pergunta3)
+pergunta4 = "Devia para a vítima? [S/N] "
+resposta4 = input(pergunta4)
+pergunta5 = "Já trabalhou com a vítima? [S/N] "
+resposta5 = input(pergunta5)
+
+# Determinar a classificação
+respostas_positivas = 0
+if resposta1 == "S":
+    respostas_positivas += 1
+if resposta2 == "S":
+    respostas_positivas += 1
+if resposta3 == "S":
+    respostas_positivas += 1
+if resposta4 == "S":
+    respostas_positivas += 1
+if resposta5 == "S":
+    respostas_positivas += 1
+
+if respostas_positivas == 2:
+    print("\nA pessoa é suspeita.")
+elif respostas_positivas >= 3 and respostas_positivas <= 4:
+    print("\nA pessoa é cúmplice.")
+elif respostas_positivas == 5:
+    print("\nA pessoa é o assassino.")
+else:
+    print("\nA pessoa é inocente.")`},
 ]},{id:4,title:"T04 — While",full:"Tópico 04 — Estruturas de Repetição (While)",sub:"while · break · acumuladores",color:"#22c55e",exercises:[
-{id:"04-01",title:"Múltiplos de 3 (0–100)",desc:"Exiba os múltiplos de 3 de 0 a 100.",sol:`n=0\nwhile n<=100:\n    if n%3==0: print(n)\n    n+=1`},
-{id:"04-02",title:"Contagem regressiva",desc:"Contagem regressiva de 10 a 0.",sol:`n=10\nwhile n>=0:\n    print(n)\n    n-=1`},
-{id:"04-03",title:"Soma dos ímpares",desc:"Calcule a soma dos números ímpares de 1 a 100.",sol:`soma=0\nn=1\nwhile n<=100:\n    if n%2!=0: soma+=n\n    n+=1\nprint("Soma:", soma)`},
-{id:"04-04",title:"Adivinhe o número",desc:"Gere número aleatório 1–100 e peça ao usuário adivinhar (sem limite de tentativas).",sol:`import random\nnum=random.randint(1,100)\nchute=int(input("Adivinhe (1-100): "))\nwhile chute!=num:\n    print("Maior!" if chute<num else "Menor!")\n    chute=int(input("Tente: "))\nprint("Acertou!")`},
-{id:"04-05",title:"Tabuada",desc:"Solicite um número inteiro e exiba sua tabuada de 1 a 10.",sol:`num=int(input("Número: "))\nn=1\nwhile n<=10:\n    print(f"{num} x {n} = {num*n}")\n    n+=1`},
-{id:"04-06",title:"Soma dos dígitos",desc:"Solicite um número inteiro e calcule a soma de seus dígitos.",sol:`num=abs(int(input("Número: ")))\nsoma=0\nwhile num>0:\n    soma+=num%10\n    num//=10\nprint("Soma:", soma)`},
-{id:"04-07",title:"Fibonacci",desc:"Imprima os N primeiros números da sequência de Fibonacci.",sol:`n=int(input("Quantos? "))\na,b=0,1\ni=0\nwhile i<n:\n    print(a,end=" ")\n    a,b=b,a+b\n    i+=1\nprint()`},
-{id:"04-08",title:"Número primo",desc:"Informe se um número é primo ou não.",sol:`num=int(input("Número: "))\nif num<2: print("Não é primo")\nelse:\n    primo=True\n    i=2\n    while i*i<=num:\n        if num%i==0:\n            primo=False\n            break\n        i+=1\n    print("Primo" if primo else "Não é primo")`},
-{id:"04-09",title:"Celsius → Fahrenheit",desc:"Tabela de conversão °C → °F de -10 até 100°C.\nFórmula: F = C * 9/5 + 32",sol:`c=-10\nwhile c<=100:\n    print(f"{c}°C = {c*9/5+32:.1f}°F")\n    c+=1`},
-{id:"04-10",title:"Adivinhe — 5 tentativas",desc:"Número aleatório 1–100. Usuário tem 5 tentativas.\nDica: 'quente' (diff≤10) ou 'frio' (diff>10).",sol:`import random\nnum=random.randint(1,100)\nfor t in range(1,6):\n    c=int(input(f"Tent {t}/5: "))\n    if c==num:\n        print("Acertou!")\n        break\n    d=abs(c-num)\n    print(("Maior" if c<num else "Menor")+" — "+("🔥 quente" if d<=10 else "🧊 frio"))\nelse:\n    print(f"Perdeu! Era {num}")`},
-{id:"04-11",title:"Sistema de votação",desc:"Candidatos: 28765 João da Silva | 32928 Carlos Alberto\nComputar votos até 'ENCERRAR'.\nMostrar parcial com 'RESULTADO'.",sol:`j=c=0\nwhile True:\n    v=input("Vote (28765/32928/RESULTADO/ENCERRAR): ").upper()\n    if v=="28765": j+=1\n    elif v=="32928": c+=1\n    elif v=="RESULTADO": print(f"João:{j} Carlos:{c}")\n    elif v=="ENCERRAR": break\n    else: print("Voto inválido")\nprint(f"Final — João:{j} Carlos:{c}")\nprint("Vencedor: "+("João" if j>c else "Carlos" if c>j else "Empate"))`},
+{id:"04-01",title:"Múltiplos de 3 (0–100)",desc:"Exiba os múltiplos de 3 de 0 a 100.",sol:`i = 0
+while i <= 100:
+    if i % 3 == 0:
+        print(i)
+    i += 1`},
+{id:"04-02",title:"Contagem regressiva",desc:"Contagem regressiva de 10 a 0.",sol:`i = 10
+while i >= 0:
+    print(i)
+    i -= 1`},
+{id:"04-03",title:"Soma dos ímpares",desc:"Calcule a soma dos números ímpares de 1 a 100.",sol:`soma = 0
+i = 1
+
+while i <= 100:
+    if i % 2 != 0:
+        soma += i
+    i += 1
+
+print(f"A soma dos números ímpares de 1 a 100 é {soma}")`},
+{id:"04-04",title:"Adivinhe o número",desc:"Gere número aleatório 1–100 e peça ao usuário adivinhar (sem limite de tentativas).",sol:`import random
+
+numero = random.randint(1, 100)
+tentativas = 0
+
+while True:
+    tentativa = int(input("Adivinhe o número (entre 1 e 100): "))
+    tentativas += 1
+    if tentativa == numero:
+        print(f"Parabéns, você acertou em {tentativas} tentativas!")
+        break
+    elif tentativa < numero:
+        print("Tente um número maior.")
+    else:
+        print("Tente um número menor.")`},
+{id:"04-05",title:"Tabuada",desc:"Solicite um número inteiro e exiba sua tabuada de 1 a 10.",sol:`n = int(input("Digite um número inteiro: "))
+i = 1
+
+while i <= 10:
+    resultado = n * i
+    print(f"{n} x {i} = {resultado}")
+    i += 1`},
+{id:"04-06",title:"Soma dos dígitos",desc:"Solicite um número inteiro e calcule a soma de seus dígitos.",sol:`numero = int(input("Digite um número inteiro: "))
+soma = 0
+
+while numero > 0:
+    resto = numero % 10
+    soma += resto
+    numero = numero // 10
+
+print(f"A soma dos dígitos é {soma}")`},
+{id:"04-07",title:"Fibonacci",desc:"Imprima os N primeiros números da sequência de Fibonacci.",sol:`n = int(input("Digite o número de elementos da sequência de Fibonacci: "))
+anterior = 0
+atual = 1
+i = 1
+
+while i <= n:
+    print(atual)
+    proximo = anterior + atual
+    anterior = atual
+    atual = proximo
+    i += 1`},
+{id:"04-08",title:"Número primo",desc:"Informe se um número é primo ou não.",sol:`numero = int(input("Digite um número inteiro: "))
+i = 2
+
+while i < numero:
+    if numero % i == 0:
+        print(f"{numero} não é um número primo.")
+        break
+    i += 1
+else:
+    print(f"{numero} é um número primo.")`},
+{id:"04-09",title:"Celsius → Fahrenheit",desc:"Tabela de conversão °C → °F de -10 até 100°C.\nFórmula: F = C * 9/5 + 32",sol:`celsius = -10
+
+while celsius <= 100:
+    fahrenheit = (celsius * 9/5) + 32
+    print(f"{celsius} °C = {fahrenheit} °F")
+    celsius += 10`},
+{id:"04-10",title:"Adivinhe — 5 tentativas",desc:"Número aleatório 1–100. Usuário tem 5 tentativas.\nDica: 'quente' (diff≤10) ou 'frio' (diff>10).",sol:`import random
+
+numero = random.randint(1, 100)
+tentativas = 0
+
+while tentativas < 5:
+    tentativa = int(input("Adivinhe o número (entre 1 e 100): "))
+    tentativas += 1
+    if tentativa == numero:
+        print(f"Parabéns, você acertou em {tentativas} tentativas!")
+        break
+
+    if abs(tentativa - numero) <= 10:
+        print("Está quente! ", end=' ')
+    else:
+        print("Está frio!", end=' ')
+
+    if tentativa < numero:
+        print("Tente um número maior. ", end=' ')
+    else:
+        print("Tente um número menor. ", end=' ')
+
+    print(f"Restam {5-tentativas} tentativas")
+
+if tentativas >=5:
+    print(f"Você não conseguiu adivinhar o número em 5 tentativas. O número era {numero}.")
+
+
+### 11. Você deve implementar um sistema de votação. A eleição deve ser decidida entre dois candidatos:`},
+{id:"04-11",title:"Sistema de votação",desc:"Candidatos: 28765 João da Silva | 32928 Carlos Alberto\nComputar votos até 'ENCERRAR'.\nMostrar parcial com 'RESULTADO'.",sol:`jose_votos = 0
+carlos_votos = 0
+
+while True:
+    print("Digite o número do candidato que deseja votar:")
+    print("28765 - Joao da Silva")
+    print("32928 - Carlos Alberto")
+    print("Digite ENCERRAR para encerrar a votação")
+    print("Digite RESULTADO para ver o resultado parcial da votação")
+    voto = input()
+
+    if voto == "ENCERRAR":
+        break
+
+    if voto == "RESULTADO":
+        print("Resultado parcial da votação:")
+        print("Joao da Silva: " + str(jose_votos) + " votos")
+        print("Carlos Alberto: " + str(carlos_votos) + " votos")
+    elif voto == "28765":
+        jose_votos += 1
+        print("Voto registrado para Joao da Silva")
+    elif voto == "32928":
+        carlos_votos += 1
+        print("Voto registrado para Carlos Alberto")
+    else:
+        print("Opção inválida. Tente novamente.")
+
+print("Resultado final da votação:")
+print("Joao da Silva: " + str(jose_votos) + " votos")
+print("Carlos Alberto: " + str(carlos_votos) + " votos")
+if jose_votos > carlos_votos:
+    print("Joao da Silva foi eleito.")
+elif carlos_votos > jose_votos:
+    print("Carlos Alberto foi eleito.")
+else:
+    print("Houve empate na votação.")`},
 ]},{id:5,title:"T05 — FOR",full:"Tópico 05 — Estruturas de Repetição (FOR)",sub:"for · range · iteração definida",color:"#06b6d4",exercises:[
-{id:"05-01",title:"-100 a 100",desc:"Imprima os números de -100 a 100 usando 'for'.",sol:`for i in range(-100,101):\n    print(i)`},
-{id:"05-02",title:"Pares 0–1000",desc:"Imprima os números pares de 0 a 1000.",sol:`for i in range(0,1001,2):\n    print(i)`},
-{id:"05-03",title:"Fatorial",desc:"Calcule o fatorial de N.\nEx: 5! = 120",sol:`n=int(input("N: "))\nf=1\nfor i in range(1,n+1): f*=i\nprint(f"{n}! = {f}")`},
-{id:"05-04",title:"Juros compostos",desc:"Calcule quanto um investimento X rende em Y anos com taxa T.\nFórmula: montante = X * (1 + T)^ano",sol:`x=float(input("Valor inicial: R$"))\nt=float(input("Taxa anual (ex: 0.10): "))\ny=int(input("Anos: "))\nfor a in range(1,y+1):\n    print(f"Ano {a}: R\${x*(1+t)**a:.2f}")`},
-{id:"05-05",title:"N-ésimo da PA",desc:"N-ésimo elemento de uma PA de razão R.\nFórmula: an = a1 + (n-1) * r",sol:`a1=float(input("Primeiro termo: "))\nr=float(input("Razão: "))\nn=int(input("N: "))\nprint(f"a{n} = {a1+(n-1)*r}")`},
-{id:"05-06",title:"N-ésimo da PG",desc:"N-ésimo elemento de uma PG de razão R.\nFórmula: an = a1 * r^(n-1)",sol:`a1=float(input("Primeiro termo: "))\nr=float(input("Razão: "))\nn=int(input("N: "))\nprint(f"a{n} = {a1*(r**(n-1))}")`},
+{id:"05-01",title:"-100 a 100",desc:"Imprima os números de -100 a 100 usando 'for'.",sol:`for i in range(-100, 101):
+    print(i)`},
+{id:"05-02",title:"Pares 0–1000",desc:"Imprima os números pares de 0 a 1000.",sol:`for i in range(0, 1001, 2):
+    print(i)`},
+{id:"05-03",title:"Fatorial",desc:"Calcule o fatorial de N.\nEx: 5! = 120",sol:`for i in range(0, 1001, 1):
+    if i % 2 == 0:
+    	print(i)`},
+{id:"05-04",title:"Juros compostos",desc:"Calcule quanto um investimento X rende em Y anos com taxa T.\nFórmula: montante = X * (1 + T)^ano",sol:`n = int(input("Digite um número para calcular o fatorial: "))
+fatorial = 1
+for i in range(1, n + 1):
+    fatorial *= i
+print(f"O fatorial de {n} é {fatorial}")`},
+{id:"05-05",title:"N-ésimo da PA",desc:"N-ésimo elemento de uma PA de razão R.\nFórmula: an = a1 + (n-1) * r",sol:`valor_inicial = float(input("Digite o valor inicial do investimento: "))
+taxa_juros = float(input("Digite a taxa de juros anual (em %): ")) / 100
+anos = int(input("Digite o número de anos: "))
+
+valor_final = valor_inicial
+for i in range(0,anos):
+    valor_final *= (1 + taxa_juros)
+
+print(f"O valor final após {anos} anos será de R$ {valor_final:.2f}")`},
+{id:"05-06",title:"N-ésimo da PG",desc:"N-ésimo elemento de uma PG de razão R.\nFórmula: an = a1 * r^(n-1)",sol:`a1 = float(input("Digite o primeiro termo da P.A: "))
+razao = float(input("Digite a razão da P.A: "))
+n = int(input("Digite o número do termo desejado: "))
+
+atual = a1
+for i in range(1, n):
+    atual += razao
+    print(i,atual)
+print(f"O {n}º termo da P.A é: {atual}")`},
 ]},{id:6,title:"T06 — Vetores",full:"Tópico 06 — Arrays e Vetores",sub:"listas 1D · índices · sem built-ins",color:"#f97316",exercises:[
-{id:"06-01",title:"20 elementos aleatórios",desc:"Crie um vetor de 20 elementos aleatórios.",sol:`import random\nvet=[]\nfor i in range(20): vet.append(random.randint(0,100))\nprint(vet)`},
-{id:"06-02",title:"Incremento de 5 em 5",desc:"Crie vetor de 20 elementos incrementando de 5 em 5.",sol:`vet=[]\nfor i in range(20): vet.append(i*5)\nprint(vet)`},
-{id:"06-03",title:"N elementos do usuário",desc:"Crie um vetor com N elementos digitados pelo usuário.",sol:`n=int(input("Quantos? "))\nvet=[]\nfor i in range(n): vet.append(int(input(f"[{i}]: ")))\nprint(vet)`},
-{id:"06-04",title:"N pares do usuário",desc:"Crie vetor com N elementos PARES digitados pelo usuário (só aceitar pares).",sol:`n=int(input("Quantos pares? "))\nvet=[]\nwhile len(vet)<n:\n    v=int(input(f"Par {len(vet)+1}: "))\n    if v%2==0: vet.append(v)\n    else: print("Não é par!")\nprint(vet)`},
-{id:"06-05",title:"Antecessor/Sucessor por índice",desc:"Para cada posição [i], imprima valor atual, antecessor e sucessor.",sol:`import random\nvet=[random.randint(0,100) for _ in range(8)]\nfor i in range(len(vet)):\n    ant=vet[i-1] if i>0 else None\n    suc=vet[i+1] if i<len(vet)-1 else None\n    print(f"[{i}] val={vet[i]} ant={ant} suc={suc}")`},
-{id:"06-06",title:"Soma de elementos opostos",desc:"Soma dos elementos opostos de um vetor de 100 elementos.\nvet[0]+vet[99], vet[1]+vet[98]...",sol:`import random\nvet=[random.randint(0,100) for _ in range(100)]\nfor i in range(50):\n    print(f"[{i}]+[{99-i}] = {vet[i]+vet[99-i]}")`},
-{id:"06-07",title:"Média e Desvio Padrão",desc:"Compute média e desvio padrão de um vetor. NÃO use funções built-in.",sol:`import random,math\nvet=[random.randint(0,100) for _ in range(20)]\nsoma=0\nfor v in vet: soma+=v\nmedia=soma/len(vet)\nvar=0\nfor v in vet: var+=(v-media)**2\ndesvio=math.sqrt(var/len(vet))\nprint(f"Média: {media:.2f}")\nprint(f"Desvio: {desvio:.2f}")`},
-{id:"06-08",title:"Soma pares e múltiplos",desc:"Vetor aleatório → soma dos pares + soma dos múltiplos de 5 + subvetor com múltiplos de 10.",sol:`import random\nvet=[random.randint(0,100) for _ in range(20)]\nsp=sm5=0; m10=[]\nfor v in vet:\n    if v%2==0: sp+=v\n    if v%5==0: sm5+=v\n    if v%10==0: m10.append(v)\nprint("Soma pares:",sp)\nprint("Soma mult5:",sm5)\nprint("Mult10:",m10)`},
-{id:"06-09",title:"Soma de dois vetores",desc:"Dois vetores de 5 elementos → terceiro resultante da soma.",sol:`import random\nv1=[random.randint(0,10) for _ in range(5)]\nv2=[random.randint(0,10) for _ in range(5)]\nv3=[]\nfor i in range(5): v3.append(v1[i]+v2[i])\nprint("V1:",v1)\nprint("V2:",v2)\nprint("V3:",v3)`},
-{id:"06-10",title:"Divide em 2 sub-vetores",desc:"Vetor de 20 elementos → dois sub-vetores de 10.",sol:`import random\nvet=[random.randint(0,100) for _ in range(20)]\nv1=vet[:10]; v2=vet[10:]\nprint("V1:",v1)\nprint("V2:",v2)`},
-{id:"06-11",title:"Maior elemento",desc:"Encontre o maior elemento. NÃO use max().",sol:`import random\nvet=[random.randint(0,100) for _ in range(20)]\nmaior=vet[0]\nfor v in vet:\n    if v>maior: maior=v\nprint("Vetor:",vet)\nprint("Maior:",maior)`},
-{id:"06-12",title:"Dois maiores elementos",desc:"Encontre os dois maiores. NÃO use max() nem sort().",sol:`import random\nvet=[random.randint(0,100) for _ in range(20)]\nm1=m2=float('-inf')\nfor v in vet:\n    if v>m1: m2=m1;m1=v\n    elif v>m2: m2=v\nprint("1º maior:",m1,"| 2º maior:",m2)`},
-{id:"06-13",title:"Rótulo acima/abaixo da média",desc:"Crie segundo vetor: 1 se acima da média, -1 se abaixo, 0 se igual.\nEx: [30,10,40,50,20] → [0,-1,1,1,-1]",sol:`import random\nvet=[random.randint(0,100) for _ in range(10)]\nsoma=0\nfor v in vet: soma+=v\nmed=soma/len(vet)\nrot=[]\nfor v in vet:\n    if v>med: rot.append(1)\n    elif v<med: rot.append(-1)\n    else: rot.append(0)\nprint("Vet:",vet)\nprint(f"Med:{med:.1f}")\nprint("Rot:",rot)`},
-{id:"06-14",title:"Pirâmide crescente",desc:"Vetor de 20 → imprimir como pirâmide:\n1\n12\n123\n...",sol:`vet=list(range(1,21))\nfor i in range(len(vet)):\n    print("".join(str(vet[j]) for j in range(i+1)))`},
-{id:"06-15",title:"Pirâmide inversa",desc:"Mesma pirâmide do exercício 14, mas na ordem inversa (de baixo para cima).",sol:`vet=list(range(1,21))\nfor i in range(len(vet)-1,-1,-1):\n    print("".join(str(vet[j]) for j in range(i+1)))`},
-{id:"06-16",title:"Constrói e desconstrói pirâmide",desc:"Construa a pirâmide crescente (ex14) e depois desconstrói (ex15) em sequência.",sol:`vet=list(range(1,21))\nfor i in range(len(vet)):\n    print("".join(str(vet[j]) for j in range(i+1)))\nfor i in range(len(vet)-1,-1,-1):\n    print("".join(str(vet[j]) for j in range(i+1)))`},
-{id:"06-17",title:"Forma de X",desc:"Dado um vetor, apresente os elementos em forma de 'X'.",sol:`vet=list(range(1,10))\nn=len(vet)\nfor i in range(n):\n    linha=[' ']*n\n    linha[i]=str(vet[i])\n    if n-1-i!=i: linha[n-1-i]=str(vet[n-1-i])\n    print("".join(linha))`},
-{id:"06-18",title:"Ordena vetor (Bubble Sort)",desc:"Ordene em ordem crescente SEM usar sort().\nEx: [5,2,1,3,4] → [1,2,3,4,5]",sol:`import random\nvet=[random.randint(0,100) for _ in range(10)]\nprint("Antes:",vet)\nn=len(vet)\nfor i in range(n):\n    for j in range(0,n-i-1):\n        if vet[j]>vet[j+1]: vet[j],vet[j+1]=vet[j+1],vet[j]\nprint("Depois:",vet)`},
-{id:"06-19",title:"Maior sequência de 0s",desc:"Maior sequência contígua de 0s em um vetor.\nEx: [1,0,0,1,1,0,1,0,0,0,0,1] → 4",sol:`vet=[1,0,0,1,1,0,1,0,0,0,0,1,1,0,0,0]\nmax_s=atual=0\nfor v in vet:\n    if v==0:\n        atual+=1\n        if atual>max_s: max_s=atual\n    else: atual=0\nprint("Maior sequência de 0s:",max_s)`},
-{id:"06-20",title:"Maior sequência crescente",desc:"Maior sequência de valores consecutivos (diferença de 1).\nEx: [64,65,12,13,14,15,21,33,34,35,36,37,...] → [33,34,35,36,37]",sol:`vet=[64,65,12,13,14,15,21,33,34,35,36,37,100,91,9,93,94]\nms=1;ms_s=0;cur=1;s=0\nfor i in range(1,len(vet)):\n    if vet[i]==vet[i-1]+1:\n        cur+=1\n        if cur>ms: ms=cur;ms_s=s\n    else: cur=1;s=i\nprint("Sequência:",vet[ms_s:ms_s+ms])`},
-{id:"06-21",title:"Validador de CPF",desc:"Implemente um validador de CPF.\nPesquise o algoritmo dos dígitos verificadores.",sol:`def valida_cpf(cpf):\n    d=[int(c) for c in cpf if c.isdigit()]\n    if len(d)!=11 or d==[d[0]]*11: return False\n    s=sum(d[i]*(10-i) for i in range(9))\n    v1=(s*10)%11\n    if v1==10: v1=0\n    if v1!=d[9]: return False\n    s=sum(d[i]*(11-i) for i in range(10))\n    v2=(s*10)%11\n    if v2==10: v2=0\n    return v2==d[10]\ncpf=input("CPF: ")\nprint("Válido!" if valida_cpf(cpf) else "Inválido!")`},
+{id:"06-01",title:"20 elementos aleatórios",desc:"Crie um vetor de 20 elementos aleatórios.",sol:`   import random
+   
+   # Criando um vetor vazio
+   vetor = []
+   
+   # Preenchendo o vetor com 20 números aleatórios entre 0 e 100
+   for i in range(20):
+       vetor.append(random.randint(0, 100))
+   
+   # Imprimindo o vetor na tela
+   print(vetor)
+   `},
+{id:"06-02",title:"Incremento de 5 em 5",desc:"Crie vetor de 20 elementos incrementando de 5 em 5.",sol:`   import random
+   
+   # Criando um vetor vazio de tamanho 20
+   vetor = [0] * 20
+   
+   # Preenchendo o vetor com números aleatórios entre 0 e 100
+   for i in range(20):
+       vetor[i] = random.randint(0, 100)
+   
+   # Imprimindo o vetor na tela
+   print(vetor)
+   `},
+{id:"06-03",title:"N elementos do usuário",desc:"Crie um vetor com N elementos digitados pelo usuário.",sol:`   # Criando um vetor vazio
+   vetor = []
+   
+   # Preenchendo o vetor com números incrementais de 5 em 5
+   for i in range(20):
+       vetor.append((i*5)
+   
+   # Imprimindo o vetor na tela
+   print(vetor)
+   `},
+{id:"06-04",title:"N pares do usuário",desc:"Crie vetor com N elementos PARES digitados pelo usuário (só aceitar pares).",sol:`   # Criando um vetor vazio
+   vetor = [0] * 20
+   
+   # Preenchendo o vetor com números incrementais de 5 em 5
+   for i in range(20):
+       vetor[i] = i * 5
+   
+   # Imprimindo o vetor na tela
+   print(vetor)
+   `},
+{id:"06-05",title:"Antecessor/Sucessor por índice",desc:"Para cada posição [i], imprima valor atual, antecessor e sucessor.",sol:`   # Lendo o tamanho do vetor N
+   N = int(input("Digite o tamanho do vetor: "))
+   
+   # Criando um vetor vazio
+   vetor = []
+   
+   # Lendo os elementos e adicionando-os ao final do vetor
+   for i in range(N):
+       valor = int(input("Digite o valor do elemento %d: " % (i+1)))
+       vetor.append(valor)
+   
+   # Imprimindo o vetor na tela
+   print(vetor)
+   `},
+{id:"06-06",title:"Soma de elementos opostos",desc:"Soma dos elementos opostos de um vetor de 100 elementos.\nvet[0]+vet[99], vet[1]+vet[98]...",sol:`   # Criando um vetor vazio
+   vetor = []
+   
+   # Lendo os elementos do vetor até que o usuário digite um número negativo
+   valor = int(input("Digite um número (digite um número negativo para sair): "))
+   while valor >= 0:
+       vetor.append(valor)
+       valor = int(input("Digite um número (digite um número negativo para sair): "))
+   
+   # Imprimindo o vetor na tela
+   print(vetor)
+   `},
+{id:"06-07",title:"Média e Desvio Padrão",desc:"Compute média e desvio padrão de um vetor. NÃO use funções built-in.",sol:`   # Criando um vetor vazio
+   vetor = []
+   
+   # Lendo os elementos pares do vetor e adicionando-os ao vetor
+   valor = int(input("Digite um número (digite 0 para sair): "))
+   while valor != 0:
+       if valor % 2 == 0:
+           vetor.append(valor)
+       valor = int(input("Digite um número (digite 0 para sair): "))
+   
+   # Imprimindo o vetor na tela
+   print(vetor)
+   `},
+{id:"06-08",title:"Soma pares e múltiplos",desc:"Vetor aleatório → soma dos pares + soma dos múltiplos de 5 + subvetor com múltiplos de 10.",sol:`   vetor = [1, 3, 5, 7, 9]
+   
+   for i in range(1, len(vetor)-1):
+       print("Valor atual:", vetor[i])
+       print("Antecessor:", vetor[i-1])
+       print("Sucessor:", vetor[i+1])
+   `},
+{id:"06-09",title:"Soma de dois vetores",desc:"Dois vetores de 5 elementos → terceiro resultante da soma.",sol:`   vetor = [i+1 for i in range(100)]
+   soma = 0
+   
+   for i in range(50):
+       soma += vetor[i] + vetor[99-i]
+   
+   print("A soma dos elementos opostos do vetor é:", soma)
+   `},
+{id:"06-10",title:"Divide em 2 sub-vetores",desc:"Vetor de 20 elementos → dois sub-vetores de 10.",sol:`   # Importando a biblioteca math para usar a função sqrt
+   import math
+   
+   # Definindo o vetor
+   vetor = [1, 2, 3, 4, 5]
+   
+   soma = 0
+   # Calculando a média
+   for i in range(0,len(vetor)):
+       soma += vetor[i]
+   media = soma / len(vetor)
+   
+   soma_var = 0
+   # Calculando a soma da variancia
+   for i in range(0,len(vetor)):
+       soma_var += (vet[i] - media) ** 2
+   
+   desvio_padrao = math.sqrt(soma_var)
+   
+   # Imprimindo os resultados
+   print("Média:", media)
+   print("Desvio padrão:", desvio_padrao)
+   `},
+{id:"06-11",title:"Maior elemento",desc:"Encontre o maior elemento. NÃO use max().",sol:`   import random
+   
+   # Criando um vetor aleatório de tamanho 10 com valores entre 0 e 100
+   vetor = []
+   for i in range(10):
+       vetor.append(random.randint(0, 100))
+   print("Vetor aleatório:", vetor)
+   
+   # Soma dos números pares (iterando por valor)
+   soma_pares = 0
+   for valor in vetor:
+       if valor % 2 == 0:
+           soma_pares += valor
+   print("Soma dos números pares:", soma_pares)
+   
+   # Soma dos múltiplos de 5 (iterando por indice)
+   soma_mult_5 = 0
+   for i in range(len(vetor)): 
+       if vetor[i] % 5 == 0:
+           soma_mult_5 += vetor[i]
+   print("Soma dos múltiplos de 5:", soma_mult_5)
+   
+   # Vetor com os múltiplos de 10 do vetor original 
+   #(aqui usei while pare exemplificar)
+   mult_10 = []
+   i = 0
+   while i < len(vetor):
+       if vetor[i] % 10 == 0:
+           mult_10.append(vetor[i])
+       i += 1
+   print("Vetor com os múltiplos de 10 do vetor original:", mult_10)
+   `},
+{id:"06-12",title:"Dois maiores elementos",desc:"Encontre os dois maiores. NÃO use max() nem sort().",sol:`    # Criando os dois vetores de 5 elementos
+    vetor1 = []
+    vetor2 = []
+    for i in range(5):
+        vetor1.append(i)
+        vetor2.append(i*2)
+    print("Vetor 1:", vetor1)
+    print("Vetor 2:", vetor2)
+    
+    # Criando o terceiro vetor com a soma dos dois vetores anteriores
+    vetor3 = []
+    for i in range(5):
+        vetor3.append(vetor1[i] + vetor2[i])
+    print("Vetor 3 (soma de Vetor 1 e Vetor
+    `},
+{id:"06-13",title:"Rótulo acima/abaixo da média",desc:"Crie segundo vetor: 1 se acima da média, -1 se abaixo, 0 se igual.\nEx: [30,10,40,50,20] → [0,-1,1,1,-1]",sol:`    # Criando um vetor de 20 elementos
+    vetor = list(range(20))
+    print("Vetor original:", vetor)
+    
+    # Dividindo o vetor em dois sub-vetores de 10 elementos cada
+    sub_vetor1 = []
+    sub_vetor2 = []
+    for i in range(len(vetor)):
+        if i < 10:
+            sub_vetor1.append(vetor[i])
+        else:
+            sub_vetor2.append(vetor[i])
+    
+    print("Sub-vetor 1:", sub_vetor1)
+    print("Sub-vetor 2:", sub_vetor2)
+    `},
+{id:"06-14",title:"Pirâmide crescente",desc:"Vetor de 20 → imprimir como pirâmide:\n1\n12\n123\n...",sol:`    # Criando um vetor aleatório
+    vetor = [3, 8, 2, 1, 10, 5]
+    
+    # Inicializando a variável maior_elemento com o primeiro valor do vetor
+    maior_elemento = vetor[0]
+    
+    # Percorrendo o vetor e comparando cada elemento com o maior_elemento atual
+    for i in range(len(vetor)):
+        if vetor[i] > maior_elemento:
+            maior_elemento = vetor[i]
+    
+    # Imprimindo o resultado na tela
+    print("Maior elemento do vetor:", maior_elemento)
+    `},
+{id:"06-15",title:"Pirâmide inversa",desc:"Mesma pirâmide do exercício 14, mas na ordem inversa (de baixo para cima).",sol:`    # Criando um vetor aleatório
+    vetor = [3, 8, 2, 1, 10, 5]
+    
+    # Inicializando as variáveis para os dois maiores elementos com os dois primeiros valores do vetor
+    maior_elemento = vetor[0]
+    segundo_maior_elemento = vetor[1]
+    
+    # Percorrendo o vetor e atualizando as variáveis para os dois maiores elementos
+    for i in range(len(vetor)):
+        if vetor[i] > maior_elemento:
+            segundo_maior_elemento = maior_elemento
+            maior_elemento = vetor[i]
+        elif vetor[i] > segundo_maior_elemento:
+            segundo_maior_elemento = vetor[i]
+    
+    # Imprimindo o resultado na tela
+    print("Maior elemento do vetor:", maior_elemento)
+    print("Segundo maior elemento do vetor:", segundo_maior_elemento)
+    `},
+{id:"06-16",title:"Constrói e desconstrói pirâmide",desc:"Construa a pirâmide crescente (ex14) e depois desconstrói (ex15) em sequência.",sol:`    # criar vetor aleatório
+    vetor = [2, 4, 5, 8, 12, 7, 3, 9, 6, 10]
+    
+    # calcular média do vetor
+    soma = 0
+    for i in range(len(vetor)):
+        soma += vetor[i]
+    media = soma / len(vetor)
+    
+    # rotular índices
+    rotulos = []
+    for i in range(len(vetor)):
+        if vetor[i] < media:
+            rotulos.append(-1)
+        elif vetor[i] > media:
+            rotulos.append(1)
+        else:
+            rotulos.append(0)
+    
+    print("Vetor original:", vetor)
+    print("Rotulos:", rotulos)
+    `},
+{id:"06-17",title:"Forma de X",desc:"Dado um vetor, apresente os elementos em forma de 'X'.",sol:`    vet = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]
+    
+    n = len(vet)
+    for i in range(n):
+        #print(" "*(n-i-1), end="")
+        for j in range(i+1):
+            print(vet[j], end=" ")
+        print()
+    `},
+{id:"06-18",title:"Ordena vetor (Bubble Sort)",desc:"Ordene em ordem crescente SEM usar sort().\nEx: [5,2,1,3,4] → [1,2,3,4,5]",sol:`    vet = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]
+    
+    for i in range(n-1,0,-1):
+        #print(" "*(n-i-1), end="")
+        for j in range(i+1):
+            print(vet[j], end=" ")
+        print()
+    `},
+{id:"06-19",title:"Maior sequência de 0s",desc:"Maior sequência contígua de 0s em um vetor.\nEx: [1,0,0,1,1,0,1,0,0,0,0,1] → 4",sol:`    vet = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]
+    
+    n = len(vet)
+    #Construção
+    for i in range(n):    
+        for j in range(i+1):
+            #end=' ' para nao pular de linha
+            print(vet[j], end=" ")
+        print('')
+    
+    #Desconstruçã
+    for i in range(n-1,0,-1):    
+        for j in range(i+1):
+            #end=' ' para nao pular de linha
+            print(vet[j], end=" ")
+        print('')
+    `},
+{id:"06-20",title:"Maior sequência crescente",desc:"Maior sequência de valores consecutivos (diferença de 1).\nEx: [64,65,12,13,14,15,21,33,34,35,36,37,...] → [33,34,35,36,37]",sol:`    vet = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
+    
+    tam = len(vet)
+    for i in range(tam):  
+      opt = (tam - 1) - i   
+      #percorre o vetor decisindo quando
+      #imprimir o valor ou ' '  
+      for j in range(tam):
+        if (j == i or j == opt):
+          print(vet[j],end=' ')
+        else:
+          print(' ',end=' ')
+    
+      print('\n')
+    `},
+{id:"06-21",title:"Validador de CPF",desc:"Implemente um validador de CPF.\nPesquise o algoritmo dos dígitos verificadores.",sol:`    #Selection Sort
+    arr = [5,1,3,4,2]
+    n = len(arr)
+    for i in range(n-1):
+        min_index = i
+        for j in range(i+1, n):
+            if arr[j] < arr[min_index]:
+                min_index = j
+    
+        tmp = arr[i]  
+        arr[i] = arr[min_index]
+        arr[min_index] = tmp 
+    
+    print(arr)
+    `},
 ]},{id:7,title:"T07 — Matrizes",full:"Tópico 07 — Arrays e Matrizes",sub:"listas 2D · double FOR · diagonais",color:"#a855f7",exercises:[
-{id:"07-01",title:"Matriz 3x3 do usuário",desc:"Usuário preenche matriz 3x3, imprima formatada.",sol:`m=[]\nfor i in range(3):\n    l=[]\n    for j in range(3): l.append(int(input(f"[{i}][{j}]: ")))\n    m.append(l)\nfor linha in m:\n    print(" | ".join(f"{v:4}" for v in linha))`},
-{id:"07-02",title:"Matriz 7x5: média e maior por coluna",desc:"Matriz 7x5 aleatória → média e maior elemento por coluna. NÃO use max() nem mean().",sol:`import random\nm=[[random.randint(0,100) for _ in range(5)] for _ in range(7)]\nfor col in range(5):\n    soma=0; maior=m[0][col]\n    for lin in range(7):\n        soma+=m[lin][col]\n        if m[lin][col]>maior: maior=m[lin][col]\n    print(f"Col {col+1}: Média={soma/7:.2f} Maior={maior}")`},
-{id:"07-03",title:"Diagonais 50x50",desc:"Matriz 50x50 aleatória → média das diagonais principal e secundária.",sol:`import random\nm=[[random.randint(1,100) for _ in range(50)] for _ in range(50)]\nsp=ss=0\nfor i in range(50):\n    sp+=m[i][i]; ss+=m[i][49-i]\nprint(f"Principal: {sp/50:.2f}")\nprint(f"Secundária: {ss/50:.2f}")`},
-{id:"07-04",title:"Campo Minado",desc:"Jogo campo minado básico.\nX = bomba, · = livre.\nMostrar campo oculto (?), revelar posições.",sol:`import random\nT=5;B=4\ncampo=[[' ']*T for _ in range(T)]\nbs=0\nwhile bs<B:\n    i,j=random.randint(0,T-1),random.randint(0,T-1)\n    if campo[i][j]!='X': campo[i][j]='X';bs+=1\noc=[['?']*T for _ in range(T)]\nrv=0;meta=T*T-B\nwhile rv<meta:\n    print("\\n".join(' '.join(r) for r in oc))\n    i=int(input("Linha: "))\n    j=int(input("Col: "))\n    if campo[i][j]=='X': print("BOOM! Perdeu!");break\n    oc[i][j]='·';rv+=1\nelse: print("Ganhou!")`},
-{id:"07-05",title:"Jogo da Velha",desc:"Implemente o jogo da velha (tic-tac-toe) para 2 jogadores, com verificação de vencedor e empate.",sol:`tab=[[' ']*3 for _ in range(3)]\ndef show():\n    for i,r in enumerate(tab):\n        print(' | '.join(r))\n        if i<2: print('---------')\ndef chk(p):\n    for i in range(3):\n        if all(tab[i][j]==p for j in range(3)): return True\n        if all(tab[j][i]==p for j in range(3)): return True\n    if all(tab[i][i]==p for i in range(3)): return True\n    if all(tab[i][2-i]==p for i in range(3)): return True\n    return False\npl='X'\nfor _ in range(9):\n    show()\n    i=int(input(f"{pl} Linha(0-2): "))\n    j=int(input(f"{pl} Col(0-2): "))\n    tab[i][j]=pl\n    if chk(pl): show();print(f"{pl} venceu!");break\n    pl='O' if pl=='X' else 'X'\nelse:\n    show();print("Empate!")`},
+{id:"07-01",title:"Matriz 3x3 do usuário",desc:"Usuário preenche matriz 3x3, imprima formatada.",sol:`# Entrada de uma matriz 3x3 pelo usuário
+matriz = []
+print("Digite os 9 números da matriz 3x3:")
+
+for i in range(3):
+    linha = []
+    for j in range(3):
+        valor = int(input(f"Elemento [{i+1}][{j+1}]: "))
+        linha.append(valor)
+    matriz.append(linha)
+
+# Impressão formatada sem join
+print("\nMatriz 3x3:")
+for linha in matriz:
+    for elemento in linha:
+        print(f"|\t{elemento}\t|", end="")
+    print()`},
+{id:"07-02",title:"Matriz 7x5: média e maior por coluna",desc:"Matriz 7x5 aleatória → média e maior elemento por coluna. NÃO use max() nem mean().",sol:`import random
+
+# Criação da matriz 7x5 sem list comprehension
+matriz = []
+for i in range(7):
+    linha = []
+    for j in range(5):
+        linha.append(random.randint(0, 100))
+    matriz.append(linha)
+
+# Impressão da matriz
+print("Matriz 7x5:")
+for i in range(7):
+    for j in range(5):
+        print(matriz[i][j], end="\t")
+    print()
+
+# Cálculo das médias e maiores elementos por coluna
+print("\nEstatísticas por coluna:")
+for col in range(5):
+    soma = 0
+    maior = matriz[0][col]
+    for lin in range(7):
+        soma += matriz[lin][col]
+        if matriz[lin][col] > maior:
+            maior = matriz[lin][col]
+    media = soma / 7
+    print("Coluna", col + 1, ": Média =", round(media, 2), ", Maior =", maior)`},
+{id:"07-03",title:"Diagonais 50x50",desc:"Matriz 50x50 aleatória → média das diagonais principal e secundária.",sol:`# Criação da matriz 50x50
+matriz = []
+for i in range(50):
+    linha = []
+    for j in range(50):
+        linha.append(random.randint(1, 100))
+    matriz.append(linha)
+
+# Cálculo das médias das diagonais
+soma_principal = 0
+soma_secundaria = 0
+
+for i in range(50):
+    soma_principal += matriz[i][i]
+    soma_secundaria += matriz[i][49 - i]
+
+media_principal = soma_principal / 50
+media_secundaria = soma_secundaria / 50
+
+print("Média da diagonal principal:", round(media_principal, 2))
+print("Média da diagonal secundária:", round(media_secundaria, 2))`},
+{id:"07-04",title:"Campo Minado",desc:"Jogo campo minado básico.\nX = bomba, · = livre.\nMostrar campo oculto (?), revelar posições.",sol:`def gerar_campo(tamanho, bombas):
+    campo = []
+    for i in range(tamanho):
+        linha = []
+        for j in range(tamanho):
+            linha.append(' ')
+        campo.append(linha)
+
+    colocadas = 0
+    while colocadas < bombas:
+        i = random.randint(0, tamanho - 1)
+        j = random.randint(0, tamanho - 1)
+        if campo[i][j] != 'X':
+            campo[i][j] = 'X'
+            colocadas += 1
+    return campo
+
+def imprimir_campo(campo):
+    for i in range(len(campo)):
+        for j in range(len(campo[i])):
+            print(campo[i][j], end=" | ")
+        print("\n" + "-" * (len(campo[i]) * 4 - 1))
+
+campo = gerar_campo(5, 5)
+print("Campo Minado:")
+imprimir_campo(campo)`},
+{id:"07-05",title:"Jogo da Velha",desc:"Implemente o jogo da velha (tic-tac-toe) para 2 jogadores, com verificação de vencedor e empate.",sol:`
+def inicializar_tabuleiro():
+    tabuleiro = []
+    for i in range(3):
+        linha = []
+        for j in range(3):
+            linha.append(' ')
+        tabuleiro.append(linha)
+    return tabuleiro
+
+def imprimir_tabuleiro(tab):
+    for i in range(3):
+        for j in range(3):
+            print(tab[i][j], end=" | ")
+        print("\n" + "-" * 9)
+
+def verificar_vitoria(tab, jogador):
+    for i in range(3):
+        if tab[i][0] == tab[i][1] == tab[i][2] == jogador:
+            return True
+        if tab[0][i] == tab[1][i] == tab[2][i] == jogador:
+            return True
+    if tab[0][0] == tab[1][1] == tab[2][2] == jogador:
+        return True
+    if tab[0][2] == tab[1][1] == tab[2][0] == jogador:
+        return True
+    return False
+
+tabuleiro = inicializar_tabuleiro()
+jogador = 'X'
+
+for rodada in range(9):
+    imprimir_tabuleiro(tabuleiro)
+    print("Jogador", jogador, "informe linha e coluna (0-2):")
+    linha = int(input("Linha: "))
+    coluna = int(input("Coluna: "))
+    if tabuleiro[linha][coluna] == ' ':
+        tabuleiro[linha][coluna] = jogador
+        if verificar_vitoria(tabuleiro, jogador):
+            imprimir_tabuleiro(tabuleiro)
+            print("Jogador", jogador, "venceu!")
+            break
+        if jogador == 'X':
+            jogador = 'O'
+        else:
+            jogador = 'X'
+    else:
+        print("Posição já ocupada. Tente novamente.")
+else:
+    imprimir_tabuleiro(tabuleiro)
+    print("Empate!")`},
 ]},{id:8,title:"T08 — Funções",full:"Tópico 08 — Funções e Recursão",sub:"def · parâmetros · retorno · recursão",color:"#14b8a6",exercises:[
-{id:"08-01",title:"max_() sem built-in",desc:"Função max_() que retorna o maior elemento de um vetor. NÃO use max().",sol:`def max_(v):\n    m=v[0]\n    for x in v:\n        if x>m: m=x\n    return m\nimport random\nvet=[random.randint(0,100) for _ in range(10)]\nprint(vet)\nprint("Maior:",max_(vet))`},
-{id:"08-02",title:"min_() sem built-in",desc:"Função min_() que retorna o menor elemento. NÃO use min().",sol:`def min_(v):\n    m=v[0]\n    for x in v:\n        if x<m: m=x\n    return m\nimport random\nvet=[random.randint(0,100) for _ in range(10)]\nprint(vet)\nprint("Menor:",min_(vet))`},
-{id:"08-03",title:"invert_() — inverte vetor",desc:"Função invert_() que inverte um vetor. NÃO use reverse() ou [::-1].",sol:`def invert_(v):\n    r=[]\n    for i in range(len(v)-1,-1,-1): r.append(v[i])\n    return r\nvet=[1,2,3,4,5]\nprint("Original:",vet)\nprint("Invertido:",invert_(vet))`},
-{id:"08-04",title:"sort_() — Bubble Sort",desc:"Função sort_() que ordena vetor crescente. NÃO use sort() nem sorted().",sol:`def sort_(v):\n    v=v[:]\n    n=len(v)\n    for i in range(n):\n        for j in range(0,n-i-1):\n            if v[j]>v[j+1]: v[j],v[j+1]=v[j+1],v[j]\n    return v\nimport random\nvet=[random.randint(0,50) for _ in range(8)]\nprint("Antes:",vet)\nprint("Depois:",sort_(vet))`},
-{id:"08-05",title:"exist_() — busca",desc:"Função exist_() que retorna True se valor existe no vetor.",sol:`def exist_(v,val):\n    for x in v:\n        if x==val: return True\n    return False\nvet=[3,7,1,9,4,6]\nprint(vet)\nprint("Existe 9?",exist_(vet,9))\nprint("Existe 5?",exist_(vet,5))`},
-{id:"08-06",title:"dev_padrao() — média e desvio",desc:"Função que recebe vetor e retorna (média, desvio_padrão).",sol:`import math\ndef dev_padrao(v):\n    n=len(v)\n    soma=0\n    for x in v: soma+=x\n    m=soma/n\n    var=0\n    for x in v: var+=(x-m)**2\n    return m,math.sqrt(var/n)\nimport random\nvet=[random.randint(0,100) for _ in range(20)]\nm,d=dev_padrao(vet)\nprint(f"Média:{m:.2f} Desvio:{d:.2f}")`},
-{id:"08-07",title:"Índices dos pares",desc:"Função que recebe vetor e retorna índices dos elementos pares.\nEx: [10,11,12,13,14] → [0,2,4]",sol:`def indices_pares(v):\n    idx=[]\n    for i in range(len(v)):\n        if v[i]%2==0: idx.append(i)\n    return idx\nvet=[10,11,12,13,14]\nprint("Índices pares:",indices_pares(vet))`},
-{id:"08-08",title:"Frequência dos elementos",desc:"Função que retorna frequência como matriz.\nEx: [1,2,1,3,3,4,3,1] → [[1,3],[2,1],[3,3],[4,1]]",sol:`def freq(v):\n    vis=[]; res=[]\n    for x in v:\n        if x not in vis:\n            vis.append(x)\n            c=0\n            for u in v:\n                if u==x: c+=1\n            res.append([x,c])\n    return res\nvet=[1,2,1,3,3,4,3,1,2,1,1]\nprint(freq(vet))`},
+{id:"08-01",title:"max_() sem built-in",desc:"Função max_() que retorna o maior elemento de um vetor. NÃO use max().",sol:`   def print_rec(N):
+       print(N)
+       if N != 0:        
+          print_rec(N-1)
+   `},
+{id:"08-02",title:"min_() sem built-in",desc:"Função min_() que retorna o menor elemento. NÃO use min().",sol:`   def print_rec(N):
+       
+       if N != 0:        
+          print_rec(N-1)
+       
+       print(N)
+   `},
+{id:"08-03",title:"invert_() — inverte vetor",desc:"Função invert_() que inverte um vetor. NÃO use reverse() ou [::-1].",sol:`   def soma(N):
+   	
+   	if N == 0:
+   		return 0
+   	
+   	s = N + soma(N-1)
+   	
+   	return s
+   `},
+{id:"08-04",title:"sort_() — Bubble Sort",desc:"Função sort_() que ordena vetor crescente. NÃO use sort() nem sorted().",sol:`   def soma_digitos(n):
+       if n == 0:
+           return 0
+       else:
+           return n % 10 + soma_digitos(n // 10)
+   `},
+{id:"08-05",title:"exist_() — busca",desc:"Função exist_() que retorna True se valor existe no vetor.",sol:`   def soma_vet(vet):
+   	
+   	if len(vet) == 1:
+   		return vet[0]
+   	
+   	s = vet[0] + soma_vet(vet[1:])	
+   	return s
+   `},
+{id:"08-06",title:"dev_padrao() — média e desvio",desc:"Função que recebe vetor e retorna (média, desvio_padrão).",sol:`   def fat(N):
+   	
+   	if N == 1:
+   		return 1
+   		
+   	s = N*fat(N-1)
+   	
+   	return s
+   `},
+{id:"08-07",title:"Índices dos pares",desc:"Função que recebe vetor e retorna índices dos elementos pares.\nEx: [10,11,12,13,14] → [0,2,4]",sol:`   def fibo(N):
+   	
+   	if N == 0:
+   		return 0
+   	elif N == 1:
+   		return 1
+   		
+   	s = fibo(N-1) + fibo(N-2)
+   	
+   	return s
+   `},
+{id:"08-08",title:"Frequência dos elementos",desc:"Função que retorna frequência como matriz.\nEx: [1,2,1,3,3,4,3,1] → [[1,3],[2,1],[3,3],[4,1]]",sol:`def selection_sort(vet, i=0):
+	# Caso base: se 'i' é igual ao tamanho da lista menos um, a lista está ordenada
+	if i == len(vet) - 1:
+		return vet
+
+	# Encontrar o índice do menor elemento na sublista a partir de 'i'
+	min_index = i
+	for j in range(i + 1, len(vet)):
+		if vet[j] < vet[min_index]:
+			min_index = j     
+
+	temp = vet[i]
+	vet[i] = vet[min_index]
+	vet[min_index] = temp
+
+	# Chamar recursivamente a função 'ordena' para o próximo índice
+	return selection_sort(vet, i + 1)`},
 {id:"08-09",title:"Validador de CPF (função)",desc:"Função valida_cpf(cpf) que valida um CPF usando o algoritmo dos dígitos verificadores.",sol:`def valida_cpf(cpf):\n    d=[int(c) for c in cpf if c.isdigit()]\n    if len(d)!=11 or d==[d[0]]*11: return False\n    s=sum(d[i]*(10-i) for i in range(9))\n    v=(s*10)%11\n    if v==10: v=0\n    if v!=d[9]: return False\n    s=sum(d[i]*(11-i) for i in range(10))\n    v=(s*10)%11\n    if v==10: v=0\n    return v==d[10]\ncpf=input("CPF: ")\nprint("Válido!" if valida_cpf(cpf) else "Inválido!")`},
 ]}];
 
@@ -1087,25 +2008,66 @@ function updateOvp(){
 TOPICS[5].exercises.push(
   {id:"06-22",title:"Iteração char a char",
    desc:"Dado a string 'Hello', imprima cada caractere em uma linha separada sem usar split.",
-   sol:`strl = 'Hello'
-tam = len(strl)
-for i in range(0, tam, 1):
-    print(strl[i])`},
+   sol:`    #Insert sort
+    arr = [5,1,3,4,2]
+    n = len(arr)
+    for i in range(1, n):
+            key = arr[i]
+            j = i - 1
+            while j >= 0 and arr[j] > key:
+                arr[j + 1] = arr[j]
+                j -= 1        
+            arr[j + 1] = key
+    `},
 
   {id:"06-23",title:"Código ASCII de um char",
    desc:"Dada a letra 'e', imprima o caractere e seu código ASCII.\nUse a função ord().",
-   sol:`c = 'e'
-n = ord(c)
-print(c, n)    # e 101`},
+   sol:`    vetor = [1,0,0,0,1,0,0,1,1,0,0,0,0,0]
+    max_zeros = 0  # Sequência máxima de zeros
+    current_zeros = 0  # Sequência atual de zeros
+    
+    for num in vetor:
+        if num == 0:
+            current_zeros += 1
+        else:
+            if current_zeros > max_zeros:
+                max_zeros = current_zeros
+            current_zeros = 0
+    
+    # Verificar a sequência final, se necessário
+    if current_zeros > max_zeros:
+        max_zeros = current_zeros
+    
+    print(max_zeros)
+    `},
 
   {id:"06-24",title:"Tabela char → código ASCII",
    desc:"Dada a string 'abABcC', imprima cada caractere com seu código ASCII.\n(Observe a diferença entre maiúsculas e minúsculas!)",
-   sol:`strl = 'abABcC'
-for i in range(len(strl)):
-    c = strl[i]
-    n = ord(c)
-    print(c, n)
-# a=97, b=98, A=65, B=66, c=99, C=67`}
+   sol:`    vetor = [-80,-79, 20, 21, 22, 23, 45, 9, 10, 11]
+    
+    #armazena os indices das sequência
+    max_idxs = [] #maior sequência 
+    idxs = [0]  #sequencia atual
+    
+    for i in range(1,len(vetor)-1):
+        #comparo o atual com o anterior
+        if vetor[i-1] + 1 == vetor[i]:        
+            idxs.append(i)        
+        else:
+          #verifica se a sequencia é a maior
+          if len(idxs) > len(max_idxs):        
+            max_idxs = idxs
+    
+          #reinicio a sequencia atual
+          idxs = [i]
+    
+    #Indices
+    print(max_idxs)
+    
+    #itero em indices para obter valores
+    for idx in max_idxs:
+      print(vetor[idx], end = ' ')
+    `}
 );
 
 // T08 (index 7) — f2 + FuncoesRecursivasEx
