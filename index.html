@@ -540,6 +540,15 @@ while i <= 100:
     print(i)
     i += 3
 print("Fim do programa")`,
+alts:[{label:"Compacta",code:`i = 0
+while i <= 100:
+    print(i)
+    i += 3
+print("Fim do programa")`},{label:"Resolução (professor)",code:`i = 0
+while i <= 100:
+    if i % 3 == 0:
+        print(i)
+    i += 1`}],
 sol:`i = 0
 while i <= 100:
     if i % 3 == 0:
@@ -549,6 +558,13 @@ while i <= 100:
 while i >= 0:
  print(i)
  i-=1`,
+alts:[{label:"Compacta",code:`i = 10
+while i >= 0:
+ print(i)
+ i-=1`},{label:"Resolução (professor)",code:`i = 10
+while i >= 0:
+    print(i)
+    i -= 1`}],
 sol:`i = 10
 while i >= 0:
     print(i)
@@ -561,6 +577,22 @@ while i <= 100:
        print(i)
     i += 1
 print(soma)`,
+alts:[{label:"Compacta",code:`i = 0
+soma = 0
+while i <= 100:
+    if i % 2 != 0:
+       soma += i
+       print(i)
+    i += 1
+print(soma)`},{label:"Resolução (professor)",code:`soma = 0
+i = 1
+
+while i <= 100:
+    if i % 2 != 0:
+        soma += i
+    i += 1
+
+print(f"A soma dos números ímpares de 1 a 100 é {soma}")`}],
 sol:`soma = 0
 i = 1
 
@@ -585,6 +617,35 @@ while True:
         print("Menor")
     else:
         print("Maior")`,
+alts:[{label:"Compacta",code:`import random
+
+i = random.randint(1,100)
+tentativa = 0
+
+while True:
+    tentativa = int(input("Digite um numero:"))
+    tentativa+=1
+    if tentativa == i:
+        print("Voce Acertou!")
+        break
+    elif tentativa > i:
+        print("Menor")
+    else:
+        print("Maior")`},{label:"Resolução (professor)",code:`import random
+
+numero = random.randint(1, 100)
+tentativas = 0
+
+while True:
+    tentativa = int(input("Adivinhe o número (entre 1 e 100): "))
+    tentativas += 1
+    if tentativa == numero:
+        print(f"Parabéns, você acertou em {tentativas} tentativas!")
+        break
+    elif tentativa < numero:
+        print("Tente um número maior.")
+    else:
+        print("Tente um número menor.")`}],
 sol:`import random
 
 numero = random.randint(1, 100)
@@ -607,6 +668,19 @@ while multiplicador <= 10:
     i = num * multiplicador
     print(f" {num} * {multiplicador} =: {i}")
     multiplicador +=1`,
+alts:[{label:"Compacta",code:`num = int(input("Digite um numero inteiro:"))
+multiplicador = 1
+
+while multiplicador <= 10:
+    i = num * multiplicador
+    print(f" {num} * {multiplicador} =: {i}")
+    multiplicador +=1`},{label:"Resolução (professor)",code:`n = int(input("Digite um número inteiro: "))
+i = 1
+
+while i <= 10:
+    resultado = n * i
+    print(f"{n} x {i} = {resultado}")
+    i += 1`}],
 sol:`n = int(input("Digite um número inteiro: "))
 i = 1
 
@@ -622,6 +696,22 @@ while num > 0:
     soma += resto
     num = num // 10
 print(soma)`,
+alts:[{label:"Compacta",code:`num = int(input("Digite um numero:"))
+soma = 0
+
+while num > 0:
+    resto = num % 10
+    soma += resto
+    num = num // 10
+print(soma)`},{label:"Resolução (professor)",code:`numero = int(input("Digite um número inteiro: "))
+soma = 0
+
+while numero > 0:
+    resto = numero % 10
+    soma += resto
+    numero = numero // 10
+
+print(f"A soma dos dígitos é {soma}")`}],
 sol:`numero = int(input("Digite um número inteiro: "))
 soma = 0
 
@@ -641,6 +731,26 @@ while i < n:
     anterior = atual
     atual = proximo
     i += 1`,
+alts:[{label:"Compacta",code:`n = int(input("Digite o número de elementos da sequência de Fibonacci: "))
+anterior = 0
+atual = 1
+i= 1
+while i < n:
+    print(anterior)
+    proximo = atual + anterior
+    anterior = atual
+    atual = proximo
+    i += 1`},{label:"Resolução (professor)",code:`n = int(input("Digite o número de elementos da sequência de Fibonacci: "))
+anterior = 0
+atual = 1
+i = 1
+
+while i <= n:
+    print(atual)
+    proximo = anterior + atual
+    anterior = atual
+    atual = proximo
+    i += 1`}],
 sol:`n = int(input("Digite o número de elementos da sequência de Fibonacci: "))
 anterior = 0
 atual = 1
@@ -662,6 +772,25 @@ while i < numero:
     i += 1
 else:
     print(f"{numero} eh primo")`,
+alts:[{label:"Compacta",code:`numero = int(input("Digite um número inteiro: "))
+i = 2
+
+while i < numero:
+    if numero % i == 0:
+       print(f"{numero} nao eh primo")
+       break
+    i += 1
+else:
+    print(f"{numero} eh primo")`},{label:"Resolução (professor)",code:`numero = int(input("Digite um número inteiro: "))
+i = 2
+
+while i < numero:
+    if numero % i == 0:
+        print(f"{numero} não é um número primo.")
+        break
+    i += 1
+else:
+    print(f"{numero} é um número primo.")`}],
 sol:`numero = int(input("Digite um número inteiro: "))
 i = 2
 
@@ -746,10 +875,16 @@ else:
 ]},{id:5,title:"T05 — FOR",full:"Tópico 05 — Estruturas de Repetição (FOR)",sub:"for · range · iteração definida",color:"#06b6d4",exercises:[
 {id:"05-01",title:"-100 a 100",desc:"Imprima os números de -100 a 100 usando 'for'.",drill:`for i in range(-100,101):
     print(i)`,
+alts:[{label:"Compacta",code:`for i in range(-100,101):
+    print(i)`},{label:"Resolução (professor)",code:`for i in range(-100, 101):
+    print(i)`}],
 sol:`for i in range(-100, 101):
     print(i)`},
 {id:"05-02",title:"Pares 0–1000",desc:"Imprima os números pares de 0 a 1000.",drill:`for i in range(0,1001,2):
     print(i)`,
+alts:[{label:"Compacta",code:`for i in range(0,1001,2):
+    print(i)`},{label:"Resolução (professor)",code:`for i in range(0, 1001, 2):
+    print(i)`}],
 sol:`for i in range(0, 1001, 2):
     print(i)`},
 {id:"05-03",title:"Fatorial",desc:"Calcule o fatorial de N.\nEx: 5! = 120",drill:`num = int(input("Digite um numero:"))
@@ -758,6 +893,14 @@ fatorial = 1
 for i in range(1,num+1):
     fatorial *= i
     print(fatorial)`,
+alts:[{label:"Compacta",code:`num = int(input("Digite um numero:"))
+fatorial = 1
+
+for i in range(1,num+1):
+    fatorial *= i
+    print(fatorial)`},{label:"Resolução (professor)",code:`for i in range(0, 1001, 1):
+    if i % 2 == 0:
+    	print(i)`}],
 sol:`for i in range(0, 1001, 1):
     if i % 2 == 0:
     	print(i)`},
@@ -770,6 +913,19 @@ atual = a
 for i in range(2,n+1):
     atual += razao
     print(i,atual)`,
+alts:[{label:"Compacta",code:`a = int(input("digite o a1:"))
+n = int(input("digite o n:"))
+razao = int(input("digite a razao:"))
+
+atual = a
+
+for i in range(2,n+1):
+    atual += razao
+    print(i,atual)`},{label:"Resolução (professor)",code:`n = int(input("Digite um número para calcular o fatorial: "))
+fatorial = 1
+for i in range(1, n + 1):
+    fatorial *= i
+print(f"O fatorial de {n} é {fatorial}")`}],
 sol:`n = int(input("Digite um número para calcular o fatorial: "))
 fatorial = 1
 for i in range(1, n + 1):
@@ -784,6 +940,23 @@ atual = a
 for i in range(2,n+1):
     atual *= razao
     print(i,atual)`,
+alts:[{label:"Compacta",code:`a = int(input("digite o a1:"))
+n = int(input("digite o n:"))
+razao = int(input("digite a razao:"))
+
+atual = a
+
+for i in range(2,n+1):
+    atual *= razao
+    print(i,atual)`},{label:"Resolução (professor)",code:`valor_inicial = float(input("Digite o valor inicial do investimento: "))
+taxa_juros = float(input("Digite a taxa de juros anual (em %): ")) / 100
+anos = int(input("Digite o número de anos: "))
+
+valor_final = valor_inicial
+for i in range(0,anos):
+    valor_final *= (1 + taxa_juros)
+
+print(f"O valor final após {anos} anos será de R$ {valor_final:.2f}")`}],
 sol:`valor_inicial = float(input("Digite o valor inicial do investimento: "))
 taxa_juros = float(input("Digite a taxa de juros anual (em %): ")) / 100
 anos = int(input("Digite o número de anos: "))
@@ -844,6 +1017,28 @@ veta = [0] * 20
 for i in range(20):
     veta[i] = i*5
 print(veta)`,
+alts:[{label:"Compacta",code:`vet = []
+
+for i in range(20):
+    vet.append(i*5)
+print(vet)
+
+veta = [0] * 20
+
+for i in range(20):
+    veta[i] = i*5
+print(veta)`},{label:"Resolução (professor)",code:`   import random
+   
+   # Criando um vetor vazio de tamanho 20
+   vetor = [0] * 20
+   
+   # Preenchendo o vetor com números aleatórios entre 0 e 100
+   for i in range(20):
+       vetor[i] = random.randint(0, 100)
+   
+   # Imprimindo o vetor na tela
+   print(vetor)
+   `}],
 sol:`   import random
    
    # Criando um vetor vazio de tamanho 20
@@ -866,6 +1061,25 @@ for n in range(N):
     n = random.randint(1,100)
     vet.append(n)
 print(vet)`,
+alts:[{label:"Compacta",code:`import random
+
+vet = []
+
+N = int(input("Digite um numero:"))
+
+for n in range(N):
+    n = random.randint(1,100)
+    vet.append(n)
+print(vet)`},{label:"Resolução (professor)",code:`   # Criando um vetor vazio
+   vetor = []
+   
+   # Preenchendo o vetor com números incrementais de 5 em 5
+   for i in range(20):
+       vetor.append((i*5)
+   
+   # Imprimindo o vetor na tela
+   print(vetor)
+   `}],
 sol:`   # Criando um vetor vazio
    vetor = []
    
@@ -886,6 +1100,25 @@ for N in range(0,n):
     N = random.randrange(0,100,2)
     vet.append(N)
 print(vet)`,
+alts:[{label:"Compacta",code:`import random
+
+vet = []
+
+n = int(input("Digite um numero de elementos:"))
+
+for N in range(0,n):
+    N = random.randrange(0,100,2)
+    vet.append(N)
+print(vet)`},{label:"Resolução (professor)",code:`   # Criando um vetor vazio
+   vetor = [0] * 20
+   
+   # Preenchendo o vetor com números incrementais de 5 em 5
+   for i in range(20):
+       vetor[i] = i * 5
+   
+   # Imprimindo o vetor na tela
+   print(vetor)
+   `}],
 sol:`   # Criando um vetor vazio
    vetor = [0] * 20
    
@@ -904,6 +1137,27 @@ for i in range(0,tam):
     print("Atual:",vet[i])
     print("Antecessor:",vet[i-1])
     print("Sucessor:",vet[i+1])`,
+alts:[{label:"Compacta",code:`vet = [2,10,3,5]
+
+tam = len(vet)-1
+
+for i in range(0,tam):
+    print("Atual:",vet[i])
+    print("Antecessor:",vet[i-1])
+    print("Sucessor:",vet[i+1])`},{label:"Resolução (professor)",code:`   # Lendo o tamanho do vetor N
+   N = int(input("Digite o tamanho do vetor: "))
+   
+   # Criando um vetor vazio
+   vetor = []
+   
+   # Lendo os elementos e adicionando-os ao final do vetor
+   for i in range(N):
+       valor = int(input("Digite o valor do elemento %d: " % (i+1)))
+       vetor.append(valor)
+   
+   # Imprimindo o vetor na tela
+   print(vetor)
+   `}],
 sol:`   # Lendo o tamanho do vetor N
    N = int(input("Digite o tamanho do vetor: "))
    
@@ -929,6 +1183,28 @@ soma = 0
 for j in range(50):
    soma += vet[j] + vet[99-j] 
    print(soma)`,
+alts:[{label:"Compacta",code:`vet = []
+
+for i in range(101):
+    vet.append(i)
+print(vet)
+
+soma = 0
+
+for j in range(50):
+   soma += vet[j] + vet[99-j] 
+   print(soma)`},{label:"Resolução (professor)",code:`   # Criando um vetor vazio
+   vetor = []
+   
+   # Lendo os elementos do vetor até que o usuário digite um número negativo
+   valor = int(input("Digite um número (digite um número negativo para sair): "))
+   while valor >= 0:
+       vetor.append(valor)
+       valor = int(input("Digite um número (digite um número negativo para sair): "))
+   
+   # Imprimindo o vetor na tela
+   print(vetor)
+   `}],
 sol:`   # Criando um vetor vazio
    vetor = []
    
@@ -957,6 +1233,34 @@ for i in range(0,tam):
 media = soma / tam
 
 print("media:",media)`,
+alts:[{label:"Compacta",code:`vet = []
+
+for i in range(50):
+    vet.append(i)
+print(vet)
+
+tam = len(vet)
+soma = 0
+
+for i in range(0,tam):
+    soma += vet[i]
+    print(soma)
+
+media = soma / tam
+
+print("media:",media)`},{label:"Resolução (professor)",code:`   # Criando um vetor vazio
+   vetor = []
+   
+   # Lendo os elementos pares do vetor e adicionando-os ao vetor
+   valor = int(input("Digite um número (digite 0 para sair): "))
+   while valor != 0:
+       if valor % 2 == 0:
+           vetor.append(valor)
+       valor = int(input("Digite um número (digite 0 para sair): "))
+   
+   # Imprimindo o vetor na tela
+   print(vetor)
+   `}],
 sol:`   # Criando um vetor vazio
    vetor = []
    
@@ -993,6 +1297,35 @@ print(vet)
 print(somapar)
 print(soma5)
 print(vet10)`,
+alts:[{label:"Compacta",code:`import random
+
+vet = []
+vet10 = []
+
+n = int(input("Digite o numero de elementos:"))
+somapar = 0
+soma5 = 0
+
+for i in range(0,n):
+    a = random.randint(1,100)
+    vet.append(a)
+    if a % 2 == 0:
+        somapar += a
+    if a % 5 == 0:
+        soma5 += a
+    if a % 10 == 0:
+        vet10.append(a)
+
+print(vet)
+print(somapar)
+print(soma5)
+print(vet10)`},{label:"Resolução (professor)",code:`   vetor = [1, 3, 5, 7, 9]
+   
+   for i in range(1, len(vetor)-1):
+       print("Valor atual:", vetor[i])
+       print("Antecessor:", vetor[i-1])
+       print("Sucessor:", vetor[i+1])
+   `}],
 sol:`   vetor = [1, 3, 5, 7, 9]
    
    for i in range(1, len(vetor)-1):
@@ -1016,6 +1349,29 @@ for i in range(0,5):
 print(vet)
 print(veta)
 print(vetsoma)`,
+alts:[{label:"Compacta",code:`import random
+
+vet = []
+veta = []
+vetsoma = []
+
+for i in range(0,5):
+    n = random.randint(1,10) 
+    n2 = random.randint(1,10)
+    
+    vet.append(n)
+    veta.append(n2)
+    vetsoma.append(n+n2)
+print(vet)
+print(veta)
+print(vetsoma)`},{label:"Resolução (professor)",code:`   vetor = [i+1 for i in range(100)]
+   soma = 0
+   
+   for i in range(50):
+       soma += vetor[i] + vetor[99-i]
+   
+   print("A soma dos elementos opostos do vetor é:", soma)
+   `}],
 sol:`   vetor = [i+1 for i in range(100)]
    soma = 0
    
@@ -1038,6 +1394,42 @@ for i in range(20):
         vet2.append(i)
 print(vet1)
 print(vet2)`,
+alts:[{label:"Compacta",code:`vet = list(range(20))
+
+print(vet)
+
+vet1 = []
+vet2 = []
+
+for i in range(20):
+    if i < 10:
+        vet1.append(i)
+    else:
+        vet2.append(i)
+print(vet1)
+print(vet2)`},{label:"Resolução (professor)",code:`   # Importando a biblioteca math para usar a função sqrt
+   import math
+   
+   # Definindo o vetor
+   vetor = [1, 2, 3, 4, 5]
+   
+   soma = 0
+   # Calculando a média
+   for i in range(0,len(vetor)):
+       soma += vetor[i]
+   media = soma / len(vetor)
+   
+   soma_var = 0
+   # Calculando a soma da variancia
+   for i in range(0,len(vetor)):
+       soma_var += (vet[i] - media) ** 2
+   
+   desvio_padrao = math.sqrt(soma_var)
+   
+   # Imprimindo os resultados
+   print("Média:", media)
+   print("Desvio padrão:", desvio_padrao)
+   `}],
 sol:`   # Importando a biblioteca math para usar a função sqrt
    import math
    
@@ -1077,6 +1469,53 @@ for i in range(tam):
     if vet[i] > maior:
         maior = vet[i]
 print(maior)`,
+alts:[{label:"Compacta",code:`import random
+
+vet = []
+
+for i in range(0,10):
+    i = random.randint(1,100)
+    vet.append(i)
+print(vet)
+
+tam = len(vet)
+maior = 0
+
+for i in range(tam):
+    if vet[i] > maior:
+        maior = vet[i]
+print(maior)`},{label:"Resolução (professor)",code:`   import random
+   
+   # Criando um vetor aleatório de tamanho 10 com valores entre 0 e 100
+   vetor = []
+   for i in range(10):
+       vetor.append(random.randint(0, 100))
+   print("Vetor aleatório:", vetor)
+   
+   # Soma dos números pares (iterando por valor)
+   soma_pares = 0
+   for valor in vetor:
+       if valor % 2 == 0:
+           soma_pares += valor
+   print("Soma dos números pares:", soma_pares)
+   
+   # Soma dos múltiplos de 5 (iterando por indice)
+   soma_mult_5 = 0
+   for i in range(len(vetor)): 
+       if vetor[i] % 5 == 0:
+           soma_mult_5 += vetor[i]
+   print("Soma dos múltiplos de 5:", soma_mult_5)
+   
+   # Vetor com os múltiplos de 10 do vetor original 
+   #(aqui usei while pare exemplificar)
+   mult_10 = []
+   i = 0
+   while i < len(vetor):
+       if vetor[i] % 10 == 0:
+           mult_10.append(vetor[i])
+       i += 1
+   print("Vetor com os múltiplos de 10 do vetor original:", mult_10)
+   `}],
 sol:`   import random
    
    # Criando um vetor aleatório de tamanho 10 com valores entre 0 e 100
@@ -1129,6 +1568,40 @@ for j in range(0,10):
         maior2 = vet[j]
 print(maior)
 print(maior2)`,
+alts:[{label:"Compacta",code:`import random
+
+vet =[]
+
+for i in range(0,10):
+    i = random.randint(0,10)
+    vet.append(i)
+print(vet)
+
+maior = vet[0]
+maior2 = vet[1]
+
+for j in range(0,10):
+    if vet[j] > maior:
+        maior2 = maior
+        maior = vet[j]
+    elif vet[j] > maior2:
+        maior2 = vet[j]
+print(maior)
+print(maior2)`},{label:"Resolução (professor)",code:`    # Criando os dois vetores de 5 elementos
+    vetor1 = []
+    vetor2 = []
+    for i in range(5):
+        vetor1.append(i)
+        vetor2.append(i*2)
+    print("Vetor 1:", vetor1)
+    print("Vetor 2:", vetor2)
+    
+    # Criando o terceiro vetor com a soma dos dois vetores anteriores
+    vetor3 = []
+    for i in range(5):
+        vetor3.append(vetor1[i] + vetor2[i])
+    print("Vetor 3 (soma de Vetor 1 e Vetor
+    `}],
 sol:`    # Criando os dois vetores de 5 elementos
     vetor1 = []
     vetor2 = []
@@ -1165,6 +1638,42 @@ for i in range(tam):
     else:
         vetmedia.append(0)
 print(vetmedia)`,
+alts:[{label:"Compacta",code:`vet = [30,10,40,50,20]
+
+soma = 0
+tam = len(vet)
+
+for i in range(tam):
+    soma += vet[i]
+    media = soma // tam
+print(vet)
+print(media)
+
+vetmedia = []
+
+for i in range(tam):
+    if vet[i] > media:
+        vetmedia.append(1)
+    elif vet[i] < media:
+        vetmedia.append(-1)
+    else:
+        vetmedia.append(0)
+print(vetmedia)`},{label:"Resolução (professor)",code:`    # Criando um vetor de 20 elementos
+    vetor = list(range(20))
+    print("Vetor original:", vetor)
+    
+    # Dividindo o vetor em dois sub-vetores de 10 elementos cada
+    sub_vetor1 = []
+    sub_vetor2 = []
+    for i in range(len(vetor)):
+        if i < 10:
+            sub_vetor1.append(vetor[i])
+        else:
+            sub_vetor2.append(vetor[i])
+    
+    print("Sub-vetor 1:", sub_vetor1)
+    print("Sub-vetor 2:", sub_vetor2)
+    `}],
 sol:`    # Criando um vetor de 20 elementos
     vetor = list(range(20))
     print("Vetor original:", vetor)
@@ -1189,6 +1698,27 @@ for i in range(tam):
     for j in range(i+1):
         print(vet[j], end="")
     print("")`,
+alts:[{label:"Compacta",code:`vet = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]
+
+tam = len(vet)
+
+for i in range(tam):
+    for j in range(i+1):
+        print(vet[j], end="")
+    print("")`},{label:"Resolução (professor)",code:`    # Criando um vetor aleatório
+    vetor = [3, 8, 2, 1, 10, 5]
+    
+    # Inicializando a variável maior_elemento com o primeiro valor do vetor
+    maior_elemento = vetor[0]
+    
+    # Percorrendo o vetor e comparando cada elemento com o maior_elemento atual
+    for i in range(len(vetor)):
+        if vetor[i] > maior_elemento:
+            maior_elemento = vetor[i]
+    
+    # Imprimindo o resultado na tela
+    print("Maior elemento do vetor:", maior_elemento)
+    `}],
 sol:`    # Criando um vetor aleatório
     vetor = [3, 8, 2, 1, 10, 5]
     
@@ -1213,6 +1743,34 @@ for a in range(taminv):
     for b in range(vetinv[a]):
         print(vetinv[b], end="")
     print("")`,
+alts:[{label:"Compacta",code:`vet = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]
+
+vetinv = vet[::-1]
+
+taminv =len(vetinv)
+
+for a in range(taminv):
+    for b in range(vetinv[a]):
+        print(vetinv[b], end="")
+    print("")`},{label:"Resolução (professor)",code:`    # Criando um vetor aleatório
+    vetor = [3, 8, 2, 1, 10, 5]
+    
+    # Inicializando as variáveis para os dois maiores elementos com os dois primeiros valores do vetor
+    maior_elemento = vetor[0]
+    segundo_maior_elemento = vetor[1]
+    
+    # Percorrendo o vetor e atualizando as variáveis para os dois maiores elementos
+    for i in range(len(vetor)):
+        if vetor[i] > maior_elemento:
+            segundo_maior_elemento = maior_elemento
+            maior_elemento = vetor[i]
+        elif vetor[i] > segundo_maior_elemento:
+            segundo_maior_elemento = vetor[i]
+    
+    # Imprimindo o resultado na tela
+    print("Maior elemento do vetor:", maior_elemento)
+    print("Segundo maior elemento do vetor:", segundo_maior_elemento)
+    `}],
 sol:`    # Criando um vetor aleatório
     vetor = [3, 8, 2, 1, 10, 5]
     
@@ -1232,7 +1790,48 @@ sol:`    # Criando um vetor aleatório
     print("Maior elemento do vetor:", maior_elemento)
     print("Segundo maior elemento do vetor:", segundo_maior_elemento)
     `},
-{id:"06-16",title:"Constrói e desconstrói pirâmide",desc:"Construa a pirâmide crescente (ex14) e depois desconstrói (ex15) em sequência.",sol:`    # criar vetor aleatório
+{id:"06-16",title:"Constrói e desconstrói pirâmide",desc:"Construa a pirâmide crescente (ex14) e depois desconstrói (ex15) em sequência.",drill:`vet = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]
+n = len(vet)
+for i in range(n):
+    for j in range(i+1):
+        print(vet[j], end=" ")
+    print('')
+for i in range(n-1,0,-1):
+    for j in range(i+1):
+        print(vet[j], end=" ")
+    print('')`,
+alts:[{label:"Compacta",code:`vet = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]
+n = len(vet)
+for i in range(n):
+    for j in range(i+1):
+        print(vet[j], end=" ")
+    print('')
+for i in range(n-1,0,-1):
+    for j in range(i+1):
+        print(vet[j], end=" ")
+    print('')`},{label:"Resolução (professor)",code:`    # criar vetor aleatório
+    vetor = [2, 4, 5, 8, 12, 7, 3, 9, 6, 10]
+    
+    # calcular média do vetor
+    soma = 0
+    for i in range(len(vetor)):
+        soma += vetor[i]
+    media = soma / len(vetor)
+    
+    # rotular índices
+    rotulos = []
+    for i in range(len(vetor)):
+        if vetor[i] < media:
+            rotulos.append(-1)
+        elif vetor[i] > media:
+            rotulos.append(1)
+        else:
+            rotulos.append(0)
+    
+    print("Vetor original:", vetor)
+    print("Rotulos:", rotulos)
+    `}],
+sol:`    # criar vetor aleatório
     vetor = [2, 4, 5, 8, 12, 7, 3, 9, 6, 10]
     
     # calcular média do vetor
@@ -1254,7 +1853,33 @@ sol:`    # Criando um vetor aleatório
     print("Vetor original:", vetor)
     print("Rotulos:", rotulos)
     `},
-{id:"06-17",title:"Forma de X",desc:"Dado um vetor, apresente os elementos em forma de 'X'.",sol:`    vet = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]
+{id:"06-17",title:"Forma de X",desc:"Dado um vetor, apresente os elementos em forma de 'X'.",drill:`vet = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]
+n = len(vet)
+for i in range(n):
+    for j in range(n):
+        if i == j or i+j == n-1:
+            print(vet[j], end=" ")
+        else:
+            print("  ", end="")
+    print()`,
+alts:[{label:"Compacta",code:`vet = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]
+n = len(vet)
+for i in range(n):
+    for j in range(n):
+        if i == j or i+j == n-1:
+            print(vet[j], end=" ")
+        else:
+            print("  ", end="")
+    print()`},{label:"Resolução (professor)",code:`    vet = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]
+    
+    n = len(vet)
+    for i in range(n):
+        #print(" "*(n-i-1), end="")
+        for j in range(i+1):
+            print(vet[j], end=" ")
+        print()
+    `}],
+sol:`    vet = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]
     
     n = len(vet)
     for i in range(n):
@@ -1263,7 +1888,28 @@ sol:`    # Criando um vetor aleatório
             print(vet[j], end=" ")
         print()
     `},
-{id:"06-18",title:"Ordena vetor (Bubble Sort)",desc:"Ordene em ordem crescente SEM usar sort().\nEx: [5,2,1,3,4] → [1,2,3,4,5]",sol:`    vet = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]
+{id:"06-18",title:"Ordena vetor (Bubble Sort)",desc:"Ordene em ordem crescente SEM usar sort().\nEx: [5,2,1,3,4] → [1,2,3,4,5]",drill:`vet = [5,2,1,3,4]
+n = len(vet)
+for i in range(n):
+    for j in range(0, n-i-1):
+        if vet[j] > vet[j+1]:
+            vet[j], vet[j+1] = vet[j+1], vet[j]
+print(vet)`,
+alts:[{label:"Compacta",code:`vet = [5,2,1,3,4]
+n = len(vet)
+for i in range(n):
+    for j in range(0, n-i-1):
+        if vet[j] > vet[j+1]:
+            vet[j], vet[j+1] = vet[j+1], vet[j]
+print(vet)`},{label:"Resolução (professor)",code:`    vet = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]
+    
+    for i in range(n-1,0,-1):
+        #print(" "*(n-i-1), end="")
+        for j in range(i+1):
+            print(vet[j], end=" ")
+        print()
+    `}],
+sol:`    vet = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]
     
     for i in range(n-1,0,-1):
         #print(" "*(n-i-1), end="")
@@ -1271,7 +1917,45 @@ sol:`    # Criando um vetor aleatório
             print(vet[j], end=" ")
         print()
     `},
-{id:"06-19",title:"Maior sequência de 0s",desc:"Maior sequência contígua de 0s em um vetor.\nEx: [1,0,0,1,1,0,1,0,0,0,0,1] → 4",sol:`    vet = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]
+{id:"06-19",title:"Maior sequência de 0s",desc:"Maior sequência contígua de 0s em um vetor.\nEx: [1,0,0,1,1,0,1,0,0,0,0,1] → 4",drill:`vet = [1,0,0,1,1,0,1,0,0,0,0,1]
+maior = 0
+atual = 0
+for x in vet:
+    if x == 0:
+        atual += 1
+        if atual > maior:
+            maior = atual
+    else:
+        atual = 0
+print(maior)`,
+alts:[{label:"Compacta",code:`vet = [1,0,0,1,1,0,1,0,0,0,0,1]
+maior = 0
+atual = 0
+for x in vet:
+    if x == 0:
+        atual += 1
+        if atual > maior:
+            maior = atual
+    else:
+        atual = 0
+print(maior)`},{label:"Resolução (professor)",code:`    vet = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]
+    
+    n = len(vet)
+    #Construção
+    for i in range(n):    
+        for j in range(i+1):
+            #end=' ' para nao pular de linha
+            print(vet[j], end=" ")
+        print('')
+    
+    #Desconstruçã
+    for i in range(n-1,0,-1):    
+        for j in range(i+1):
+            #end=' ' para nao pular de linha
+            print(vet[j], end=" ")
+        print('')
+    `}],
+sol:`    vet = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]
     
     n = len(vet)
     #Construção
@@ -1288,7 +1972,47 @@ sol:`    # Criando um vetor aleatório
             print(vet[j], end=" ")
         print('')
     `},
-{id:"06-20",title:"Maior sequência crescente",desc:"Maior sequência de valores consecutivos (diferença de 1).\nEx: [64,65,12,13,14,15,21,33,34,35,36,37,...] → [33,34,35,36,37]",sol:`    vet = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
+{id:"06-20",title:"Maior sequência crescente",desc:"Maior sequência de valores consecutivos (diferença de 1).\nEx: [64,65,12,13,14,15,21,33,34,35,36,37,...] → [33,34,35,36,37]",drill:`vet = [64,65,12,13,14,15,21,33,34,35,36,37]
+melhor = []
+atual = [vet[0]]
+for i in range(1, len(vet)):
+    if vet[i] == vet[i-1] + 1:
+        atual.append(vet[i])
+    else:
+        if len(atual) > len(melhor):
+            melhor = atual[:]
+        atual = [vet[i]]
+if len(atual) > len(melhor):
+    melhor = atual
+print(melhor)`,
+alts:[{label:"Compacta",code:`vet = [64,65,12,13,14,15,21,33,34,35,36,37]
+melhor = []
+atual = [vet[0]]
+for i in range(1, len(vet)):
+    if vet[i] == vet[i-1] + 1:
+        atual.append(vet[i])
+    else:
+        if len(atual) > len(melhor):
+            melhor = atual[:]
+        atual = [vet[i]]
+if len(atual) > len(melhor):
+    melhor = atual
+print(melhor)`},{label:"Resolução (professor)",code:`    vet = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
+    
+    tam = len(vet)
+    for i in range(tam):  
+      opt = (tam - 1) - i   
+      #percorre o vetor decisindo quando
+      #imprimir o valor ou ' '  
+      for j in range(tam):
+        if (j == i or j == opt):
+          print(vet[j],end=' ')
+        else:
+          print(' ',end=' ')
+    
+      print('\n')
+    `}],
+sol:`    vet = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
     
     tam = len(vet)
     for i in range(tam):  
@@ -1303,7 +2027,41 @@ sol:`    # Criando um vetor aleatório
     
       print('\n')
     `},
-{id:"06-21",title:"Validador de CPF",desc:"Implemente um validador de CPF.\nPesquise o algoritmo dos dígitos verificadores.",sol:`    #Selection Sort
+{id:"06-21",title:"Validador de CPF",desc:"Implemente um validador de CPF.\nPesquise o algoritmo dos dígitos verificadores.",drill:`cpf = input("CPF (somente numeros): ")
+nums = [int(c) for c in cpf if c.isdigit()]
+if len(nums) != 11:
+    print("Invalido")
+else:
+    s1 = sum(nums[i]*(10-i) for i in range(9)) % 11
+    d1 = 0 if s1 < 2 else 11-s1
+    s2 = sum(nums[i]*(11-i) for i in range(10)) % 11
+    d2 = 0 if s2 < 2 else 11-s2
+    print("Valido" if d1==nums[9] and d2==nums[10] else "Invalido")`,
+alts:[{label:"Compacta",code:`cpf = input("CPF (somente numeros): ")
+nums = [int(c) for c in cpf if c.isdigit()]
+if len(nums) != 11:
+    print("Invalido")
+else:
+    s1 = sum(nums[i]*(10-i) for i in range(9)) % 11
+    d1 = 0 if s1 < 2 else 11-s1
+    s2 = sum(nums[i]*(11-i) for i in range(10)) % 11
+    d2 = 0 if s2 < 2 else 11-s2
+    print("Valido" if d1==nums[9] and d2==nums[10] else "Invalido")`},{label:"Resolução (professor)",code:`    #Selection Sort
+    arr = [5,1,3,4,2]
+    n = len(arr)
+    for i in range(n-1):
+        min_index = i
+        for j in range(i+1, n):
+            if arr[j] < arr[min_index]:
+                min_index = j
+    
+        tmp = arr[i]  
+        arr[i] = arr[min_index]
+        arr[min_index] = tmp 
+    
+    print(arr)
+    `}],
+sol:`    #Selection Sort
     arr = [5,1,3,4,2]
     n = len(arr)
     for i in range(n-1):
@@ -1333,6 +2091,36 @@ for linha in matriz:
     for elemento in linha:
         print(f"|\t{elemento}\t|", end="")
     print()`,
+alts:[{label:"Compacta",code:`matriz = []
+print("Digite os 9 números da matriz 3x3:")
+
+for i in range(3):
+    linha = []
+    for j in range(3):
+        valor = int(input(f"Elemento [{i+1}] [{j+1}]:"))
+        linha.append(valor)
+    matriz.append(linha)
+
+for linha in matriz:
+    for elemento in linha:
+        print(f"|\t{elemento}\t|", end="")
+    print()`},{label:"Resolução (professor)",code:`# Entrada de uma matriz 3x3 pelo usuário
+matriz = []
+print("Digite os 9 números da matriz 3x3:")
+
+for i in range(3):
+    linha = []
+    for j in range(3):
+        valor = int(input(f"Elemento [{i+1}][{j+1}]: "))
+        linha.append(valor)
+    matriz.append(linha)
+
+# Impressão formatada sem join
+print("\nMatriz 3x3:")
+for linha in matriz:
+    for elemento in linha:
+        print(f"|\t{elemento}\t|", end="")
+    print()`}],
 sol:`# Entrada de uma matriz 3x3 pelo usuário
 matriz = []
 print("Digite os 9 números da matriz 3x3:")
@@ -1374,6 +2162,57 @@ for j in range(5):
             maior = matriz [i][j]
     media = soma / 7
     print(media)`,
+alts:[{label:"Compacta",code:`import random
+
+matriz = []
+
+for i in range(7):
+    linha =[]
+    for j in range(5):
+        linha.append(random.randint(1,100))
+    matriz.append(linha)
+
+for linha in matriz:
+    for elemento in linha:
+        print(f"|\t{elemento}\t|", end="")
+    print()
+
+for j in range(5):
+    soma = 0
+    maior = matriz [0][j]
+    for i in range(7):
+        soma += matriz[i][j]
+        if matriz [i][j] > maior:
+            maior = matriz [i][j]
+    media = soma / 7
+    print(media)`},{label:"Resolução (professor)",code:`import random
+
+# Criação da matriz 7x5 sem list comprehension
+matriz = []
+for i in range(7):
+    linha = []
+    for j in range(5):
+        linha.append(random.randint(0, 100))
+    matriz.append(linha)
+
+# Impressão da matriz
+print("Matriz 7x5:")
+for i in range(7):
+    for j in range(5):
+        print(matriz[i][j], end="\t")
+    print()
+
+# Cálculo das médias e maiores elementos por coluna
+print("\nEstatísticas por coluna:")
+for col in range(5):
+    soma = 0
+    maior = matriz[0][col]
+    for lin in range(7):
+        soma += matriz[lin][col]
+        if matriz[lin][col] > maior:
+            maior = matriz[lin][col]
+    media = soma / 7
+    print("Coluna", col + 1, ": Média =", round(media, 2), ", Maior =", maior)`}],
 sol:`import random
 
 # Criação da matriz 7x5 sem list comprehension
@@ -1501,19 +2340,83 @@ else:
     imprimir_tabuleiro(tabuleiro)
     print("Empate!")`},
 ]},{id:8,title:"T08 — Funções",full:"Tópico 08 — Funções e Recursão",sub:"def · parâmetros · retorno · recursão",color:"#14b8a6",exercises:[
-{id:"08-01",title:"max_() sem built-in",desc:"Função max_() que retorna o maior elemento de um vetor. NÃO use max().",sol:`   def print_rec(N):
+{id:"08-01",title:"max_() sem built-in",desc:"Função max_() que retorna o maior elemento de um vetor. NÃO use max().",drill:`def max_(vet):
+    maior = vet[0]
+    for i in range(len(vet)):
+        if vet[i] > maior:
+            maior = vet[i]
+    return maior
+
+print(max_([3,1,4,1,5,9,2,6]))`,
+alts:[{label:"Compacta",code:`def max_(vet):
+    maior = vet[0]
+    for i in range(len(vet)):
+        if vet[i] > maior:
+            maior = vet[i]
+    return maior
+
+print(max_([3,1,4,1,5,9,2,6]))`},{label:"Resolução (professor)",code:`   def print_rec(N):
+       print(N)
+       if N != 0:        
+          print_rec(N-1)
+   `}],
+sol:`   def print_rec(N):
        print(N)
        if N != 0:        
           print_rec(N-1)
    `},
-{id:"08-02",title:"min_() sem built-in",desc:"Função min_() que retorna o menor elemento. NÃO use min().",sol:`   def print_rec(N):
+{id:"08-02",title:"min_() sem built-in",desc:"Função min_() que retorna o menor elemento. NÃO use min().",drill:`def min_(vet):
+    menor = vet[0]
+    for i in range(len(vet)):
+        if vet[i] < menor:
+            menor = vet[i]
+    return menor
+
+print(min_([3,1,4,1,5,9,2,6]))`,
+alts:[{label:"Compacta",code:`def min_(vet):
+    menor = vet[0]
+    for i in range(len(vet)):
+        if vet[i] < menor:
+            menor = vet[i]
+    return menor
+
+print(min_([3,1,4,1,5,9,2,6]))`},{label:"Resolução (professor)",code:`   def print_rec(N):
+       
+       if N != 0:        
+          print_rec(N-1)
+       
+       print(N)
+   `}],
+sol:`   def print_rec(N):
        
        if N != 0:        
           print_rec(N-1)
        
        print(N)
    `},
-{id:"08-03",title:"invert_() — inverte vetor",desc:"Função invert_() que inverte um vetor. NÃO use reverse() ou [::-1].",sol:`   def soma(N):
+{id:"08-03",title:"invert_() — inverte vetor",desc:"Função invert_() que inverte um vetor. NÃO use reverse() ou [::-1].",drill:`def invert_(vet):
+    vetinv = []
+    for i in range(len(vet)-1, -1, -1):
+        vetinv.append(vet[i])
+    return vetinv
+
+print(invert_([1,2,3,4,5]))`,
+alts:[{label:"Compacta",code:`def invert_(vet):
+    vetinv = []
+    for i in range(len(vet)-1, -1, -1):
+        vetinv.append(vet[i])
+    return vetinv
+
+print(invert_([1,2,3,4,5]))`},{label:"Resolução (professor)",code:`   def soma(N):
+   	
+   	if N == 0:
+   		return 0
+   	
+   	s = N + soma(N-1)
+   	
+   	return s
+   `}],
+sol:`   def soma(N):
    	
    	if N == 0:
    		return 0
@@ -1522,13 +2425,59 @@ else:
    	
    	return s
    `},
-{id:"08-04",title:"sort_() — Bubble Sort",desc:"Função sort_() que ordena vetor crescente. NÃO use sort() nem sorted().",sol:`   def soma_digitos(n):
+{id:"08-04",title:"sort_() — Bubble Sort",desc:"Função sort_() que ordena vetor crescente. NÃO use sort() nem sorted().",drill:`def sort_(vet):
+    n = len(vet)
+    for i in range(n):
+        for j in range(0, n-i-1):
+            if vet[j] > vet[j+1]:
+                vet[j], vet[j+1] = vet[j+1], vet[j]
+    return vet
+
+print(sort_([5,2,1,3,4]))`,
+alts:[{label:"Compacta",code:`def sort_(vet):
+    n = len(vet)
+    for i in range(n):
+        for j in range(0, n-i-1):
+            if vet[j] > vet[j+1]:
+                vet[j], vet[j+1] = vet[j+1], vet[j]
+    return vet
+
+print(sort_([5,2,1,3,4]))`},{label:"Resolução (professor)",code:`   def soma_digitos(n):
+       if n == 0:
+           return 0
+       else:
+           return n % 10 + soma_digitos(n // 10)
+   `}],
+sol:`   def soma_digitos(n):
        if n == 0:
            return 0
        else:
            return n % 10 + soma_digitos(n // 10)
    `},
-{id:"08-05",title:"exist_() — busca",desc:"Função exist_() que retorna True se valor existe no vetor.",sol:`   def soma_vet(vet):
+{id:"08-05",title:"exist_() — busca",desc:"Função exist_() que retorna True se valor existe no vetor.",drill:`def exist_(vet, val):
+    for x in vet:
+        if x == val:
+            return True
+    return False
+
+print(exist_([1,2,3,4,5], 3))
+print(exist_([1,2,3,4,5], 9))`,
+alts:[{label:"Compacta",code:`def exist_(vet, val):
+    for x in vet:
+        if x == val:
+            return True
+    return False
+
+print(exist_([1,2,3,4,5], 3))
+print(exist_([1,2,3,4,5], 9))`},{label:"Resolução (professor)",code:`   def soma_vet(vet):
+   	
+   	if len(vet) == 1:
+   		return vet[0]
+   	
+   	s = vet[0] + soma_vet(vet[1:])	
+   	return s
+   `}],
+sol:`   def soma_vet(vet):
    	
    	if len(vet) == 1:
    		return vet[0]
@@ -1536,7 +2485,35 @@ else:
    	s = vet[0] + soma_vet(vet[1:])	
    	return s
    `},
-{id:"08-06",title:"dev_padrao() — média e desvio",desc:"Função que recebe vetor e retorna (média, desvio_padrão).",sol:`   def fat(N):
+{id:"08-06",title:"dev_padrao() — média e desvio",desc:"Função que recebe vetor e retorna (média, desvio_padrão).",drill:`import math
+
+def dev_padrao(vet):
+    n = len(vet)
+    media = sum(vet) / n
+    variancia = sum((x - media)**2 for x in vet) / n
+    return media, math.sqrt(variancia)
+
+m, dp = dev_padrao([1,2,3,4,5])
+print(f"media: {m}, dp: {dp:.2f}")`,
+alts:[{label:"Compacta",code:`import math
+
+def dev_padrao(vet):
+    n = len(vet)
+    media = sum(vet) / n
+    variancia = sum((x - media)**2 for x in vet) / n
+    return media, math.sqrt(variancia)
+
+m, dp = dev_padrao([1,2,3,4,5])
+print(f"media: {m}, dp: {dp:.2f}")`},{label:"Resolução (professor)",code:`   def fat(N):
+   	
+   	if N == 1:
+   		return 1
+   		
+   	s = N*fat(N-1)
+   	
+   	return s
+   `}],
+sol:`   def fat(N):
    	
    	if N == 1:
    		return 1
@@ -1545,7 +2522,33 @@ else:
    	
    	return s
    `},
-{id:"08-07",title:"Índices dos pares",desc:"Função que recebe vetor e retorna índices dos elementos pares.\nEx: [10,11,12,13,14] → [0,2,4]",sol:`   def fibo(N):
+{id:"08-07",title:"Índices dos pares",desc:"Função que recebe vetor e retorna índices dos elementos pares.\nEx: [10,11,12,13,14] → [0,2,4]",drill:`def indices_pares(vet):
+    idx = []
+    for i in range(len(vet)):
+        if vet[i] % 2 == 0:
+            idx.append(i)
+    return idx
+
+print(indices_pares([10,11,12,13,14]))`,
+alts:[{label:"Compacta",code:`def indices_pares(vet):
+    idx = []
+    for i in range(len(vet)):
+        if vet[i] % 2 == 0:
+            idx.append(i)
+    return idx
+
+print(indices_pares([10,11,12,13,14]))`},{label:"Resolução (professor)",code:`   def fibo(N):
+   	
+   	if N == 0:
+   		return 0
+   	elif N == 1:
+   		return 1
+   		
+   	s = fibo(N-1) + fibo(N-2)
+   	
+   	return s
+   `}],
+sol:`   def fibo(N):
    	
    	if N == 0:
    		return 0
@@ -1556,7 +2559,43 @@ else:
    	
    	return s
    `},
-{id:"08-08",title:"Frequência dos elementos",desc:"Função que retorna frequência como matriz.\nEx: [1,2,1,3,3,4,3,1] → [[1,3],[2,1],[3,3],[4,1]]",sol:`def selection_sort(vet, i=0):
+{id:"08-08",title:"Frequência dos elementos",desc:"Função que retorna frequência como matriz.\nEx: [1,2,1,3,3,4,3,1] → [[1,3],[2,1],[3,3],[4,1]]",drill:`def frequencia(vet):
+    freq = []
+    visto = []
+    for x in vet:
+        if x not in visto:
+            visto.append(x)
+            freq.append([x, vet.count(x)])
+    return freq
+
+print(frequencia([1,2,1,3,3,4,3,1]))`,
+alts:[{label:"Compacta",code:`def frequencia(vet):
+    freq = []
+    visto = []
+    for x in vet:
+        if x not in visto:
+            visto.append(x)
+            freq.append([x, vet.count(x)])
+    return freq
+
+print(frequencia([1,2,1,3,3,4,3,1]))`},{label:"Resolução (professor)",code:`def selection_sort(vet, i=0):
+	# Caso base: se 'i' é igual ao tamanho da lista menos um, a lista está ordenada
+	if i == len(vet) - 1:
+		return vet
+
+	# Encontrar o índice do menor elemento na sublista a partir de 'i'
+	min_index = i
+	for j in range(i + 1, len(vet)):
+		if vet[j] < vet[min_index]:
+			min_index = j     
+
+	temp = vet[i]
+	vet[i] = vet[min_index]
+	vet[min_index] = temp
+
+	# Chamar recursivamente a função 'ordena' para o próximo índice
+	return selection_sort(vet, i + 1)`}],
+sol:`def selection_sort(vet, i=0):
 	# Caso base: se 'i' é igual ao tamanho da lista menos um, a lista está ordenada
 	if i == len(vet) - 1:
 		return vet
@@ -1573,7 +2612,31 @@ else:
 
 	# Chamar recursivamente a função 'ordena' para o próximo índice
 	return selection_sort(vet, i + 1)`},
-{id:"08-09",title:"Validador de CPF (função)",desc:"Função valida_cpf(cpf) que valida um CPF usando o algoritmo dos dígitos verificadores.",sol:`def valida_cpf(cpf):\n    d=[int(c) for c in cpf if c.isdigit()]\n    if len(d)!=11 or d==[d[0]]*11: return False\n    s=sum(d[i]*(10-i) for i in range(9))\n    v=(s*10)%11\n    if v==10: v=0\n    if v!=d[9]: return False\n    s=sum(d[i]*(11-i) for i in range(10))\n    v=(s*10)%11\n    if v==10: v=0\n    return v==d[10]\ncpf=input("CPF: ")\nprint("Válido!" if valida_cpf(cpf) else "Inválido!")`},
+{id:"08-09",title:"Validador de CPF (função)",desc:"Função valida_cpf(cpf) que valida um CPF usando o algoritmo dos dígitos verificadores.",drill:`def valida_cpf(cpf):
+    nums = [int(c) for c in cpf if c.isdigit()]
+    if len(nums) != 11:
+        return False
+    s1 = sum(nums[i]*(10-i) for i in range(9)) % 11
+    d1 = 0 if s1 < 2 else 11-s1
+    s2 = sum(nums[i]*(11-i) for i in range(10)) % 11
+    d2 = 0 if s2 < 2 else 11-s2
+    return d1 == nums[9] and d2 == nums[10]
+
+cpf = input("CPF: ")
+print("Valido" if valida_cpf(cpf) else "Invalido")`,
+alts:[{label:"Compacta",code:`def valida_cpf(cpf):
+    nums = [int(c) for c in cpf if c.isdigit()]
+    if len(nums) != 11:
+        return False
+    s1 = sum(nums[i]*(10-i) for i in range(9)) % 11
+    d1 = 0 if s1 < 2 else 11-s1
+    s2 = sum(nums[i]*(11-i) for i in range(10)) % 11
+    d2 = 0 if s2 < 2 else 11-s2
+    return d1 == nums[9] and d2 == nums[10]
+
+cpf = input("CPF: ")
+print("Valido" if valida_cpf(cpf) else "Invalido")`},{label:"Resolução (professor)",code:`def valida_cpf(cpf):\n    d=[int(c) for c in cpf if c.isdigit()]\n    if len(d)!=11 or d==[d[0]]*11: return False\n    s=sum(d[i]*(10-i) for i in range(9))\n    v=(s*10)%11\n    if v==10: v=0\n    if v!=d[9]: return False\n    s=sum(d[i]*(11-i) for i in range(10))\n    v=(s*10)%11\n    if v==10: v=0\n    return v==d[10]\ncpf=input("CPF: ")\nprint("Válido!" if valida_cpf(cpf) else "Inválido!")`}],
+sol:`def valida_cpf(cpf):\n    d=[int(c) for c in cpf if c.isdigit()]\n    if len(d)!=11 or d==[d[0]]*11: return False\n    s=sum(d[i]*(10-i) for i in range(9))\n    v=(s*10)%11\n    if v==10: v=0\n    if v!=d[9]: return False\n    s=sum(d[i]*(11-i) for i in range(10))\n    v=(s*10)%11\n    if v==10: v=0\n    return v==d[10]\ncpf=input("CPF: ")\nprint("Válido!" if valida_cpf(cpf) else "Inválido!")`},
 ]}];
 
 const SK="ra_prog";
@@ -2394,6 +3457,20 @@ TOPICS[5].exercises.push(
 tam = len(strl)
 for i in range(0,tam,1):
     print(strl[i])`,
+alts:[{label:"Compacta",code:`strl = 'Hello'
+tam = len(strl)
+for i in range(0,tam,1):
+    print(strl[i])`},{label:"Resolução (professor)",code:`    #Insert sort
+    arr = [5,1,3,4,2]
+    n = len(arr)
+    for i in range(1, n):
+            key = arr[i]
+            j = i - 1
+            while j >= 0 and arr[j] > key:
+                arr[j + 1] = arr[j]
+                j -= 1        
+            arr[j + 1] = key
+    `}],
 sol:`    #Insert sort
     arr = [5,1,3,4,2]
     n = len(arr)
@@ -2411,6 +3488,26 @@ sol:`    #Insert sort
    drill:`c= 'e'
 n = ord(c)
 print(c,n)`,
+alts:[{label:"Compacta",code:`c= 'e'
+n = ord(c)
+print(c,n)`},{label:"Resolução (professor)",code:`    vetor = [1,0,0,0,1,0,0,1,1,0,0,0,0,0]
+    max_zeros = 0  # Sequência máxima de zeros
+    current_zeros = 0  # Sequência atual de zeros
+    
+    for num in vetor:
+        if num == 0:
+            current_zeros += 1
+        else:
+            if current_zeros > max_zeros:
+                max_zeros = current_zeros
+            current_zeros = 0
+    
+    # Verificar a sequência final, se necessário
+    if current_zeros > max_zeros:
+        max_zeros = current_zeros
+    
+    print(max_zeros)
+    `}],
 sol:`    vetor = [1,0,0,0,1,0,0,1,1,0,0,0,0,0]
     max_zeros = 0  # Sequência máxima de zeros
     current_zeros = 0  # Sequência atual de zeros
@@ -2438,6 +3535,36 @@ for i in range(0,tam,1):
     c = strl[i]
     n = ord(c)
     print(c,n)`,
+alts:[{label:"Compacta",code:`strl = 'abABcC'
+tam = len(strl)
+for i in range(0,tam,1):
+    c = strl[i]
+    n = ord(c)
+    print(c,n)`},{label:"Resolução (professor)",code:`    vetor = [-80,-79, 20, 21, 22, 23, 45, 9, 10, 11]
+    
+    #armazena os indices das sequência
+    max_idxs = [] #maior sequência 
+    idxs = [0]  #sequencia atual
+    
+    for i in range(1,len(vetor)-1):
+        #comparo o atual com o anterior
+        if vetor[i-1] + 1 == vetor[i]:        
+            idxs.append(i)        
+        else:
+          #verifica se a sequencia é a maior
+          if len(idxs) > len(max_idxs):        
+            max_idxs = idxs
+    
+          #reinicio a sequencia atual
+          idxs = [i]
+    
+    #Indices
+    print(max_idxs)
+    
+    #itero em indices para obter valores
+    for idx in max_idxs:
+      print(vetor[idx], end = ' ')
+    `}],
 sol:`    vetor = [-80,-79, 20, 21, 22, 23, 45, 9, 10, 11]
     
     #armazena os indices das sequência
@@ -2476,6 +3603,22 @@ TOPICS[7].exercises.push(
     return a
 
 print(fibonacci_normal(4))`,
+alts:[{label:"Compacta",code:`def fibonacci_normal(n):
+    a, b = 0, 1
+    for i in range(n):
+        a, b = b, a + b
+    return a
+
+print(fibonacci_normal(4))`},{label:"Resolução (professor)",code:`def fibonacci_normal(n):
+    a, b = 0, 1
+    for i in range(n):
+        a, b = b, a + b
+    return a
+
+print(fibonacci_normal(0))   # 0
+print(fibonacci_normal(1))   # 1
+print(fibonacci_normal(4))   # 3
+print(fibonacci_normal(10))  # 55`}],
 sol:`def fibonacci_normal(n):
     a, b = 0, 1
     for i in range(n):
@@ -2496,6 +3639,19 @@ print(fibonacci_normal(10))  # 55`},
     P(n-1)
 
 P(5)`,
+alts:[{label:"Compacta",code:`def P(n):
+    if n == -1:
+        return
+    print(n)
+    P(n-1)
+
+P(5)`},{label:"Resolução (professor)",code:`def P(n):
+    if n == -1:
+        return
+    print(n)
+    P(n-1)
+
+P(5)   # imprime 5, 4, 3, 2, 1, 0`}],
 sol:`def P(n):
     if n == -1:
         return
@@ -2513,6 +3669,19 @@ P(5)   # imprime 5, 4, 3, 2, 1, 0`},
     return soma
 
 print(soma_digitos(23))`,
+alts:[{label:"Compacta",code:`def soma_digitos(n):
+    if n == 0:
+        return 0
+    soma = n % 10 + soma_digitos(n // 10)
+    return soma
+
+print(soma_digitos(23))`},{label:"Resolução (professor)",code:`def soma_digitos(n):
+    if n == 0:
+        return 0
+    return n % 10 + soma_digitos(n // 10)
+
+print(soma_digitos(23))   # 5
+print(soma_digitos(123))  # 6`}],
 sol:`def soma_digitos(n):
     if n == 0:
         return 0
@@ -2530,6 +3699,19 @@ print(soma_digitos(123))  # 6`},
     return s
 
 print(soma(10))`,
+alts:[{label:"Compacta",code:`def soma(n):
+    if n == 0:
+        return 0
+    s = n + soma(n-1)
+    return s
+
+print(soma(10))`},{label:"Resolução (professor)",code:`def soma(n):
+    if n == 0:
+        return 0
+    return n + soma(n-1)
+
+print(soma(5))   # 15
+print(soma(10))  # 55`}],
 sol:`def soma(n):
     if n == 0:
         return 0
@@ -2549,6 +3731,22 @@ print(soma(10))  # 55`},
 
 vetor = [1,32,44]
 print("Soma:", soma_vetor(vetor, 0))`,
+alts:[{label:"Compacta",code:`def soma_vetor(vet, ind):
+    T = len(vet)
+    if ind == T-1:
+        return vet[ind]
+    s = vet[ind] + soma_vetor(vet, ind+1)
+    return s
+
+vetor = [1,32,44]
+print("Soma:", soma_vetor(vetor, 0))`},{label:"Resolução (professor)",code:`def soma_vetor(vet, ind):
+    T = len(vet)
+    if ind == T - 1:
+        return vet[ind]
+    return vet[ind] + soma_vetor(vet, ind + 1)
+
+vetor = [1, 32, 44]
+print("Soma:", soma_vetor(vetor, 0))   # 77`}],
 sol:`def soma_vetor(vet, ind):
     T = len(vet)
     if ind == T - 1:
