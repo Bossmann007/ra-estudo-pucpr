@@ -1027,29 +1027,25 @@ veta = [0] * 20
 
 for i in range(20):
     veta[i] = i*5
-print(veta)`},{label:"Resolução (professor)",code:`   import random
-   
-   # Criando um vetor vazio de tamanho 20
-   vetor = [0] * 20
-   
-   # Preenchendo o vetor com números aleatórios entre 0 e 100
-   for i in range(20):
-       vetor[i] = random.randint(0, 100)
-   
-   # Imprimindo o vetor na tela
-   print(vetor)
-   `}],
-sol:`   import random
-   
-   # Criando um vetor vazio de tamanho 20
-   vetor = [0] * 20
-   
-   # Preenchendo o vetor com números aleatórios entre 0 e 100
-   for i in range(20):
-       vetor[i] = random.randint(0, 100)
-   
-   # Imprimindo o vetor na tela
-   print(vetor)
+print(veta)`},{label:"Resolução (professor)",code:`# Criando um vetor vazio de tamanho 20
+vetor = [0] * 20
+
+# Preenchendo o vetor incrementando de 5 em 5
+for i in range(20):
+    vetor[i] = (i + 1) * 5
+
+# Imprimindo o vetor na tela
+print(vetor)
+`}],
+sol:`# Criando um vetor vazio de tamanho 20
+vetor = [0] * 20
+
+# Preenchendo o vetor incrementando de 5 em 5
+for i in range(20):
+    vetor[i] = (i + 1) * 5
+
+# Imprimindo o vetor na tela
+print(vetor)
    `},
 {id:"06-03",title:"N elementos do usuário",desc:"Crie um vetor com N elementos digitados pelo usuário.",drill:`import random
 
