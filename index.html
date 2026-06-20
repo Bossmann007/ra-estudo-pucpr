@@ -53,7 +53,7 @@ main{flex:1;display:flex;overflow:hidden}
 .brun{background:var(--grn);color:#000}
 .bclr{background:var(--bdr);color:var(--txt)}
 .bsol{background:#1e1b4b;color:#a5b4fc;border:1px solid #4338ca}
-.bdone{background:var(--grn);color:#000}
+.bdone{background:var(--grn);color:#000}.exc-done{background:rgba(74,222,128,.06);border-left:2px solid #4ade80}.exc-done .exc-num{color:#4ade80}.exc-done .exc-title::after{content:' ✓';color:#4ade80;font-size:10px}
 .brev{background:var(--yel);color:#000}
 .marks{margin-left:auto;display:flex;gap:5px}
 .ce-wrap{display:flex;flex:1;overflow:hidden}
@@ -82,6 +82,11 @@ textarea.ce{flex:1;background:#0d1117;color:#e6edf3;font-family:'Consolas','Cour
 .drill-hdr{padding:8px 12px;background:#12151e;border-bottom:1px solid var(--bdr);display:flex;align-items:center;gap:10px;font-size:11px;color:var(--mut);flex-shrink:0}
 .drill-hdr b{color:var(--txt)}
 .drill-done{flex:1;overflow-y:auto;padding:10px 12px;font-family:monospace;font-size:12px;line-height:1.9}
+.dreview-panel{margin-top:10px;border:1px solid #3f3f5a;border-radius:6px;padding:8px 10px;background:#1a1a2e}
+.dreview-toggle{background:none;border:none;color:#a78bfa;font-size:12px;cursor:pointer;padding:0;font-weight:600}
+.dreview-card{display:flex;align-items:baseline;gap:8px;margin:4px 0;padding:4px 6px;background:#12122a;border-radius:4px}
+.dreview-lbl{color:#6b7280;font-size:11px;min-width:28px;font-family:monospace}
+.dreview-code{color:#34d399;font-family:monospace;font-size:12px;white-space:pre;background:none;border:none;padding:0}
 #daltpick{flex:1;overflow-y:auto;padding:12px}
 .alt-card{background:var(--bg);border:1px solid var(--bdr);border-radius:6px;padding:10px;margin-bottom:10px}
 .alt-label{font-size:11px;font-weight:700;color:var(--acc);margin-bottom:6px}
@@ -188,9 +193,17 @@ textarea.ce{flex:1;background:#0d1117;color:#e6edf3;font-family:'Consolas','Cour
                 <div class="drill-acts">
                   <button class="btn bclr" style="font-size:10px" onclick="drillHint()">💡 Dica (1/3)</button>
                   <button class="btn bclr" style="font-size:10px" onclick="drillSkip()">⏭ Pular</button>
+                  <button class="btn bclr" style="font-size:10px" onclick="showMyCode()">📝 Meu código</button>
                   <div class="drill-ind" id="dind"></div>
                 </div>
               </div>
+            </div>
+            <div id="dmycode" style="display:none;position:absolute;inset:0;background:rgba(20,10,40,.95);z-index:50;padding:16px;border-radius:8px;overflow:auto;">
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+                <span style="font-weight:700;font-size:13px;color:#a78bfa">📝 Meu código salvo</span>
+                <button class="btn bclr" style="font-size:10px" onclick="closeMyCode()">✕ Fechar</button>
+              </div>
+              <pre id="dmycode-pre" style="background:rgba(0,0,0,.4);padding:12px;border-radius:6px;font-size:12px;white-space:pre-wrap;word-break:break-all;color:#e2e8f0;min-height:60px"></pre>
             </div>
             <div class="ce-wrap">
               <div id="linenos">1</div>
@@ -885,9 +898,13 @@ fatorial = 1
 
 for i in range(1,num+1):
     fatorial *= i
-    print(fatorial)`},{label:"Resolução (professor)",code:`for i in range(0, 1001, 1):
-    if i % 2 == 0:
-    	print(i)`}],
+    print(fatorial)`},{label:"Resolução (professor)",code:`n = int(input("Digite um número para calcular o fatorial: "))
+fatorial = 1
+
+for i in range(1, n + 1):
+    fatorial *= i
+
+print(f"O fatorial de {n} é {fatorial}")`}],
 sol:`n = int(input("Digite um número para calcular o fatorial: "))
 fatorial = 1
 
@@ -912,11 +929,15 @@ atual = a
 
 for i in range(2,n+1):
     atual += razao
-    print(i,atual)`},{label:"Resolução (professor)",code:`n = int(input("Digite um número para calcular o fatorial: "))
-fatorial = 1
-for i in range(1, n + 1):
-    fatorial *= i
-print(f"O fatorial de {n} é {fatorial}")`}],
+    print(i,atual)`},{label:"Resolução (professor)",code:`valor_inicial = float(input("Digite o valor inicial do investimento: "))
+taxa_juros = float(input("Digite a taxa de juros anual (em %): ")) / 100
+anos = int(input("Digite o número de anos: "))
+
+montante = valor_inicial
+for i in range(anos):
+    montante = montante * (1 + taxa_juros)
+
+print(f"Montante após {anos} anos: R\${montante:.2f}")`}],
 sol:`valor_inicial = float(input("Digite o valor inicial do investimento: "))
 taxa_juros = float(input("Digite a taxa de juros anual (em %): ")) / 100
 anos = int(input("Digite o número de anos: "))
@@ -943,15 +964,13 @@ atual = a
 
 for i in range(2,n+1):
     atual *= razao
-    print(i,atual)`},{label:"Resolução (professor)",code:`valor_inicial = float(input("Digite o valor inicial do investimento: "))
-taxa_juros = float(input("Digite a taxa de juros anual (em %): ")) / 100
-anos = int(input("Digite o número de anos: "))
+    print(i,atual)`},{label:"Resolução (professor)",code:`a1 = float(input("Digite o primeiro termo da PA: "))
+razao = float(input("Digite a razão da PA: "))
+n = int(input("Digite o número do termo desejado: "))
 
-valor_final = valor_inicial
-for i in range(0,anos):
-    valor_final *= (1 + taxa_juros)
+an = a1 + (n - 1) * razao
 
-print(f"O valor final após {anos} anos será de R$ {valor_final:.2f}")`}],
+print(f"O {n}º termo da PA é: {an}")`}],
 sol:`a1 = float(input("Digite o primeiro termo da PA: "))
 razao = float(input("Digite a razão da PA: "))
 n = int(input("Digite o número do termo desejado: "))
@@ -2711,7 +2730,7 @@ function buildEl(t){
   for(const ex of t.exercises){
     const st=p[ex.id]||"none";
     const c=document.createElement("div");
-    c.className="exc"+(curId===ex.id?" active":"");
+    c.className="exc"+(curId===ex.id?" active":"")+(st==="done"?" exc-done":"");
     c.innerHTML=`<div class="exc-row"><span class="exc-num">#${ex.id.split("-")[1]}</span><span class="exc-title">${ex.title}</span><span class="exc-st">${SI[st]}</span></div>`;
     c.onclick=()=>selEx(ex);el.appendChild(c);
   }
@@ -2807,7 +2826,7 @@ document.addEventListener("DOMContentLoaded",()=>{
 // ============================================================
 // DRILL MODE
 // ============================================================
-let dLines=[], dIdx=0, dMissed=[], dHintLevel=0, dWrongTimer=null;
+let dLines=[], dIdx=0, dMissed=[], dMissedLines=[], dHintLevel=0, dWrongTimer=null;
 
 function dOverride(){
   clearTimeout(dWrongTimer);
@@ -2819,6 +2838,7 @@ function dOverride(){
   inp.className="drill-inp ok";
   fb.className="drill-fb ok"; fb.textContent="✅ Aceito!";
   appendDone(typed,"ok");
+  dTyped.push(typed);
   dHintLevel=0;
   dIdx++;
   setTimeout(()=>{
@@ -2870,7 +2890,7 @@ function pickAlt(idx){
 
 function dStart(code){
   dLines=code.split("\n").filter(l=>l.trim()!=="");
-  dIdx=0;dMissed=[];dHintLevel=0;
+  dIdx=0;dMissed=[];dMissedLines=[];dHintLevel=0;
   document.getElementById("ddone").innerHTML="";
   document.getElementById("dtot").textContent=dLines.length;
   document.getElementById("dfb").textContent="";
@@ -2909,6 +2929,7 @@ function drillCheck(e){
     const fb=document.getElementById("dfb");
     fb.className="drill-fb ok"; fb.textContent="✅ Certo!";
     appendDone(expected,"ok");
+    dTyped.push(val);
     dHintLevel=0;
     dIdx++;
     setTimeout(()=>{
@@ -2922,6 +2943,7 @@ function drillCheck(e){
     // wrong
     inp.className="drill-inp err";
     dMissed.push(dIdx);
+    dMissedLines.push(dLines[dIdx]);
     const fb=document.getElementById("dfb");
     fb.className="drill-fb err";
     fb.innerHTML="✕  era: <code style='background:rgba(0,0,0,.3);padding:1px 4px;border-radius:3px'>"+expected+"</code>"
@@ -2963,7 +2985,7 @@ function drillHint(){
 
 function drillSkip(){
   if(dIdx>=dLines.length)return;
-  dMissed.push(dIdx);
+  dMissed.push(dIdx);dMissedLines.push(dLines[dIdx]);
   appendDone(dLines[dIdx],"skip");
   dIdx++;dHintLevel=0;
   document.getElementById("dinp").value="";
@@ -2978,15 +3000,57 @@ function dFinish(){
   const inp=document.getElementById("dinp");
   const fb=document.getElementById("dfb");
   inp.disabled=true;
+  if(curId && dTyped.length>0){
+    localStorage.setItem('usercode_'+curId, dTyped.join('\n'));
+  }
   const unique=[...new Set(dMissed)];
   if(unique.length===0){
     fb.className="drill-fb ok";
     fb.textContent=`🎉 Perfeito! ${dLines.length}/${dLines.length} linhas. Exercício dominado!`;
+    // remove any stale review panel
+    const old=document.getElementById("dreview");if(old)old.remove();
     mark("done");
   } else {
     fb.className="drill-fb err";
     fb.innerHTML=`${unique.length} linha(s) com erro. <button class="btn brun" style="font-size:10px;margin-left:8px" onclick="drillRetry()">🔁 Refazer erros</button>`;
     mark("review");
+    // build review panel
+    const uniqueLines=[...new Set(dMissedLines)];
+    const old2=document.getElementById("dreview");if(old2)old2.remove();
+    const panel=document.createElement("div");
+    panel.id="dreview";panel.className="dreview-panel";
+    const hdr=document.createElement("button");
+    hdr.className="dreview-toggle";
+    hdr.textContent="📋 Revisar erros";
+    hdr.onclick=function(){
+      const body=document.getElementById("dreview-body");
+      body.style.display=body.style.display==="none"?"":"none";
+      hdr.textContent=body.style.display==="none"?"📋 Revisar erros ▶":"📋 Revisar erros ▼";
+    };
+    panel.appendChild(hdr);
+    const body=document.createElement("div");
+    body.id="dreview-body";
+    // deduplicate preserving order via Set on content
+    const seen=new Set();
+    let lineNo=0;
+    dMissed.forEach((idx,i)=>{
+      const content=dMissedLines[i];
+      if(seen.has(content))return;
+      seen.add(content);lineNo++;
+      const card=document.createElement("div");card.className="dreview-card";
+      const lbl=document.createElement("span");lbl.className="dreview-lbl";lbl.textContent=`#${lineNo}`;
+      const code=document.createElement("code");code.className="dreview-code";code.textContent=content;
+      card.appendChild(lbl);card.appendChild(code);
+      body.appendChild(card);
+    });
+    panel.appendChild(body);
+    const trainBtn=document.createElement("button");
+    trainBtn.className="btn brun";trainBtn.style.cssText="margin-top:8px;width:100%";
+    trainBtn.textContent="🔁 Treinar só os erros";
+    trainBtn.onclick=drillTrainErrors;
+    panel.appendChild(trainBtn);
+    // insert after dfb
+    fb.parentNode.insertBefore(panel,fb.nextSibling);
   }
 }
 
@@ -3001,6 +3065,32 @@ function drillRetry(){
   document.getElementById("dfb").textContent="";
   document.getElementById("dfb").className="drill-fb";
   dRenderHdr();dRenderCtx();inp.focus();
+}
+
+function drillTrainErrors(){
+  const seen=new Set();
+  const errLines=[];
+  dMissed.forEach((idx,i)=>{
+    const content=dMissedLines[i];
+    if(seen.has(content))return;
+    seen.add(content);
+    errLines.push(content);
+  });
+  if(errLines.length===0)return;
+  const old=document.getElementById("dreview");if(old)old.remove();
+  dStart(errLines.join("\n"));
+}
+
+function showMyCode(){
+  if(!curId){alert('Nenhum exercício selecionado.');return;}
+  const saved=localStorage.getItem('usercode_'+curId);
+  const pre=document.getElementById('dmycode-pre');
+  pre.textContent=saved||'(nenhum código salvo para este exercício ainda — conclua um treino primeiro)';
+  document.getElementById('dmycode').style.display='block';
+}
+
+function closeMyCode(){
+  document.getElementById('dmycode').style.display='none';
 }
 
 function stopDrill(){
@@ -3446,7 +3536,7 @@ function buildEl(t){
     const st=p[ex.id]||"none";
     if(filterReview && st==="done") continue;
     const c=document.createElement("div");
-    c.className="exc"+(curId===ex.id?" active":"");
+    c.className="exc"+(curId===ex.id?" active":"")+(st==="done"?" exc-done":"");
     const badge = ex.type==="trace" ? '<span class="badge badge-trace">TRACE</span>'
                 : ex.type==="debug" ? '<span class="badge badge-debug">DEBUG</span>'
                 : (t.sim ? '<span class="badge badge-sim">SIM</span>' : "");
