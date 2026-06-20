@@ -1065,26 +1065,24 @@ N = int(input("Digite um numero:"))
 for n in range(N):
     n = random.randint(1,100)
     vet.append(n)
-print(vet)`},{label:"Resolução (professor)",code:`   # Criando um vetor vazio
-   vetor = []
-   
-   # Preenchendo o vetor com números incrementais de 5 em 5
-   for i in range(20):
-       vetor.append((i*5)
-   
-   # Imprimindo o vetor na tela
-   print(vetor)
-   `}],
-sol:`   # Criando um vetor vazio
-   vetor = []
-   
-   # Preenchendo o vetor com números incrementais de 5 em 5
-   for i in range(20):
-       vetor.append((i*5)
-   
-   # Imprimindo o vetor na tela
-   print(vetor)
-   `},
+print(vet)`},{label:"Resolução (professor)",code:`vetor = []
+N = int(input("Digite a quantidade de elementos: "))
+
+for i in range(N):
+    n = int(input(f"Digite o elemento {i+1}: "))
+    vetor.append(n)
+
+print(vetor)
+`}],
+sol:`vetor = []
+N = int(input("Digite a quantidade de elementos: "))
+
+for i in range(N):
+    n = int(input(f"Digite o elemento {i+1}: "))
+    vetor.append(n)
+
+print(vetor)
+`},
 {id:"06-04",title:"N pares do usuário",desc:"Crie vetor com N elementos PARES digitados pelo usuário (só aceitar pares).",drill:`import random
 
 vet = []
