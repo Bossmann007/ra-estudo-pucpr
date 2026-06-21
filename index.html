@@ -183,6 +183,7 @@ textarea.ce{flex:1;background:#0d1117;color:#e6edf3;font-family:'Consolas','Cour
                 <span>🎯 Modo Treino — linha a linha</span>
                 <b>Linha <span id="dln">1</span>/<span id="dtot">0</span></b>
                 <span>Erros: <span id="derr" style="color:var(--red)">0</span></span>
+                <span>Precisão: <span id="dacc" style="color:#4ade80">—</span></span>
                 <button class="btn bclr" style="margin-left:auto;font-size:10px" onclick="stopDrill()">✕ Sair</button>
               </div>
               <div id="ddone" class="drill-done"></div>
@@ -2768,12 +2769,15 @@ let irsolve=null;
 function runCode(){
   const code=document.getElementById("ce").value;
   if(!code.trim()){document.getElementById("outbox").textContent="Escreva seu código primeiro!";return;}
+  // cancel any pending input() from a previous run
+  if(irsolve){irsolve=null;document.getElementById("imodal").classList.remove("open");}
   const ob=document.getElementById("outbox");
   ob.textContent="";ob.className="outbox";
 
   Sk.configure({
     output:t=>ob.textContent+=t,
     read:x=>{if(!Sk.builtinFiles?.files[x])throw"File not found: '"+x+"'";return Sk.builtinFiles.files[x];},
+    execLimit:10000,
     inputfun:prompt=>new Promise(res=>{
       document.getElementById("iprmt").textContent=prompt||"Digite um valor:";
       document.getElementById("ifield").value="";
@@ -2806,6 +2810,7 @@ document.addEventListener("DOMContentLoaded",()=>{
       t.value=t.value.substring(0,s)+"    "+t.value.substring(t.selectionEnd);
       t.selectionStart=t.selectionEnd=s+4;
     }
+    if((e.ctrlKey||e.metaKey)&&e.key==="Enter"){e.preventDefault();runCode();}
   });
   document.getElementById('dinp').addEventListener('keydown', drillCheck);
 });
@@ -2814,7 +2819,7 @@ document.addEventListener("DOMContentLoaded",()=>{
 // ============================================================
 // DRILL MODE
 // ============================================================
-let dLines=[], dIdx=0, dMissed=[], dMissedLines=[], dHintLevel=0, dWrongTimer=null;
+let dLines=[], dIdx=0, dMissed=[], dMissedLines=[], dHintLevel=0, dWrongTimer=null, dTyped=[], dStartTime=0;
 
 function dOverride(){
   clearTimeout(dWrongTimer);
@@ -2878,7 +2883,8 @@ function pickAlt(idx){
 
 function dStart(code){
   dLines=code.split("\n").filter(l=>l.trim()!=="");
-  dIdx=0;dMissed=[];dMissedLines=[];dHintLevel=0;
+  dIdx=0;dMissed=[];dMissedLines=[];dHintLevel=0;dTyped=[];dStartTime=Date.now();
+  const _da=document.getElementById("dacc");if(_da)_da.textContent="—";
   document.getElementById("ddone").innerHTML="";
   document.getElementById("dtot").textContent=dLines.length;
   document.getElementById("dfb").textContent="";
@@ -2892,6 +2898,11 @@ function dStart(code){
 function dRenderHdr(){
   document.getElementById("dln").textContent=Math.min(dIdx+1,dLines.length);
   document.getElementById("derr").textContent=dMissed.length;
+  if(dIdx>0){
+    const acc=Math.round(((dIdx-[...new Set(dMissed)].length)/dIdx)*100);
+    const el=document.getElementById("dacc");
+    if(el)el.textContent=acc+"%";
+  }
 }
 
 function dRenderCtx(){
@@ -2934,8 +2945,17 @@ function drillCheck(e){
     dMissedLines.push(dLines[dIdx]);
     const fb=document.getElementById("dfb");
     fb.className="drill-fb err";
-    fb.innerHTML="✕  era: <code style='background:rgba(0,0,0,.3);padding:1px 4px;border-radius:3px'>"+expected+"</code>"
-      +"<button onclick='dOverride()' style='margin-left:8px;font-size:10px;padding:2px 7px;border-radius:4px;border:1px solid #a78bfa;background:transparent;color:#a78bfa;cursor:pointer'>✓ meu código está certo</button>";
+    fb.textContent="";
+    fb.appendChild(document.createTextNode("✕  era: "));
+    const _ec=document.createElement("code");
+    _ec.style.cssText="background:rgba(0,0,0,.3);padding:1px 4px;border-radius:3px";
+    _ec.textContent=expected;
+    fb.appendChild(_ec);
+    const _eb=document.createElement("button");
+    _eb.onclick=dOverride;
+    _eb.style.cssText="margin-left:8px;font-size:10px;padding:2px 7px;border-radius:4px;border:1px solid #a78bfa;background:transparent;color:#a78bfa;cursor:pointer";
+    _eb.textContent="✓ meu código está certo";
+    fb.appendChild(_eb);
     dRenderHdr();
     dWrongTimer=setTimeout(()=>{
       appendDone(expected,"miss");
@@ -2992,15 +3012,19 @@ function dFinish(){
     localStorage.setItem('usercode_'+curId, dTyped.join('\n'));
   }
   const unique=[...new Set(dMissed)];
+  const elapsed=Math.round((Date.now()-dStartTime)/1000);
+  const mins=Math.floor(elapsed/60),secs=elapsed%60;
+  const timeStr=mins>0?`${mins}m${secs}s`:`${secs}s`;
+  const acc=Math.round(((dLines.length-unique.length)/dLines.length)*100);
   if(unique.length===0){
     fb.className="drill-fb ok";
-    fb.textContent=`🎉 Perfeito! ${dLines.length}/${dLines.length} linhas. Exercício dominado!`;
+    fb.textContent=`🎉 Perfeito! ${dLines.length}/${dLines.length} linhas · 100% precisão · ${timeStr}`;
     // remove any stale review panel
     const old=document.getElementById("dreview");if(old)old.remove();
     mark("done");
   } else {
     fb.className="drill-fb err";
-    fb.innerHTML=`${unique.length} linha(s) com erro. <button class="btn brun" style="font-size:10px;margin-left:8px" onclick="drillRetry()">🔁 Refazer erros</button>`;
+    fb.innerHTML=`${unique.length} linha(s) com erro · ${acc}% precisão · ${timeStr}. <button class="btn brun" style="font-size:10px;margin-left:8px" onclick="drillRetry()">🔁 Refazer erros</button>`;
     mark("review");
     // build review panel
     const uniqueLines=[...new Set(dMissedLines)];
