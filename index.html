@@ -172,6 +172,7 @@ textarea.ce{flex:1;background:#0d1117;color:#e6edf3;font-family:'Consolas','Cour
               <button class="btn bclr" onclick="clearCode()">Clear</button>
               <button class="btn bsol" onclick="toggleSol()">💡 Solução</button>
               <button class="btn btrn" onclick="startDrill()">🎯 Treinar</button>
+              <button class="btn btrn" style="background:#1e3a5f;border-color:#3b82f6" onclick="startOutputDrill()">📊 Por Output</button>
               <div class="marks">
                 <button class="btn bdone" onclick="mark('done')" title="Entendi">✅</button>
                 <button class="btn brev" onclick="mark('review')" title="Rever">🔄</button>
@@ -196,6 +197,24 @@ textarea.ce{flex:1;background:#0d1117;color:#e6edf3;font-family:'Consolas','Cour
                   <button class="btn bclr" style="font-size:10px" onclick="drillSkip()">⏭ Pular</button>
                   <button class="btn bclr" style="font-size:10px" onclick="showMyCode()">📝 Meu código</button>
                   <div class="drill-ind" id="dind"></div>
+                </div>
+              </div>
+              <!-- Output drill sub-panel -->
+              <div id="odrill" style="display:none;flex-direction:column;flex:1;min-height:0">
+                <div class="drill-hdr">
+                  <span>📊 Modo Output — escreva a solução livremente</span>
+                  <button class="btn bclr" style="margin-left:auto;font-size:10px" onclick="stopDrill()">✕ Sair</button>
+                </div>
+                <textarea id="odinp" style="flex:1;background:#0d1117;color:#e2e8f0;border:none;outline:none;padding:12px;font-family:monospace;font-size:13px;resize:none;min-height:180px" placeholder="# escreva sua solução aqui..." spellcheck="false" autocomplete="off"></textarea>
+                <div style="padding:8px 12px;background:#12151e;border-top:1px solid #1e2535;display:flex;align-items:center;gap:8px">
+                  <button class="btn brun" onclick="checkOutputDrill()">▶ Verificar Output</button>
+                  <span id="odfb" style="font-size:12px"></span>
+                </div>
+                <div id="oddiff" style="display:none;padding:10px 12px;background:#0a0d14;border-top:1px solid #1e2535;font-size:12px;font-family:monospace">
+                  <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+                    <div><div style="color:#94a3b8;margin-bottom:4px">Esperado:</div><pre id="odexp" style="background:#12151e;padding:8px;border-radius:4px;margin:0;white-space:pre-wrap;color:#4ade80"></pre></div>
+                    <div><div style="color:#94a3b8;margin-bottom:4px">Seu output:</div><pre id="odgot" style="background:#12151e;padding:8px;border-radius:4px;margin:0;white-space:pre-wrap;color:#f87171"></pre></div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -3110,8 +3129,74 @@ function stopDrill(){
   document.getElementById("drillwrap").style.display="none";
   document.getElementById("ce").style.display="";
   document.getElementById("solpanel").style.display="";
+  // reset both sub-panels
+  document.getElementById("odrill").style.display="none";
+  document.querySelector(".drill-hdr").style.display="";
+  document.getElementById("ddone").style.display="";
 }
 
+// ── OUTPUT DRILL ───────────────────────────────────────────────────────────────
+let _odSol="";
+
+function startOutputDrill(){
+  if(!curId)return;
+  const ex=findEx(curId);
+  if(!ex||!ex.sol){alert("Exercício sem solução definida.");return;}
+  if((ex.sol||"").includes("input(")){
+    alert("Este exercício usa input() — use o Modo Treino linha a linha.");return;
+  }
+  _odSol=ex.sol;
+  document.getElementById("ce").style.display="none";
+  document.getElementById("solpanel").style.display="none";
+  document.getElementById("drillwrap").style.display="flex";
+  // hide line-by-line panel, show output panel
+  document.querySelector(".drill-hdr").style.display="none";
+  document.getElementById("ddone").style.display="none";
+  document.getElementById("daltpick").style.display="none";
+  const od=document.getElementById("odrill");
+  od.style.display="flex";
+  document.getElementById("odinp").value="";
+  document.getElementById("odfb").textContent="";
+  document.getElementById("oddiff").style.display="none";
+  document.getElementById("odinp").focus();
+}
+
+async function _runForOutput(code){
+  let out="";
+  Sk.configure({
+    output:s=>{out+=s;},
+    read:f=>{if(Sk.builtinFiles?.files[f])return Sk.builtinFiles.files[f];throw new Error("File not found: "+f);},
+    execLimit:5000,
+  });
+  await Sk.misceval.asyncToPromise(()=>Sk.importMainWithBody("<stdin>",false,code,true));
+  return out;
+}
+
+async function checkOutputDrill(){
+  const userCode=document.getElementById("odinp").value.trim();
+  if(!userCode){document.getElementById("odfb").textContent="⚠️ Escreva seu código primeiro";return;}
+  const fb=document.getElementById("odfb");
+  fb.textContent="⏳ Rodando...";fb.style.color="#94a3b8";
+  let expected="",got="";
+  try{ expected=await _runForOutput(_odSol); }catch(e){ fb.textContent="⚠️ Erro ao rodar solução: "+e.toString();return; }
+  try{ got=await _runForOutput(userCode); }catch(e){
+    fb.textContent="❌ Erro no seu código";fb.style.color="#f87171";
+    document.getElementById("oddiff").style.display="block";
+    document.getElementById("odexp").textContent=expected||"(sem saída)";
+    document.getElementById("odgot").textContent=e.toString();
+    return;
+  }
+  if(got.trimEnd()===expected.trimEnd()){
+    fb.textContent="✅ Output idêntico! Solução correta.";fb.style.color="#4ade80";
+    document.getElementById("oddiff").style.display="none";
+  } else {
+    fb.textContent="❌ Output diferente";fb.style.color="#f87171";
+    document.getElementById("oddiff").style.display="block";
+    document.getElementById("odexp").textContent=expected||"(sem saída)";
+    document.getElementById("odgot").textContent=got||"(sem saída)";
+    document.getElementById("odgot").style.color="#f87171";
+  }
+}
 
 // ── CHEAT SHEETS ──────────────────────────────────────────────────────────────
 const REFS = {
