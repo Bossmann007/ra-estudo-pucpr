@@ -3570,6 +3570,7 @@ function selT(t){
 }
 
 function selEx(ex){
+  if(document.getElementById("drillwrap").style.display!=="none")stopDrill();
   curId=ex.id; buildEl(curT);
   document.getElementById("emp").style.display="none";
   document.getElementById("refpanel").style.display="none";
