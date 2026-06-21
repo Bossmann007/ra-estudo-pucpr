@@ -3146,15 +3146,14 @@ function startOutputDrill(){
     alert("Este exercício usa input() — use o Modo Treino linha a linha.");return;
   }
   _odSol=ex.sol;
-  document.getElementById("ce").style.display="none";
-  document.getElementById("solpanel").style.display="none";
-  document.getElementById("drillwrap").style.display="flex";
-  // hide line-by-line panel, show output panel
+  // configure sub-panels BEFORE showing wrapper to avoid flash
   document.querySelector(".drill-hdr").style.display="none";
   document.getElementById("ddone").style.display="none";
   document.getElementById("daltpick").style.display="none";
-  const od=document.getElementById("odrill");
-  od.style.display="flex";
+  document.getElementById("odrill").style.display="flex";
+  document.getElementById("ce").style.display="none";
+  document.getElementById("solpanel").style.display="none";
+  document.getElementById("drillwrap").style.display="flex";
   const ta=document.getElementById("odinp");
   ta.value="";
   document.getElementById("odfb").textContent="";
