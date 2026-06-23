@@ -161,8 +161,17 @@ textarea.ce{flex:1;background:#0d1117;color:#e6edf3;font-family:'Consolas','Cour
       <div class="ref-panel" id="refpanel" style="display:none"></div>
       <div class="exview" id="exview" style="display:none">
         <div class="exhdr">
-          <div class="extitle" id="xtitle"></div>
-          <div class="exdesc" id="xdesc"></div>
+          <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px">
+            <div>
+              <div class="extitle" id="xtitle"></div>
+              <div class="exdesc" id="xdesc"></div>
+            </div>
+            <div id="simtimer" style="display:none;align-items:center;gap:8px;background:#12151e;border:1px solid #f59e0b;border-radius:8px;padding:6px 12px">
+              <span style="font-size:18px;font-weight:700;font-family:monospace;color:#f59e0b" id="stdisp">60:00</span>
+              <button class="btn bclr" style="font-size:10px;padding:2px 7px" onclick="simTimerToggle()" id="stbtn">⏸ Pausar</button>
+              <button class="btn bclr" style="font-size:10px;padding:2px 7px" onclick="simTimerReset()">↺</button>
+            </div>
+          </div>
         </div>
         <div class="exbody">
           <div class="codecol">
@@ -3780,6 +3789,53 @@ function selT(t){
   document.getElementById("exview").style.display="none";
   showRef(t);
   if(!REFS[t.id]) document.getElementById("emp").style.display="flex";
+  // start/stop sim timer depending on topic type
+  if(t.sim) simTimerStart();
+  else simTimerStop();
+}
+
+// ── SIM TIMER ─────────────────────────────────────────────────────────────────
+let _stSec=3600, _stInterval=null, _stRunning=false;
+
+function _stRender(){
+  const m=Math.floor(_stSec/60), s=_stSec%60;
+  const el=document.getElementById("stdisp");
+  if(!el)return;
+  el.textContent=`${String(m).padStart(2,"0")}:${String(s).padStart(2,"0")}`;
+  el.style.color=_stSec<=300?"#f87171":_stSec<=600?"#fbbf24":"#f59e0b";
+}
+
+function simTimerStart(){
+  const box=document.getElementById("simtimer");
+  if(!box)return;
+  box.style.display="flex";
+  if(_stInterval)return; // already running (resumed from same sim)
+  _stRunning=true;
+  _stInterval=setInterval(()=>{
+    if(!_stRunning)return;
+    if(_stSec<=0){clearInterval(_stInterval);_stInterval=null;_stRender();
+      document.getElementById("stbtn").textContent="⏱ Fim!";return;}
+    _stSec--;_stRender();
+  },1000);
+}
+
+function simTimerStop(){
+  document.getElementById("simtimer").style.display="none";
+  clearInterval(_stInterval);_stInterval=null;_stRunning=false;
+  _stSec=3600;_stRender();
+}
+
+function simTimerToggle(){
+  _stRunning=!_stRunning;
+  document.getElementById("stbtn").textContent=_stRunning?"⏸ Pausar":"▶ Continuar";
+}
+
+function simTimerReset(){
+  clearInterval(_stInterval);_stInterval=null;
+  _stSec=3600;_stRender();
+  _stRunning=true;
+  document.getElementById("stbtn").textContent="⏸ Pausar";
+  simTimerStart();
 }
 
 function selEx(ex){
