@@ -1,3 +1,12 @@
+<!-- ENZO-PORTFOLIO-BRAND -->
+<p align="center">
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:111111,100:CA8A04&height=165&section=header&text=RA%20Estudo%20PUCPR&fontSize=42&fontColor=ffffff&animation=fadeIn&fontAlignY=35&desc=Interactive%20practice%20for%20Raciocínio%20Algorítmico.&descAlignY=57&descSize=14" alt="RA Estudo PUCPR" />
+</p>
+
+<p align="center"><strong>HTML · Python · Education</strong></p>
+
+---
+
 # RA — Raciocínio Algorítmico · PUCPR
 
 Ferramenta de estudo interativa para a disciplina de **Raciocínio Algorítmico** da PUCPR.
@@ -35,3 +44,8 @@ Abra `index.html` direto no navegador — sem servidor, sem dependências locais
 | S03 | Simulado — Vetores/Funções |
 
 Referência: [andrehochuli/teaching](https://github.com/andrehochuli/teaching/tree/main/RaciocinioAlgoritmico)
+
+<!-- ENZO-PORTFOLIO-BRAND-FOOTER -->
+<p align="center">
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:111111,100:CA8A04&height=85&section=footer" alt="Footer" />
+</p>
